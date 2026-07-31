@@ -1,0 +1,29 @@
+{
+ "records": 15176,
+ "layout": {
+  "method": "umap",
+  "metric": "cosine",
+  "neighbors": 25,
+  "minDist": 0.15,
+  "space": "32d PCA codes"
+ },
+ "x": {
+  "lo": -5.974553108215332,
+  "span": 29.547531127929688
+ },
+ "y": {
+  "lo": -13.059358596801758,
+  "span": 31.74738883972168
+ },
+ "delta": {
+  "lo": -0.16770857572555542,
+  "hi": 1.2852873802185059,
+  "what": "cirpin(i,j) - progres(i,j) at j = best CIRPIN match of i"
+ },
+ "channels": [
+  "x:int16",
+  "y:int16",
+  "delta:uint16",
+  "nres:uint16"
+ ]
+}

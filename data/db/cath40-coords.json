@@ -1,0 +1,1 @@
+{"format": 4, "records": 34649, "index": "cath40-coords.idx", "indexBlock": 1024, "base": "cath40-coords-base.bin", "indexBytes": 69298, "shards": [{"file": "cath40-coords-000.bin", "row0": 0, "rows": 34649, "base": 0, "bytes": 8830835}], "codebook": "7a3a64ed5f056614"}

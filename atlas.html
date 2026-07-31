@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CIRPIN atlas — SCOPe40 fold space</title>
+<style>
+  :root {
+    --ink: #16181d; --ink2: #4a5058; --ink3: #7b828c;
+    --line: #d8dce1; --bg: #eceef1; --panel: #f8f9fa;
+    --accent: #c8102e; --mark: #0d7d8c;
+  }
+  * { box-sizing: border-box; }
+  /* Column flex rather than a magic height for the canvas. It used to be
+     calc(100vh - 210px), which was right until the class legend was added and then silently
+     pushed the map past the bottom of the window. Letting main take the remaining space means
+     adding or removing a header row cannot break the layout again. */
+  html, body { height: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+    display: flex; flex-direction: column;
+  }
+  header { flex: none; }
+  header {
+    display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap;
+    padding: 12px 20px; background: var(--panel); border-bottom: 1px solid var(--line);
+  }
+  h1 { font-size: 14px; letter-spacing: .18em; margin: 0; font-weight: 600; }
+  .muted { color: var(--ink3); }
+  a { color: var(--ink2); }
+  main {
+    display: grid; grid-template-columns: minmax(0,1fr) 340px; gap: 0;
+    flex: 1; min-height: 0;
+  }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  #map { width: 100%; height: 100%; min-height: 320px; display: block;
+         cursor: crosshair; background: var(--bg); }
+  aside {
+    border-left: 1px solid var(--line); padding: 14px 16px; background: var(--panel);
+    overflow-y: auto; min-height: 0;
+  }
+  /* The height is set by the renderer, which draws a square as wide as the panel; 190px here is
+     only what it measures before the first structure arrives. cursor: grab because it turns. */
+  #trace { width: 100%; height: 190px; display: block; cursor: grab; }
+  button {
+    font: inherit; padding: 3px 10px; border: 1px solid var(--line);
+    background: #fff; color: var(--ink2); cursor: pointer;
+  }
+  button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  td { padding: 2px 0; }
+  td.n { text-align: right; color: var(--ink2); font-variant-numeric: tabular-nums; }
+  td.linked { box-shadow: inset 2px 0 0 #0d7d8c; padding-left: 6px; }
+  tr.pick { cursor: pointer; }
+  tr.pick:hover td { color: var(--accent); }
+  #tip {
+    position: fixed; pointer-events: none; background: var(--ink); color: #fff;
+    padding: 2px 7px; font-size: 12px; opacity: 0; transition: opacity .08s;
+  }
+  .key { display: flex; align-items: center; gap: 6px; color: var(--ink3); }
+  #cut { width: 92px; accent-color: var(--mark); }
+  #cutVal { font-variant-numeric: tabular-nums; color: var(--ink2); }
+  #cutN { font-size: 11px; min-width: 8ch; }
+  /* A legend box in the corner of the plot, which is where a legend belongs.
+     It began as a full-width strip above the map and that was the wrong shape twice over: seven
+     long class names wrapped to two rows, and those two rows came straight out of the map's
+     height. Sitting over the plot it costs nothing, and the map is what the space is for. */
+  .map-wrap { position: relative; min-height: 0; }
+  .classkey {
+    position: absolute; top: 12px; left: 14px; z-index: 2;
+    display: flex; flex-direction: column; gap: 3px;
+    padding: 9px 11px; background: rgba(248,249,250,.92); border: 1px solid var(--line);
+    font-size: 12px; color: var(--ink2); pointer-events: none;
+  }
+  .classkey b {
+    font-weight: 500; color: var(--ink3); font-size: 10px; letter-spacing: .14em;
+    text-transform: uppercase; margin-bottom: 2px;
+  }
+  .classkey span { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .classkey i { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .classkey.off { display: none; }
+  /* wide enough for "disagreement", which was overlapping its own value. 96px was measured
+     against a proportional face and this panel is monospace: twelve characters at 13px need
+     ~101px, so the label and the number were touching with no gap at all. */
+  dl.lineage dt { width: 112px; }
+  dl.lineage dd { margin-left: 112px; }
+  /* The CP rule as a caption under its count rather than a wrap after it. Inline, it broke
+     across lines mid-comparison ("Progres / < 0.6"), which reads as damage rather than as an
+     explanation of the number above it. */
+  dd .rule { font-size: 11px; color: var(--ink3); }
+  dt { color: var(--ink3); float: left; width: 130px; clear: left; }
+  dd { margin: 0 0 2px 130px; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<header>
+  <h1>CIRPIN ATLAS</h1>
+  <span class="muted" id="status">loading…</span>
+  <span style="flex:1"></span>
+  <!-- The cutoff, where the lines come from. 0.5 to 1.0 because below 0.5 every domain is joined to
+       most of the database and the map is a solid mat; the default is the 0.9 the search itself uses
+       to call two domains the same fold. -->
+  <span class="key"><label for="cut">lines &ge;</label>
+    <input type="range" id="cut" min="0.5" max="1" step="0.01" value="0.9">
+    <output id="cutVal">0.90</output>
+    <span class="muted" id="cutN"></span>
+  </span>
+  <button id="spin" aria-pressed="true">spin</button>
+</header>
+
+<main>
+  <div class="map-wrap">
+    <canvas id="map"></canvas>
+    <div id="legend" class="classkey" role="group" aria-label="SCOPe class colours"></div>
+  </div>
+  <aside>
+    <div id="empty" class="muted">Click a point.</div>
+    <!-- Every label here is one word and every value is a number or a name. The panel used to
+         explain each of them in a caption underneath — how to turn the structure, what the teal rule
+         meant, what rule the CP count applied — and the explanations came to more text than the
+         facts. What is genuinely not guessable sits in a title attribute; the rest was a caption on
+         a caption. -->
+    <div id="detail" hidden>
+      <div><strong id="did"></strong></div>
+      <canvas id="trace" title="drag to turn, double-click to reset"></canvas>
+      <div class="muted" style="margin-bottom:6px">N <span style="color:#3a4bd8">■</span>→<span
+        style="color:#d83a3a">■</span> C</div>
+      <dl class="lineage">
+        <dt>class</dt><dd id="dclass"></dd>
+        <dt>fold</dt><dd id="dfold"></dd>
+        <dt>residues</dt><dd id="dnres"></dd>
+        <dt title="partners with CIRPIN above 0.9 and Progres below 0.6 — the app's
+          circular-permutation rule">CP</dt><dd id="dcp"></dd>
+      </dl>
+      <table id="nn"></table>
+    </div>
+  </aside>
+</main>
+
+<div id="tip"></div>
+
+<script type="module">
+import { loadCodebook, decodeRecord, shardedStore } from './src/coords.js?v=5e652e7b';
+import { fetchRange, fetchWhole, fetchJSONWhole } from './src/fetchrange.js?v=5e652e7b';
+import { loadAtlas, makeScatter, neighbours, partnersAbove, makeTraceView, CLASS_COLOURS,
+  LINK_CUTOFF } from './src/atlas.js?v=5e652e7b';
+// The Cα-only secondary-structure assignment, which the cartoon renderer needs to know a helix from
+// a loop. Imported here rather than inside src/atlas.js so the whole TM-align port is not a
+// dependency of the layout code that has no use for it.
+import { makeSec, smoothSec } from './src/tmalign.js?v=5e652e7b';
+
+const $ = (id) => document.getElementById(id);
+const status = (t) => { $('status').textContent = t; };
+
+// Whole-file reads go through the shared module as well, not because this page needs the progress
+// reporting but because that is what enforces the invariant: the registry can only catch a file
+// being fetched both ways if it sees both ways.
+const bin = (u) => fetchWhole(u);
+const json = (u) => fetchJSONWhole(u);
+
+status('loading layout…');
+const [aMeta, aBuf, dbMeta, basis, cbBuf] = await Promise.all([
+  json('./data/db/scope40-atlas3.json'),
+  bin('./data/db/scope40-atlas3.bin'),
+  json('./data/db/scope40.json'),
+  json('./data/db/scope40-basis.json'),
+  bin('./data/coords-codebook.bin'),
+]);
+const atlas = loadAtlas(aBuf, aMeta);
+const ids = (await (await fetch('./data/db/scope40-ids.txt')).text()).split('\n');
+const { cb } = loadCodebook(cbBuf);
+
+// The codes the search scans, dequantised once: 15,176 x 32 floats is 1.9 MB in memory and makes
+// an exact nearest-neighbour scan about 5 ms, so the neighbour list never has to be approximate.
+status('loading embeddings…');
+const dims = dbMeta.dims;
+const codeBuf = new Uint8Array(await bin(`./data/db/${dbMeta.models.cirpin.shards[0][0]}`));
+const lo = Float32Array.from(basis.models.cirpin.lo);
+const step = Float32Array.from(basis.models.cirpin.step);
+const codes = new Float32Array(atlas.n * dims);
+for (let i = 0; i < atlas.n; i++) {
+  let norm = 0;
+  for (let d = 0; d < dims; d++) {
+    const v = codeBuf[i * dims + d] * step[d] + lo[d];
+    codes[i * dims + d] = v;
+    norm += v * v;
+  }
+  norm = Math.sqrt(norm) || 1;
+  for (let d = 0; d < dims; d++) codes[i * dims + d] /= norm;
+}
+
+// The range reader is shared with the search page now. This file used to carry its own copy,
+// documenting the same "a 200 has to be sliced" hazard in the same words — and without the
+// cache: 'no-store' that stops a cached 200 handing over a whole shard, so the lesson was written
+// twice and applied once.
+const rangeBytes = fetchRange;
+
+// the coordinate store, exactly as the search page reads it
+const manifest = await json('./data/coords.json');
+const baseTable = new Uint32Array(await bin(`./data/${manifest.base}`));
+const store = shardedStore(manifest, baseTable, rangeBytes, (f) => `./data/${f}`);
+
+// The structure panel, drawn and turned by the same code as the search page's viewer.
+const trace = makeTraceView($('trace'), { makeSec, smoothSec });
+
+const scatter = makeScatter($('map'), atlas, {
+  onSpin(on) { $('spin').setAttribute('aria-pressed', on ? 'true' : 'false'); },
+  onHover(i, mx, my) {
+    const tip = $('tip');
+    if (i < 0) { tip.style.opacity = 0; return; }
+    tip.textContent = ids[i];
+    tip.style.left = `${mx + 14}px`;
+    tip.style.top = `${my + 78}px`;
+    tip.style.opacity = 1;
+  },
+  onPick: show,
+});
+scatter.draw();
+// What the map IS, not how a mouse works. A canvas that responds to a drag teaches that in one
+// gesture, and the header was spending four clauses on it.
+status(`${atlas.n.toLocaleString()} SCOPe40 domains · ${atlas.components}d UMAP`);
+$('spin').hidden = !scatter.is3D;
+$('spin').onclick = () => {
+  $('spin').setAttribute('aria-pressed', scatter.toggleSpin() ? 'true' : 'false');
+};
+
+// The legend, from the classes the build recorded.
+// Shorthand in the box, full name on hover. "Alpha and beta proteins (a/b)" and
+// "Alpha and beta proteins (a+b)" differ by one character in the middle of a long string, which is
+// unreadable at a glance and takes the width of the plot; a/b and a+b is how the classes are
+// actually referred to anyway.
+const CLASS_SHORT = {
+  a: 'all \u03b1', b: 'all \u03b2', c: '\u03b1/\u03b2', d: '\u03b1+\u03b2',
+  e: 'multi-domain', f: 'membrane', g: 'small',
+};
+const CLASS_LEGEND = '<b>SCOPe class</b>' + (aMeta.classes || []).map((c, i) =>
+  `<span title="${c.name}"><i style="background:${CLASS_COLOURS[i]}"></i>`
+  + `${c.key} &middot; ${CLASS_SHORT[c.key] || c.name}</span>`).join('');
+
+// The ramp legend prints the quantile boundaries, so a shade can be read back to a number. Without
+// it a sequential colour says only "more" and "less", which for a quantity with a defined meaning
+// is throwing the meaning away.
+$('legend').innerHTML = CLASS_LEGEND;
+
+// The caption earns its space by being short. The full numbers matter — they are what makes the
+// map checkable rather than decorative — but as a wall of text under the map they cost more pixels
+// than the map itself had left, so the summary is always visible and the detail is one click away.
+// The one claim that has to travel with the map, in the status line rather than a panel under it:
+// the neighbour list is computed, not read off the picture. Everything else the footer said — the
+// fold-purity figures, the 2D-versus-3D preservation table, the warning about UMAP's global
+// distances — is measured in tools/build_atlas.py and recorded in src/atlas.js, which is where a
+// reader who wants it will look.
+$('status').title = 'Neighbourhoods are folds: the nearest point on screen shares the selected '
+  + "domain's SCOPe fold 85% of the time, against 0.9% at random. UMAP distances mean nothing "
+  + 'globally — only locally.';
+
+const K = 12;
+let cutoff = LINK_CUTOFF;
+let picked = -1;
+
+/**
+ * Draw every partner of the selection above the cutoff.
+ *
+ * Split out from show() because the slider needs exactly this and nothing else — re-running show()
+ * would re-fetch the coordinates and repaint the structure to change a set of lines.
+ */
+function relink() {
+  if (picked < 0) { $('cutN').textContent = ''; return; }
+  const links = partnersAbove(codes, dims, atlas.n, picked, cutoff);
+  scatter.setFocus(picked, links);
+  $('cutN').textContent = `${links.length} partner${links.length === 1 ? '' : 's'}`;
+}
+
+async function show(row) {
+  picked = row;
+  relink();
+  const nn = neighbours(codes, dims, atlas.n, row, K);
+  $('empty').hidden = true;
+  $('detail').hidden = false;
+  $('did').textContent = ids[row];
+  $('dcp').textContent = atlas.cp[row] || 'none';
+  $('dnres').textContent = `${atlas.nres[row]}`;
+  const cls = aMeta.classes?.[atlas.cls[row]];
+  const fold = aMeta.folds?.[atlas.fold[row]];
+  $('dclass').textContent = cls ? `${cls.key} · ${cls.name}` : 'unclassified';
+  $('dfold').innerHTML = fold
+    ? `${fold.sccs} · ${fold.name}` : 'unclassified';
+
+  const table = $('nn');
+  table.innerHTML = '';
+  for (const [s, i] of nn) {
+    const tr = document.createElement('tr');
+    tr.className = 'pick';
+    // The rule down the left marked the rows that were also drawn as lines. With the cutoff on a
+    // slider it would move as the slider moves, and it needed a caption to say what it meant —
+    // which is precisely the kind of mark that costs more than it carries.
+    tr.innerHTML = `<td>${ids[i]}</td>`
+      + `<td class="n">${s.toFixed(3)}</td><td class="n">${atlas.nres[i]}</td>`;
+    // Centres as well as selects, the same as clicking on the canvas. Walking the neighbour list
+    // is the main way anyone explores this, and having the map stay put while the panel changed
+    // under you made the two feel like separate tools.
+    tr.onclick = () => { show(i); scatter.centreOn(i); };
+    table.appendChild(tr);
+  }
+
+  const w = await store.where(row);
+  if (!w) { trace.show(null); return; }
+  const bytes = await rangeBytes(w.url, w.start, w.end);
+  trace.show(decodeRecord(bytes.buffer, bytes.byteOffset, cb));
+}
+
+window.addEventListener('resize', () => { scatter.fit(); scatter.draw(); trace.draw(); });
+// diagnostic handle; harmless and useful when something looks geometrically wrong
+window.__scatter = scatter;
+</script>
+</body>
+</html>

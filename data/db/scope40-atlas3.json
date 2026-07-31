@@ -1,0 +1,5099 @@
+{
+ "records": 15176,
+ "layout": {
+  "method": "umap",
+  "components": 3,
+  "metric": "cosine",
+  "neighbors": 25,
+  "minDist": 0.15,
+  "space": "32d PCA codes"
+ },
+ "scale": {
+  "span": 22.737638473510742,
+  "mid": [
+   8.601484298706055,
+   5.071438789367676,
+   6.56304931640625
+  ]
+ },
+ "delta": {
+  "lo": -0.08376151323318481,
+  "hi": 1.4024444818496704,
+  "what": "max over j of cirpin(i,j) - progres(i,j) where cirpin(i,j) > 0.9; 0 if no such partner"
+ },
+ "cp": {
+  "cutCirpin": 0.9,
+  "cutProgres": 0.6,
+  "what": "partners with cirpin > cut and progres < cut \u2014 the app's CP rule"
+ },
+ "channels": [
+  "x:int16",
+  "y:int16",
+  "z:int16",
+  "delta:uint16",
+  "nres:uint16",
+  "fold:uint16",
+  "class:uint16",
+  "cpCount:uint16"
+ ],
+ "classes": [
+  {
+   "key": "a",
+   "name": "All alpha proteins"
+  },
+  {
+   "key": "b",
+   "name": "All beta proteins"
+  },
+  {
+   "key": "c",
+   "name": "Alpha and beta proteins (a/b)"
+  },
+  {
+   "key": "d",
+   "name": "Alpha and beta proteins (a+b)"
+  },
+  {
+   "key": "e",
+   "name": "Multi-domain proteins (alpha and beta)"
+  },
+  {
+   "key": "f",
+   "name": "Membrane and cell surface proteins and peptides"
+  },
+  {
+   "key": "g",
+   "name": "Small proteins"
+  }
+ ],
+ "folds": [
+  {
+   "sccs": "a.1",
+   "name": "Globin-like"
+  },
+  {
+   "sccs": "a.10",
+   "name": "Protozoan pheromone-like"
+  },
+  {
+   "sccs": "a.100",
+   "name": "6-phosphogluconate dehydrogenase C-terminal domain-like"
+  },
+  {
+   "sccs": "a.101",
+   "name": "Uteroglobin-like"
+  },
+  {
+   "sccs": "a.102",
+   "name": "alpha/alpha toroid"
+  },
+  {
+   "sccs": "a.103",
+   "name": "Citrate synthase"
+  },
+  {
+   "sccs": "a.104",
+   "name": "Cytochrome P450"
+  },
+  {
+   "sccs": "a.108",
+   "name": "Ribosomal protein L7/12, oligomerisation (N-terminal) domain"
+  },
+  {
+   "sccs": "a.109",
+   "name": "Class II MHC-associated invariant chain ectoplasmic trimerization domain"
+  },
+  {
+   "sccs": "a.11",
+   "name": "Acyl-CoA binding protein-like"
+  },
+  {
+   "sccs": "a.110",
+   "name": "Aldehyde ferredoxin oxidoreductase, C-terminal domains"
+  },
+  {
+   "sccs": "a.111",
+   "name": "Acid phosphatase/Vanadium-dependent haloperoxidase"
+  },
+  {
+   "sccs": "a.113",
+   "name": "DNA repair protein MutS, domain III"
+  },
+  {
+   "sccs": "a.114",
+   "name": "Interferon-induced guanylate-binding protein 1 (GBP1), C-terminal domain"
+  },
+  {
+   "sccs": "a.115",
+   "name": "A virus capsid protein alpha-helical domain"
+  },
+  {
+   "sccs": "a.116",
+   "name": "GTPase activation domain, GAP"
+  },
+  {
+   "sccs": "a.117",
+   "name": "Ras GEF"
+  },
+  {
+   "sccs": "a.118",
+   "name": "alpha-alpha superhelix"
+  },
+  {
+   "sccs": "a.119",
+   "name": "Lipoxigenase"
+  },
+  {
+   "sccs": "a.12",
+   "name": "Kix domain of CBP (creb binding protein)"
+  },
+  {
+   "sccs": "a.120",
+   "name": "gene 59 helicase assembly protein"
+  },
+  {
+   "sccs": "a.121",
+   "name": "Tetracyclin repressor-like, C-terminal domain"
+  },
+  {
+   "sccs": "a.123",
+   "name": "Nuclear receptor ligand-binding domain"
+  },
+  {
+   "sccs": "a.124",
+   "name": "Phospholipase C/P1 nuclease"
+  },
+  {
+   "sccs": "a.126",
+   "name": "Serum albumin-like"
+  },
+  {
+   "sccs": "a.127",
+   "name": "L-aspartase-like"
+  },
+  {
+   "sccs": "a.128",
+   "name": "Terpenoid synthases"
+  },
+  {
+   "sccs": "a.129",
+   "name": "GroEL equatorial domain-like"
+  },
+  {
+   "sccs": "a.13",
+   "name": "RAP domain-like"
+  },
+  {
+   "sccs": "a.130",
+   "name": "Chorismate mutase II"
+  },
+  {
+   "sccs": "a.131",
+   "name": "Peridinin-chlorophyll protein"
+  },
+  {
+   "sccs": "a.132",
+   "name": "Heme oxygenase-like"
+  },
+  {
+   "sccs": "a.133",
+   "name": "Phospholipase A2, PLA2"
+  },
+  {
+   "sccs": "a.134",
+   "name": "Fungal elicitin"
+  },
+  {
+   "sccs": "a.135",
+   "name": "Tetraspanin"
+  },
+  {
+   "sccs": "a.136",
+   "name": "FinO-like"
+  },
+  {
+   "sccs": "a.137",
+   "name": "Non-globular all-alpha subunits of globular proteins"
+  },
+  {
+   "sccs": "a.138",
+   "name": "Multiheme cytochromes"
+  },
+  {
+   "sccs": "a.139",
+   "name": "Type I dockerin domain"
+  },
+  {
+   "sccs": "a.14",
+   "name": "VHP, Villin headpiece domain"
+  },
+  {
+   "sccs": "a.140",
+   "name": "LEM/SAP HeH motif"
+  },
+  {
+   "sccs": "a.141",
+   "name": "Frizzled cysteine-rich domain"
+  },
+  {
+   "sccs": "a.142",
+   "name": "PTS-regulatory domain, PRD"
+  },
+  {
+   "sccs": "a.143",
+   "name": "RPB6/omega subunit-like"
+  },
+  {
+   "sccs": "a.144",
+   "name": "PABP domain-like"
+  },
+  {
+   "sccs": "a.145",
+   "name": "Flagellar transcriptional activator FlhD"
+  },
+  {
+   "sccs": "a.146",
+   "name": "Telomeric repeat binding factor (TRF) dimerisation domain"
+  },
+  {
+   "sccs": "a.147",
+   "name": "Bcr-Abl oncoprotein oligomerization domain"
+  },
+  {
+   "sccs": "a.148",
+   "name": "Arp2/3 complex 21 kDa subunit ARPC3"
+  },
+  {
+   "sccs": "a.149",
+   "name": "RNase III domain-like"
+  },
+  {
+   "sccs": "a.15",
+   "name": "TAF(II)230 TBP-binding fragment"
+  },
+  {
+   "sccs": "a.150",
+   "name": "Anti-sigma factor AsiA"
+  },
+  {
+   "sccs": "a.151",
+   "name": "Glutamyl tRNA-reductase dimerization domain"
+  },
+  {
+   "sccs": "a.152",
+   "name": "AhpD-like"
+  },
+  {
+   "sccs": "a.153",
+   "name": "Nuclear receptor coactivator interlocking domain"
+  },
+  {
+   "sccs": "a.154",
+   "name": "Variable surface antigen VlsE"
+  },
+  {
+   "sccs": "a.155",
+   "name": "H-NS histone-like proteins"
+  },
+  {
+   "sccs": "a.156",
+   "name": "S13-like H2TH domain"
+  },
+  {
+   "sccs": "a.157",
+   "name": "Skp1 dimerisation domain-like"
+  },
+  {
+   "sccs": "a.158",
+   "name": "F-box domain"
+  },
+  {
+   "sccs": "a.159",
+   "name": "Another 3-helical bundle"
+  },
+  {
+   "sccs": "a.16",
+   "name": "S15/NS1 RNA-binding domain"
+  },
+  {
+   "sccs": "a.160",
+   "name": "PAP/OAS1 substrate-binding domain"
+  },
+  {
+   "sccs": "a.161",
+   "name": "beta-catenin-interacting protein ICAT"
+  },
+  {
+   "sccs": "a.162",
+   "name": "Pre-protein crosslinking domain of SecA"
+  },
+  {
+   "sccs": "a.163",
+   "name": "Crustacean CHH/MIH/GIH neurohormone"
+  },
+  {
+   "sccs": "a.164",
+   "name": "C-terminal domain of DFF45/ICAD (DFF-C domain)"
+  },
+  {
+   "sccs": "a.165",
+   "name": "Myosin phosphatase inhibitor 17kDa protein, CPI-17"
+  },
+  {
+   "sccs": "a.166",
+   "name": "RuBisCo LSMT C-terminal, substrate-binding domain"
+  },
+  {
+   "sccs": "a.168",
+   "name": "SopE-like GEF domain"
+  },
+  {
+   "sccs": "a.169",
+   "name": "BEACH domain"
+  },
+  {
+   "sccs": "a.17",
+   "name": "Cysteine alpha-hairpin motif"
+  },
+  {
+   "sccs": "a.170",
+   "name": "BRCA2 helical domain"
+  },
+  {
+   "sccs": "a.171",
+   "name": "BRCA2 tower domain"
+  },
+  {
+   "sccs": "a.172",
+   "name": "Helical scaffold and wing domains of SecA"
+  },
+  {
+   "sccs": "a.173",
+   "name": "Poly A polymerase C-terminal region-like"
+  },
+  {
+   "sccs": "a.174",
+   "name": "Double Clp-N motif"
+  },
+  {
+   "sccs": "a.175",
+   "name": "Orange carotenoid protein, N-terminal domain"
+  },
+  {
+   "sccs": "a.176",
+   "name": "N-terminal domain of bifunctional PutA protein"
+  },
+  {
+   "sccs": "a.177",
+   "name": "Sigma2 domain of RNA polymerase sigma factors"
+  },
+  {
+   "sccs": "a.178",
+   "name": "Soluble domain of poliovirus core protein 3a"
+  },
+  {
+   "sccs": "a.179",
+   "name": "Replisome organizer (g39p helicase loader/inhibitor protein)"
+  },
+  {
+   "sccs": "a.18",
+   "name": "T4 endonuclease V"
+  },
+  {
+   "sccs": "a.180",
+   "name": "N-terminal, cytoplasmic domain of anti-sigmaE factor RseA"
+  },
+  {
+   "sccs": "a.181",
+   "name": "Antibiotic binding domain of TipA-like multidrug resistance regulators"
+  },
+  {
+   "sccs": "a.182",
+   "name": "GatB/YqeY motif"
+  },
+  {
+   "sccs": "a.183",
+   "name": "Nop domain"
+  },
+  {
+   "sccs": "a.184",
+   "name": "TorD-like"
+  },
+  {
+   "sccs": "a.185",
+   "name": "Gametocyte protein Pfg27"
+  },
+  {
+   "sccs": "a.186",
+   "name": "KaiA/RbsU domain"
+  },
+  {
+   "sccs": "a.187",
+   "name": "HAND domain of the nucleosome remodeling ATPase ISWI"
+  },
+  {
+   "sccs": "a.188",
+   "name": "PWI domain"
+  },
+  {
+   "sccs": "a.189",
+   "name": "XPC-binding domain-like"
+  },
+  {
+   "sccs": "a.19",
+   "name": "Fertilization protein"
+  },
+  {
+   "sccs": "a.190",
+   "name": "Flavivirus capsid protein C"
+  },
+  {
+   "sccs": "a.191",
+   "name": "Methenyltetrahydrofolate cyclohydrolase-like"
+  },
+  {
+   "sccs": "a.192",
+   "name": "N-terminal domain of adenylylcyclase associated protein, CAP"
+  },
+  {
+   "sccs": "a.193",
+   "name": "GRIP domain"
+  },
+  {
+   "sccs": "a.194",
+   "name": "L27 domain"
+  },
+  {
+   "sccs": "a.195",
+   "name": "YutG-like"
+  },
+  {
+   "sccs": "a.196",
+   "name": "Invasion protein A (SipA) , C-terminal actin binding domain"
+  },
+  {
+   "sccs": "a.198",
+   "name": "YcfC-like"
+  },
+  {
+   "sccs": "a.199",
+   "name": "YgfB-like"
+  },
+  {
+   "sccs": "a.2",
+   "name": "Long alpha-hairpin"
+  },
+  {
+   "sccs": "a.20",
+   "name": "PGBD-like"
+  },
+  {
+   "sccs": "a.200",
+   "name": "Hypothetical protein MTH393"
+  },
+  {
+   "sccs": "a.202",
+   "name": "Superantigen MAM"
+  },
+  {
+   "sccs": "a.203",
+   "name": "Putative anticodon-binding domain of alanyl-tRNA synthetase (AlaRS)"
+  },
+  {
+   "sccs": "a.204",
+   "name": "all-alpha NTP pyrophosphatases"
+  },
+  {
+   "sccs": "a.205",
+   "name": "Hsp90 co-chaperone CDC37"
+  },
+  {
+   "sccs": "a.206",
+   "name": "P40 nucleoprotein"
+  },
+  {
+   "sccs": "a.207",
+   "name": "Formin homology 2 domain (FH2 domain)"
+  },
+  {
+   "sccs": "a.208",
+   "name": "DhaL-like"
+  },
+  {
+   "sccs": "a.209",
+   "name": "ADP-ribosylglycohydrolase"
+  },
+  {
+   "sccs": "a.21",
+   "name": "HMG-box"
+  },
+  {
+   "sccs": "a.210",
+   "name": "Eukaryotic initiation factor 4f subunit eIF4g, eIF4e-binding domain"
+  },
+  {
+   "sccs": "a.211",
+   "name": "HD-domain/PDEase-like"
+  },
+  {
+   "sccs": "a.212",
+   "name": "KRAB domain (Kruppel-associated box)"
+  },
+  {
+   "sccs": "a.213",
+   "name": "DinB/YfiT-like putative metalloenzymes"
+  },
+  {
+   "sccs": "a.214",
+   "name": "NblA-like"
+  },
+  {
+   "sccs": "a.215",
+   "name": "A middle domain of Talin 1"
+  },
+  {
+   "sccs": "a.216",
+   "name": "I/LWEQ domain"
+  },
+  {
+   "sccs": "a.217",
+   "name": "Surp module (SWAP domain)"
+  },
+  {
+   "sccs": "a.218",
+   "name": "YgfY-like"
+  },
+  {
+   "sccs": "a.219",
+   "name": "Hypothetical protein YhaI"
+  },
+  {
+   "sccs": "a.22",
+   "name": "Histone-fold"
+  },
+  {
+   "sccs": "a.220",
+   "name": "Hypothetical protein At3g22680"
+  },
+  {
+   "sccs": "a.221",
+   "name": "Lissencephaly-1 protein (Lis-1, PAF-AH alpha) N-terminal domain"
+  },
+  {
+   "sccs": "a.222",
+   "name": "VPS9 domain"
+  },
+  {
+   "sccs": "a.223",
+   "name": "Triger factor/SurA peptide-binding domain-like"
+  },
+  {
+   "sccs": "a.224",
+   "name": "Glycolipid transfer protein, GLTP"
+  },
+  {
+   "sccs": "a.225",
+   "name": "Hypothetical protein MG354"
+  },
+  {
+   "sccs": "a.226",
+   "name": "Her-1"
+  },
+  {
+   "sccs": "a.227",
+   "name": "ERO1-like"
+  },
+  {
+   "sccs": "a.228",
+   "name": "GDNF receptor-like"
+  },
+  {
+   "sccs": "a.229",
+   "name": "Hypothetical protein YqbG"
+  },
+  {
+   "sccs": "a.23",
+   "name": "Open three-helical up-and-down bundle"
+  },
+  {
+   "sccs": "a.230",
+   "name": "YugE-like"
+  },
+  {
+   "sccs": "a.231",
+   "name": "EspA/CesA-like"
+  },
+  {
+   "sccs": "a.232",
+   "name": "RNA-binding protein She2p"
+  },
+  {
+   "sccs": "a.233",
+   "name": "YfbU-like"
+  },
+  {
+   "sccs": "a.234",
+   "name": "Hypothetical protein MPN330"
+  },
+  {
+   "sccs": "a.235",
+   "name": "ATP-dependent DNA ligase DNA-binding domain"
+  },
+  {
+   "sccs": "a.236",
+   "name": "DNA primase DnaG, C-terminal domain"
+  },
+  {
+   "sccs": "a.237",
+   "name": "DNA polymerase III theta subunit-like"
+  },
+  {
+   "sccs": "a.238",
+   "name": "BAR/IMD domain-like"
+  },
+  {
+   "sccs": "a.239",
+   "name": "ChaB-like"
+  },
+  {
+   "sccs": "a.24",
+   "name": "Four-helical up-and-down bundle"
+  },
+  {
+   "sccs": "a.240",
+   "name": "BSD domain-like"
+  },
+  {
+   "sccs": "a.241",
+   "name": "TraM-like"
+  },
+  {
+   "sccs": "a.242",
+   "name": "Dcp2 domain-like"
+  },
+  {
+   "sccs": "a.243",
+   "name": "Type III secretion system domain"
+  },
+  {
+   "sccs": "a.244",
+   "name": "EF2947-like"
+  },
+  {
+   "sccs": "a.245",
+   "name": "EB1 dimerisation domain-like"
+  },
+  {
+   "sccs": "a.246",
+   "name": "Hyaluronidase domain-like"
+  },
+  {
+   "sccs": "a.247",
+   "name": "YoaC-like"
+  },
+  {
+   "sccs": "a.248",
+   "name": "SP0561-like"
+  },
+  {
+   "sccs": "a.249",
+   "name": "YfmB-like"
+  },
+  {
+   "sccs": "a.25",
+   "name": "Ferritin-like"
+  },
+  {
+   "sccs": "a.250",
+   "name": "IpaD-like"
+  },
+  {
+   "sccs": "a.251",
+   "name": "Phage replication organizer domain"
+  },
+  {
+   "sccs": "a.252",
+   "name": "Mediator hinge subcomplex-like"
+  },
+  {
+   "sccs": "a.253",
+   "name": "AF0941-like"
+  },
+  {
+   "sccs": "a.254",
+   "name": "PA2201 C-terminal domain-like"
+  },
+  {
+   "sccs": "a.255",
+   "name": "Rv1873-like"
+  },
+  {
+   "sccs": "a.256",
+   "name": "RUN domain-like"
+  },
+  {
+   "sccs": "a.257",
+   "name": "SipA N-terminal domain-like"
+  },
+  {
+   "sccs": "a.258",
+   "name": "PG0816-like"
+  },
+  {
+   "sccs": "a.259",
+   "name": "YidB-like"
+  },
+  {
+   "sccs": "a.26",
+   "name": "4-helical cytokines"
+  },
+  {
+   "sccs": "a.260",
+   "name": "Rhabdovirus nucleoprotein-like"
+  },
+  {
+   "sccs": "a.261",
+   "name": "GUN4-like"
+  },
+  {
+   "sccs": "a.262",
+   "name": "PriB N-terminal domain-like"
+  },
+  {
+   "sccs": "a.263",
+   "name": "DNA terminal protein"
+  },
+  {
+   "sccs": "a.264",
+   "name": "Duffy binding domain-like"
+  },
+  {
+   "sccs": "a.265",
+   "name": "Fic-like"
+  },
+  {
+   "sccs": "a.266",
+   "name": "Indolic compounds 2,3-dioxygenase-like"
+  },
+  {
+   "sccs": "a.267",
+   "name": "Topoisomerase V catalytic domain-like"
+  },
+  {
+   "sccs": "a.268",
+   "name": "PTPA-like"
+  },
+  {
+   "sccs": "a.269",
+   "name": "FtsH protease domain-like"
+  },
+  {
+   "sccs": "a.27",
+   "name": "Anticodon-binding domain of a subclass of class I aminoacyl-tRNA synthetases"
+  },
+  {
+   "sccs": "a.270",
+   "name": "Hermes dimerisation domain"
+  },
+  {
+   "sccs": "a.271",
+   "name": "SOCS box-like"
+  },
+  {
+   "sccs": "a.272",
+   "name": "YqgQ-like"
+  },
+  {
+   "sccs": "a.273",
+   "name": "Orange domain-like"
+  },
+  {
+   "sccs": "a.274",
+   "name": "HAMP domain-like"
+  },
+  {
+   "sccs": "a.275",
+   "name": "DnaD domain-like"
+  },
+  {
+   "sccs": "a.276",
+   "name": "BH2638-like"
+  },
+  {
+   "sccs": "a.277",
+   "name": "TAFH domain-like"
+  },
+  {
+   "sccs": "a.278",
+   "name": "GINS helical bundle-like"
+  },
+  {
+   "sccs": "a.279",
+   "name": "Jann4075-like"
+  },
+  {
+   "sccs": "a.28",
+   "name": "Acyl carrier protein-like"
+  },
+  {
+   "sccs": "a.280",
+   "name": "RbcX-like"
+  },
+  {
+   "sccs": "a.281",
+   "name": "YheA-like"
+  },
+  {
+   "sccs": "a.282",
+   "name": "RPA2825-like"
+  },
+  {
+   "sccs": "a.283",
+   "name": "ENT-like"
+  },
+  {
+   "sccs": "a.284",
+   "name": "YejL-like"
+  },
+  {
+   "sccs": "a.285",
+   "name": "MtlR-like"
+  },
+  {
+   "sccs": "a.286",
+   "name": "Sama2622-like"
+  },
+  {
+   "sccs": "a.287",
+   "name": "TerB-like"
+  },
+  {
+   "sccs": "a.288",
+   "name": "UraD-like"
+  },
+  {
+   "sccs": "a.289",
+   "name": "Sec63 N-terminal domain-like"
+  },
+  {
+   "sccs": "a.29",
+   "name": "Bromodomain-like"
+  },
+  {
+   "sccs": "a.290",
+   "name": "PSPTO4464-like"
+  },
+  {
+   "sccs": "a.291",
+   "name": "MG296-like"
+  },
+  {
+   "sccs": "a.292",
+   "name": "HP0242-like"
+  },
+  {
+   "sccs": "a.293",
+   "name": "SMc04008-like"
+  },
+  {
+   "sccs": "a.294",
+   "name": "Tex N-terminal region-like"
+  },
+  {
+   "sccs": "a.295",
+   "name": "AGR_C_984p-like"
+  },
+  {
+   "sccs": "a.296",
+   "name": "PMT central region-like"
+  },
+  {
+   "sccs": "a.297",
+   "name": "DDB1 C-terminal-like"
+  },
+  {
+   "sccs": "a.298",
+   "name": "Left-handed alpha-alpha superhelix"
+  },
+  {
+   "sccs": "a.299",
+   "name": "Tenuivirus/Phlebovirus nucleocapsid protein-like"
+  },
+  {
+   "sccs": "a.3",
+   "name": "Cytochrome c"
+  },
+  {
+   "sccs": "a.30",
+   "name": "ROP-like"
+  },
+  {
+   "sccs": "a.300",
+   "name": "Arenavirus nucleocapsid protein-like"
+  },
+  {
+   "sccs": "a.301",
+   "name": "Sus1-like"
+  },
+  {
+   "sccs": "a.302",
+   "name": "Putative dsDNA-binding domain from CRISPR-associated protein Cas12a / Cpf1-like"
+  },
+  {
+   "sccs": "a.31",
+   "name": "Dimerization-anchoring domain of cAMP-dependent PK regulatory subunit"
+  },
+  {
+   "sccs": "a.32",
+   "name": "Transcription factor IIA (TFIIA), alpha-helical domain"
+  },
+  {
+   "sccs": "a.33",
+   "name": "Ectatomin subunits"
+  },
+  {
+   "sccs": "a.34",
+   "name": "Dimerisation interlock"
+  },
+  {
+   "sccs": "a.35",
+   "name": "lambda repressor-like DNA-binding domains"
+  },
+  {
+   "sccs": "a.36",
+   "name": "Signal peptide-binding domain"
+  },
+  {
+   "sccs": "a.37",
+   "name": "A DNA-binding domain in eukaryotic transcription factors"
+  },
+  {
+   "sccs": "a.38",
+   "name": "HLH-like"
+  },
+  {
+   "sccs": "a.39",
+   "name": "EF Hand-like"
+  },
+  {
+   "sccs": "a.4",
+   "name": "DNA/RNA-binding 3-helical bundle"
+  },
+  {
+   "sccs": "a.40",
+   "name": "CH domain-like"
+  },
+  {
+   "sccs": "a.41",
+   "name": "Domain of poly(ADP-ribose) polymerase"
+  },
+  {
+   "sccs": "a.42",
+   "name": "SWIB/MDM2 domain"
+  },
+  {
+   "sccs": "a.43",
+   "name": "Ribbon-helix-helix"
+  },
+  {
+   "sccs": "a.45",
+   "name": "GST C-terminal domain-like"
+  },
+  {
+   "sccs": "a.46",
+   "name": "Methionine synthase domain-like"
+  },
+  {
+   "sccs": "a.47",
+   "name": "STAT-like"
+  },
+  {
+   "sccs": "a.48",
+   "name": "N-cbl like"
+  },
+  {
+   "sccs": "a.49",
+   "name": "C-terminal domain of B transposition protein"
+  },
+  {
+   "sccs": "a.5",
+   "name": "RuvA C-terminal domain-like"
+  },
+  {
+   "sccs": "a.50",
+   "name": "Anaphylotoxins (complement system)"
+  },
+  {
+   "sccs": "a.51",
+   "name": "Cytochrome c oxidase subunit h"
+  },
+  {
+   "sccs": "a.52",
+   "name": "Bifunctional inhibitor/lipid-transfer protein/seed storage 2S albumin"
+  },
+  {
+   "sccs": "a.53",
+   "name": "p53 tetramerization domain"
+  },
+  {
+   "sccs": "a.54",
+   "name": "Domain of early E2A DNA-binding protein, ADDBP"
+  },
+  {
+   "sccs": "a.55",
+   "name": "IHF-like DNA-binding proteins"
+  },
+  {
+   "sccs": "a.56",
+   "name": "CO dehydrogenase ISP C-domain like"
+  },
+  {
+   "sccs": "a.57",
+   "name": "Protein HNS-dependent expression A; HdeA"
+  },
+  {
+   "sccs": "a.58",
+   "name": "Chemotaxis receptor methyltransferase CheR, N-terminal domain"
+  },
+  {
+   "sccs": "a.59",
+   "name": "PAH2 domain"
+  },
+  {
+   "sccs": "a.6",
+   "name": "Putative DNA-binding domain"
+  },
+  {
+   "sccs": "a.60",
+   "name": "SAM domain-like"
+  },
+  {
+   "sccs": "a.61",
+   "name": "Retroviral matrix proteins"
+  },
+  {
+   "sccs": "a.62",
+   "name": "Hepatitis B viral capsid (hbcag)"
+  },
+  {
+   "sccs": "a.63",
+   "name": "Apolipophorin-III"
+  },
+  {
+   "sccs": "a.64",
+   "name": "Saposin-like"
+  },
+  {
+   "sccs": "a.65",
+   "name": "Annexin"
+  },
+  {
+   "sccs": "a.66",
+   "name": "Transducin (alpha subunit), insertion domain"
+  },
+  {
+   "sccs": "a.68",
+   "name": "Wiscott-Aldrich syndrome protein, WASP, C-terminal domain"
+  },
+  {
+   "sccs": "a.69",
+   "name": "Left-handed superhelix"
+  },
+  {
+   "sccs": "a.7",
+   "name": "Spectrin repeat-like"
+  },
+  {
+   "sccs": "a.70",
+   "name": "ATPD N-terminal domain-like"
+  },
+  {
+   "sccs": "a.71",
+   "name": "ERP29 C domain-like"
+  },
+  {
+   "sccs": "a.72",
+   "name": "Functional domain of the splicing factor Prp18"
+  },
+  {
+   "sccs": "a.73",
+   "name": "Retrovirus capsid protein, N-terminal core domain"
+  },
+  {
+   "sccs": "a.74",
+   "name": "Cyclin-like"
+  },
+  {
+   "sccs": "a.75",
+   "name": "Ribosomal protein S7"
+  },
+  {
+   "sccs": "a.76",
+   "name": "Iron-dependent repressor protein, dimerization domain"
+  },
+  {
+   "sccs": "a.77",
+   "name": "DEATH domain"
+  },
+  {
+   "sccs": "a.78",
+   "name": "GntR ligand-binding domain-like"
+  },
+  {
+   "sccs": "a.79",
+   "name": "NusB-like"
+  },
+  {
+   "sccs": "a.8",
+   "name": "immunoglobulin/albumin-binding domain-like"
+  },
+  {
+   "sccs": "a.80",
+   "name": "post-AAA+ oligomerization domain-like"
+  },
+  {
+   "sccs": "a.81",
+   "name": "N-terminal domain of DnaB helicase"
+  },
+  {
+   "sccs": "a.83",
+   "name": "Guanido kinase N-terminal domain"
+  },
+  {
+   "sccs": "a.84",
+   "name": "Scaffolding protein gpD of bacteriophage procapsid"
+  },
+  {
+   "sccs": "a.85",
+   "name": "Hemocyanin, N-terminal domain"
+  },
+  {
+   "sccs": "a.86",
+   "name": "Di-copper centre-containing domain"
+  },
+  {
+   "sccs": "a.87",
+   "name": "DBL homology domain (DH-domain)"
+  },
+  {
+   "sccs": "a.88",
+   "name": "LigA subunit of an aromatic-ring-opening dioxygenase LigAB"
+  },
+  {
+   "sccs": "a.89",
+   "name": "Methyl-coenzyme M reductase alpha and beta chain C-terminal domain"
+  },
+  {
+   "sccs": "a.9",
+   "name": "Peripheral subunit-binding domain of 2-oxo acid dehydrogenase complex"
+  },
+  {
+   "sccs": "a.90",
+   "name": "Transcription factor STAT-4 N-domain"
+  },
+  {
+   "sccs": "a.91",
+   "name": "Regulator of G-protein signaling, RGS"
+  },
+  {
+   "sccs": "a.92",
+   "name": "Carbamoyl phosphate synthetase, large subunit connection domain"
+  },
+  {
+   "sccs": "a.93",
+   "name": "Heme-dependent peroxidases"
+  },
+  {
+   "sccs": "a.94",
+   "name": "Ribosomal protein L19 (L19e)"
+  },
+  {
+   "sccs": "a.95",
+   "name": "Influenza virus matrix protein M1"
+  },
+  {
+   "sccs": "a.96",
+   "name": "DNA-glycosylase"
+  },
+  {
+   "sccs": "a.97",
+   "name": "An anticodon-binding domain of class I aminoacyl-tRNA synthetases"
+  },
+  {
+   "sccs": "a.98",
+   "name": "R1 subunit of ribonucleotide reductase, N-terminal domain"
+  },
+  {
+   "sccs": "a.99",
+   "name": "Cryptochrome/photolyase FAD-binding domain"
+  },
+  {
+   "sccs": "b.1",
+   "name": "Immunoglobulin-like beta-sandwich"
+  },
+  {
+   "sccs": "b.100",
+   "name": "Sortase"
+  },
+  {
+   "sccs": "b.101",
+   "name": "Ribonuclease domain of colicin E3"
+  },
+  {
+   "sccs": "b.102",
+   "name": "Methuselah ectodomain"
+  },
+  {
+   "sccs": "b.103",
+   "name": "MoeA N-terminal region -like"
+  },
+  {
+   "sccs": "b.104",
+   "name": "P-domain of calnexin/calreticulin"
+  },
+  {
+   "sccs": "b.105",
+   "name": "Penicillin-binding protein associated domain"
+  },
+  {
+   "sccs": "b.106",
+   "name": "Phage tail proteins"
+  },
+  {
+   "sccs": "b.107",
+   "name": "Urease metallochaperone UreE, N-terminal domain"
+  },
+  {
+   "sccs": "b.108",
+   "name": "Triple-stranded beta-helix"
+  },
+  {
+   "sccs": "b.109",
+   "name": "beta-hairpin stack"
+  },
+  {
+   "sccs": "b.11",
+   "name": "gamma-Crystallin-like"
+  },
+  {
+   "sccs": "b.110",
+   "name": "Cloacin translocation domain"
+  },
+  {
+   "sccs": "b.111",
+   "name": "Small protein B (SmpB)"
+  },
+  {
+   "sccs": "b.112",
+   "name": "C-terminal domain of mollusc hemocyanin"
+  },
+  {
+   "sccs": "b.113",
+   "name": "N-terminal domain of MutM-like DNA repair proteins"
+  },
+  {
+   "sccs": "b.114",
+   "name": "N-utilization substance G protein NusG, insert domain"
+  },
+  {
+   "sccs": "b.115",
+   "name": "Calcium-mediated lectin"
+  },
+  {
+   "sccs": "b.116",
+   "name": "Viral chemokine binding protein m3"
+  },
+  {
+   "sccs": "b.117",
+   "name": "Obg-fold"
+  },
+  {
+   "sccs": "b.118",
+   "name": "FAS1 domain"
+  },
+  {
+   "sccs": "b.119",
+   "name": "C-terminal autoproteolytic domain of nucleoporin nup98"
+  },
+  {
+   "sccs": "b.12",
+   "name": "Lipase/lipooxygenase domain (PLAT/LH2 domain)"
+  },
+  {
+   "sccs": "b.120",
+   "name": "Tp47 lipoprotein, N-terminal domain"
+  },
+  {
+   "sccs": "b.121",
+   "name": "Nucleoplasmin-like/VP (viral coat and capsid proteins)"
+  },
+  {
+   "sccs": "b.122",
+   "name": "PUA domain-like"
+  },
+  {
+   "sccs": "b.123",
+   "name": "Hypothetical protein TM1070"
+  },
+  {
+   "sccs": "b.124",
+   "name": "HesB-like domain"
+  },
+  {
+   "sccs": "b.125",
+   "name": "LolA-like prokaryotic lipoproteins and lipoprotein localization factors"
+  },
+  {
+   "sccs": "b.126",
+   "name": "Adsorption protein p2"
+  },
+  {
+   "sccs": "b.127",
+   "name": "Baseplate structural protein gp8"
+  },
+  {
+   "sccs": "b.128",
+   "name": "Hypothetical protein YojF"
+  },
+  {
+   "sccs": "b.129",
+   "name": "Double-split beta-barrel"
+  },
+  {
+   "sccs": "b.130",
+   "name": "Heat shock protein 70kD (HSP70), peptide-binding domain"
+  },
+  {
+   "sccs": "b.131",
+   "name": "SPOC domain-like"
+  },
+  {
+   "sccs": "b.132",
+   "name": "Supernatant protein factor (SPF), C-terminal domain"
+  },
+  {
+   "sccs": "b.133",
+   "name": "Dextranase, N-terminal domain"
+  },
+  {
+   "sccs": "b.134",
+   "name": "Smp-1-like"
+  },
+  {
+   "sccs": "b.135",
+   "name": "Superantigen (mitogen) Ypm"
+  },
+  {
+   "sccs": "b.136",
+   "name": "SspB-like"
+  },
+  {
+   "sccs": "b.137",
+   "name": "Rof/RNase P subunit-like"
+  },
+  {
+   "sccs": "b.138",
+   "name": "Hydrophobin II, HfbII"
+  },
+  {
+   "sccs": "b.139",
+   "name": "Surface presentation of antigens (SPOA)"
+  },
+  {
+   "sccs": "b.14",
+   "name": "Calpain large subunit, middle domain (domain III)"
+  },
+  {
+   "sccs": "b.140",
+   "name": "Replicase NSP9"
+  },
+  {
+   "sccs": "b.141",
+   "name": "Bacterial fluorinating enzyme, C-terminal domain"
+  },
+  {
+   "sccs": "b.142",
+   "name": "DNA-binding pseudobarrel domain"
+  },
+  {
+   "sccs": "b.143",
+   "name": "NAC domain"
+  },
+  {
+   "sccs": "b.144",
+   "name": "Trimeric adhesin"
+  },
+  {
+   "sccs": "b.145",
+   "name": "AXH domain"
+  },
+  {
+   "sccs": "b.146",
+   "name": "Ctag/Cox11"
+  },
+  {
+   "sccs": "b.147",
+   "name": "BTV NS2-like ssRNA-binding domain"
+  },
+  {
+   "sccs": "b.148",
+   "name": "Coronavirus RNA-binding domain"
+  },
+  {
+   "sccs": "b.149",
+   "name": "Beta-galactosidase LacA, domain 3"
+  },
+  {
+   "sccs": "b.15",
+   "name": "HSP20-like chaperones"
+  },
+  {
+   "sccs": "b.150",
+   "name": "Glycolsyl hydrolase family 31 C-terminal domain-like"
+  },
+  {
+   "sccs": "b.151",
+   "name": "CsrA-like"
+  },
+  {
+   "sccs": "b.152",
+   "name": "Flagellar hook protein flgE"
+  },
+  {
+   "sccs": "b.153",
+   "name": "PheT/TilS domain"
+  },
+  {
+   "sccs": "b.154",
+   "name": "HPA-like"
+  },
+  {
+   "sccs": "b.155",
+   "name": "L21p-like"
+  },
+  {
+   "sccs": "b.156",
+   "name": "Atu1913-like"
+  },
+  {
+   "sccs": "b.157",
+   "name": "Hcp1-like"
+  },
+  {
+   "sccs": "b.158",
+   "name": "BH3618-like"
+  },
+  {
+   "sccs": "b.159",
+   "name": "AOC barrel-like"
+  },
+  {
+   "sccs": "b.16",
+   "name": "Ecotin, trypsin inhibitor"
+  },
+  {
+   "sccs": "b.160",
+   "name": "L,D-transpeptidase catalytic domain-like"
+  },
+  {
+   "sccs": "b.161",
+   "name": "PTSIIA/GutA-like"
+  },
+  {
+   "sccs": "b.162",
+   "name": "At5g01610-like"
+  },
+  {
+   "sccs": "b.163",
+   "name": "Pseudo beta-prism I"
+  },
+  {
+   "sccs": "b.164",
+   "name": "SARS ORF9b-like"
+  },
+  {
+   "sccs": "b.165",
+   "name": "MOSC N-terminal domain-like"
+  },
+  {
+   "sccs": "b.166",
+   "name": "MAL13P1.257-like"
+  },
+  {
+   "sccs": "b.167",
+   "name": "FimD N-terminal domain-like"
+  },
+  {
+   "sccs": "b.168",
+   "name": "HisI-like"
+  },
+  {
+   "sccs": "b.169",
+   "name": "MFPT repeat-like"
+  },
+  {
+   "sccs": "b.17",
+   "name": "PEBP-like"
+  },
+  {
+   "sccs": "b.170",
+   "name": "WSSV envelope protein-like"
+  },
+  {
+   "sccs": "b.171",
+   "name": "Trm112p-like"
+  },
+  {
+   "sccs": "b.172",
+   "name": "YopX-like"
+  },
+  {
+   "sccs": "b.173",
+   "name": "NifT/FixU barrel-like"
+  },
+  {
+   "sccs": "b.174",
+   "name": "YopT-like"
+  },
+  {
+   "sccs": "b.175",
+   "name": "FomD barrel-like"
+  },
+  {
+   "sccs": "b.176",
+   "name": "AttH-like"
+  },
+  {
+   "sccs": "b.177",
+   "name": "YmcC-like"
+  },
+  {
+   "sccs": "b.178",
+   "name": "Spiral beta-roll"
+  },
+  {
+   "sccs": "b.179",
+   "name": "Anthrax protective antigen N-terminal-like"
+  },
+  {
+   "sccs": "b.18",
+   "name": "Galactose-binding domain-like"
+  },
+  {
+   "sccs": "b.180",
+   "name": "Pseudo beta-prism II"
+  },
+  {
+   "sccs": "b.181",
+   "name": "Handle domain of Transferrin binding protein TbpB-like"
+  },
+  {
+   "sccs": "b.182",
+   "name": "U5 small nuclear riboprotein particle assembly factor Aar2 N-terminal domain-like"
+  },
+  {
+   "sccs": "b.183",
+   "name": "Perfringolysin C-terminal-like"
+  },
+  {
+   "sccs": "b.184",
+   "name": "P2X receptor body domain-like"
+  },
+  {
+   "sccs": "b.19",
+   "name": "Viral protein domain"
+  },
+  {
+   "sccs": "b.2",
+   "name": "Common fold of diphtheria toxin/transcription factors/cytochrome f"
+  },
+  {
+   "sccs": "b.20",
+   "name": "ENV polyprotein, receptor-binding domain"
+  },
+  {
+   "sccs": "b.21",
+   "name": "Virus attachment protein globular domain"
+  },
+  {
+   "sccs": "b.22",
+   "name": "TNF-like"
+  },
+  {
+   "sccs": "b.23",
+   "name": "CUB-like"
+  },
+  {
+   "sccs": "b.24",
+   "name": "Hyaluronate lyase-like, C-terminal domain"
+  },
+  {
+   "sccs": "b.25",
+   "name": "Osmotin, thaumatin-like protein"
+  },
+  {
+   "sccs": "b.26",
+   "name": "SMAD/FHA domain"
+  },
+  {
+   "sccs": "b.27",
+   "name": "Soluble secreted chemokine inhibitor, VCCI"
+  },
+  {
+   "sccs": "b.28",
+   "name": "Baculovirus p35 protein"
+  },
+  {
+   "sccs": "b.29",
+   "name": "Concanavalin A-like lectins/glucanases"
+  },
+  {
+   "sccs": "b.3",
+   "name": "Prealbumin-like"
+  },
+  {
+   "sccs": "b.30",
+   "name": "Supersandwich"
+  },
+  {
+   "sccs": "b.31",
+   "name": "EV matrix protein"
+  },
+  {
+   "sccs": "b.32",
+   "name": "gp9"
+  },
+  {
+   "sccs": "b.33",
+   "name": "ISP domain"
+  },
+  {
+   "sccs": "b.34",
+   "name": "SH3-like barrel"
+  },
+  {
+   "sccs": "b.35",
+   "name": "GroES-like"
+  },
+  {
+   "sccs": "b.36",
+   "name": "PDZ domain-like"
+  },
+  {
+   "sccs": "b.37",
+   "name": "N-terminal domains of the minor coat protein g3p"
+  },
+  {
+   "sccs": "b.38",
+   "name": "Sm-like fold"
+  },
+  {
+   "sccs": "b.39",
+   "name": "Ribosomal protein L14"
+  },
+  {
+   "sccs": "b.4",
+   "name": "HSP40/DnaJ peptide-binding domain"
+  },
+  {
+   "sccs": "b.40",
+   "name": "OB-fold"
+  },
+  {
+   "sccs": "b.41",
+   "name": "PRC-barrel domain"
+  },
+  {
+   "sccs": "b.42",
+   "name": "beta-Trefoil"
+  },
+  {
+   "sccs": "b.43",
+   "name": "Reductase/isomerase/elongation factor common domain"
+  },
+  {
+   "sccs": "b.44",
+   "name": "Elongation factor/aminomethyltransferase common domain"
+  },
+  {
+   "sccs": "b.45",
+   "name": "Split barrel-like"
+  },
+  {
+   "sccs": "b.46",
+   "name": "FMT C-terminal domain-like"
+  },
+  {
+   "sccs": "b.47",
+   "name": "Trypsin-like serine proteases"
+  },
+  {
+   "sccs": "b.48",
+   "name": "mu transposase, C-terminal domain"
+  },
+  {
+   "sccs": "b.49",
+   "name": "Domain of alpha and beta subunits of F1 ATP synthase-like"
+  },
+  {
+   "sccs": "b.5",
+   "name": "alpha-Amylase inhibitor tendamistat"
+  },
+  {
+   "sccs": "b.50",
+   "name": "Acid proteases"
+  },
+  {
+   "sccs": "b.51",
+   "name": "ValRS/IleRS/LeuRS editing domain"
+  },
+  {
+   "sccs": "b.52",
+   "name": "Double psi beta-barrel"
+  },
+  {
+   "sccs": "b.53",
+   "name": "Ribosomal protein L25-like"
+  },
+  {
+   "sccs": "b.54",
+   "name": "Core binding factor beta, CBF"
+  },
+  {
+   "sccs": "b.55",
+   "name": "PH domain-like barrel"
+  },
+  {
+   "sccs": "b.56",
+   "name": "Transcription factor IIA (TFIIA), beta-barrel domain"
+  },
+  {
+   "sccs": "b.57",
+   "name": "Herpes virus serine proteinase, assemblin"
+  },
+  {
+   "sccs": "b.58",
+   "name": "PK beta-barrel domain-like"
+  },
+  {
+   "sccs": "b.59",
+   "name": "XRCC4, N-terminal domain"
+  },
+  {
+   "sccs": "b.6",
+   "name": "Cupredoxin-like"
+  },
+  {
+   "sccs": "b.60",
+   "name": "Lipocalins"
+  },
+  {
+   "sccs": "b.61",
+   "name": "Streptavidin-like"
+  },
+  {
+   "sccs": "b.62",
+   "name": "Cyclophilin-like"
+  },
+  {
+   "sccs": "b.63",
+   "name": "Oncogene products"
+  },
+  {
+   "sccs": "b.64",
+   "name": "Mannose 6-phosphate receptor domain"
+  },
+  {
+   "sccs": "b.65",
+   "name": "triple barrel"
+  },
+  {
+   "sccs": "b.66",
+   "name": "4-bladed beta-propeller"
+  },
+  {
+   "sccs": "b.67",
+   "name": "5-bladed beta-propeller"
+  },
+  {
+   "sccs": "b.68",
+   "name": "6-bladed beta-propeller"
+  },
+  {
+   "sccs": "b.69",
+   "name": "7-bladed beta-propeller"
+  },
+  {
+   "sccs": "b.7",
+   "name": "C2 domain-like"
+  },
+  {
+   "sccs": "b.70",
+   "name": "8-bladed beta-propeller"
+  },
+  {
+   "sccs": "b.71",
+   "name": "Glycosyl hydrolase domain"
+  },
+  {
+   "sccs": "b.72",
+   "name": "WW domain-like"
+  },
+  {
+   "sccs": "b.73",
+   "name": "Head domain of nucleotide exchange factor GrpE"
+  },
+  {
+   "sccs": "b.74",
+   "name": "Carbonic anhydrase"
+  },
+  {
+   "sccs": "b.75",
+   "name": "Bacteriochlorophyll A protein"
+  },
+  {
+   "sccs": "b.76",
+   "name": "open-sided beta-meander"
+  },
+  {
+   "sccs": "b.77",
+   "name": "beta-Prism I"
+  },
+  {
+   "sccs": "b.78",
+   "name": "beta-Prism II"
+  },
+  {
+   "sccs": "b.8",
+   "name": "TRAF domain-like"
+  },
+  {
+   "sccs": "b.80",
+   "name": "Single-stranded right-handed beta-helix"
+  },
+  {
+   "sccs": "b.81",
+   "name": "Single-stranded left-handed beta-helix"
+  },
+  {
+   "sccs": "b.82",
+   "name": "Double-stranded beta-helix"
+  },
+  {
+   "sccs": "b.83",
+   "name": "Triple beta-spiral"
+  },
+  {
+   "sccs": "b.84",
+   "name": "Barrel-sandwich hybrid"
+  },
+  {
+   "sccs": "b.85",
+   "name": "beta-clip"
+  },
+  {
+   "sccs": "b.86",
+   "name": "Hedgehog/intein (Hint) domain"
+  },
+  {
+   "sccs": "b.87",
+   "name": "LexA/Signal peptidase"
+  },
+  {
+   "sccs": "b.88",
+   "name": "Mss4-like"
+  },
+  {
+   "sccs": "b.89",
+   "name": "Cyanovirin-N"
+  },
+  {
+   "sccs": "b.9",
+   "name": "Neurophysin II"
+  },
+  {
+   "sccs": "b.90",
+   "name": "Head-binding domain of phage P22 tailspike protein"
+  },
+  {
+   "sccs": "b.91",
+   "name": "E2 regulatory, transactivation domain"
+  },
+  {
+   "sccs": "b.92",
+   "name": "Composite domain of metallo-dependent hydrolases"
+  },
+  {
+   "sccs": "b.93",
+   "name": "Epsilon subunit of F1F0-ATP synthase N-terminal domain"
+  },
+  {
+   "sccs": "b.94",
+   "name": "Olfactory marker protein"
+  },
+  {
+   "sccs": "b.95",
+   "name": "Ganglioside M2 (gm2) activator"
+  },
+  {
+   "sccs": "b.96",
+   "name": "Nicotinic receptor ligand binding domain-like"
+  },
+  {
+   "sccs": "b.97",
+   "name": "Cytolysin/lectin"
+  },
+  {
+   "sccs": "b.98",
+   "name": "Zn aminopeptidase N-terminal domain"
+  },
+  {
+   "sccs": "c.1",
+   "name": "TIM beta/alpha-barrel"
+  },
+  {
+   "sccs": "c.10",
+   "name": "Leucine-rich repeat, LRR (right-handed beta-alpha superhelix)"
+  },
+  {
+   "sccs": "c.100",
+   "name": "Thiamin pyrophosphokinase, catalytic domain"
+  },
+  {
+   "sccs": "c.101",
+   "name": "Undecaprenyl diphosphate synthase"
+  },
+  {
+   "sccs": "c.102",
+   "name": "Cell-division inhibitor MinC, N-terminal domain"
+  },
+  {
+   "sccs": "c.103",
+   "name": "MTH938-like"
+  },
+  {
+   "sccs": "c.104",
+   "name": "YjeF N-terminal domain-like"
+  },
+  {
+   "sccs": "c.105",
+   "name": "2,3-Bisphosphoglycerate-independent phosphoglycerate mutase, substrate-binding domain"
+  },
+  {
+   "sccs": "c.106",
+   "name": "SurE-like"
+  },
+  {
+   "sccs": "c.107",
+   "name": "DHH phosphoesterases"
+  },
+  {
+   "sccs": "c.108",
+   "name": "HAD-like"
+  },
+  {
+   "sccs": "c.109",
+   "name": "PEP carboxykinase N-terminal domain"
+  },
+  {
+   "sccs": "c.110",
+   "name": "DTD-like"
+  },
+  {
+   "sccs": "c.111",
+   "name": "Activating enzymes of the ubiquitin-like proteins"
+  },
+  {
+   "sccs": "c.112",
+   "name": "Glycerol-3-phosphate (1)-acyltransferase"
+  },
+  {
+   "sccs": "c.113",
+   "name": "HemD-like"
+  },
+  {
+   "sccs": "c.114",
+   "name": "DsrEFH-like"
+  },
+  {
+   "sccs": "c.115",
+   "name": "Hypothetical protein MTH777 (MT0777)"
+  },
+  {
+   "sccs": "c.116",
+   "name": "alpha/beta knot"
+  },
+  {
+   "sccs": "c.117",
+   "name": "Amidase signature (AS) enzymes"
+  },
+  {
+   "sccs": "c.118",
+   "name": "GckA/TtuD-like"
+  },
+  {
+   "sccs": "c.119",
+   "name": "DAK1/DegV-like"
+  },
+  {
+   "sccs": "c.12",
+   "name": "Ribosomal proteins L15p and L18e"
+  },
+  {
+   "sccs": "c.120",
+   "name": "PIN domain-like"
+  },
+  {
+   "sccs": "c.121",
+   "name": "Ribose/Galactose isomerase RpiB/AlsB"
+  },
+  {
+   "sccs": "c.122",
+   "name": "L-sulfolactate dehydrogenase-like"
+  },
+  {
+   "sccs": "c.123",
+   "name": "CoA-transferase family III (CaiB/BaiF)"
+  },
+  {
+   "sccs": "c.124",
+   "name": "NagB/RpiA/CoA transferase-like"
+  },
+  {
+   "sccs": "c.125",
+   "name": "Creatininase"
+  },
+  {
+   "sccs": "c.126",
+   "name": "DNA polymerase III psi subunit"
+  },
+  {
+   "sccs": "c.127",
+   "name": "F420-dependent methylenetetrahydromethanopterin dehydrogenase (MTD)"
+  },
+  {
+   "sccs": "c.128",
+   "name": "DNA polymerase III chi subunit"
+  },
+  {
+   "sccs": "c.129",
+   "name": "MCP/YpsA-like"
+  },
+  {
+   "sccs": "c.13",
+   "name": "SpoIIaa-like"
+  },
+  {
+   "sccs": "c.130",
+   "name": "Alpha-2,3/8-sialyltransferase CstII"
+  },
+  {
+   "sccs": "c.131",
+   "name": "Peptidyl-tRNA hydrolase II"
+  },
+  {
+   "sccs": "c.132",
+   "name": "Bacterial fluorinating enzyme, N-terminal domain"
+  },
+  {
+   "sccs": "c.133",
+   "name": "RbsD-like"
+  },
+  {
+   "sccs": "c.134",
+   "name": "LmbE-like"
+  },
+  {
+   "sccs": "c.135",
+   "name": "NIF3 (NGG1p interacting factor 3)-like"
+  },
+  {
+   "sccs": "c.136",
+   "name": "Toprim domain"
+  },
+  {
+   "sccs": "c.138",
+   "name": "Indigoidine synthase A-like"
+  },
+  {
+   "sccs": "c.14",
+   "name": "ClpP/crotonase"
+  },
+  {
+   "sccs": "c.140",
+   "name": "TTHA0583/YokD-like"
+  },
+  {
+   "sccs": "c.141",
+   "name": "Glycerate kinase I"
+  },
+  {
+   "sccs": "c.142",
+   "name": "Nqo1 FMN-binding domain-like"
+  },
+  {
+   "sccs": "c.143",
+   "name": "CofD-like"
+  },
+  {
+   "sccs": "c.144",
+   "name": "RibA-like"
+  },
+  {
+   "sccs": "c.145",
+   "name": "NadA-like"
+  },
+  {
+   "sccs": "c.146",
+   "name": "YgbK-like"
+  },
+  {
+   "sccs": "c.147",
+   "name": "CAC2185-like"
+  },
+  {
+   "sccs": "c.148",
+   "name": "ComB-like"
+  },
+  {
+   "sccs": "c.149",
+   "name": "AtpF-like"
+  },
+  {
+   "sccs": "c.15",
+   "name": "BRCT domain"
+  },
+  {
+   "sccs": "c.150",
+   "name": "EreA/ChaN-like"
+  },
+  {
+   "sccs": "c.151",
+   "name": "CobE/GbiG C-terminal domain-like"
+  },
+  {
+   "sccs": "c.152",
+   "name": "CbiG N-terminal domain-like"
+  },
+  {
+   "sccs": "c.153",
+   "name": "YerB-like"
+  },
+  {
+   "sccs": "c.154",
+   "name": "CdCA1 repeat-like"
+  },
+  {
+   "sccs": "c.155",
+   "name": "LytB-like"
+  },
+  {
+   "sccs": "c.16",
+   "name": "Lumazine synthase"
+  },
+  {
+   "sccs": "c.17",
+   "name": "Caspase-like"
+  },
+  {
+   "sccs": "c.18",
+   "name": "Uracil-DNA glycosylase-like"
+  },
+  {
+   "sccs": "c.19",
+   "name": "FabD/lysophospholipase-like"
+  },
+  {
+   "sccs": "c.2",
+   "name": "NAD(P)-binding Rossmann-fold domains"
+  },
+  {
+   "sccs": "c.20",
+   "name": "Initiation factor IF2/eIF5b, domain 3"
+  },
+  {
+   "sccs": "c.21",
+   "name": "Ribosomal protein L13"
+  },
+  {
+   "sccs": "c.22",
+   "name": "Ribosomal protein L4"
+  },
+  {
+   "sccs": "c.23",
+   "name": "Flavodoxin-like"
+  },
+  {
+   "sccs": "c.24",
+   "name": "Methylglyoxal synthase-like"
+  },
+  {
+   "sccs": "c.25",
+   "name": "Ferredoxin reductase-like, C-terminal NADP-linked domain"
+  },
+  {
+   "sccs": "c.26",
+   "name": "Adenine nucleotide alpha hydrolase-like"
+  },
+  {
+   "sccs": "c.27",
+   "name": "Nucleoside phosphorylase/phosphoribosyltransferase catalytic domain"
+  },
+  {
+   "sccs": "c.28",
+   "name": "Cryptochrome/photolyase, N-terminal domain"
+  },
+  {
+   "sccs": "c.3",
+   "name": "FAD/NAD(P)-binding domain"
+  },
+  {
+   "sccs": "c.30",
+   "name": "PreATP-grasp domain"
+  },
+  {
+   "sccs": "c.31",
+   "name": "DHS-like NAD/FAD-binding domain"
+  },
+  {
+   "sccs": "c.32",
+   "name": "Tubulin nucleotide-binding domain-like"
+  },
+  {
+   "sccs": "c.33",
+   "name": "Isochorismatase-like hydrolases"
+  },
+  {
+   "sccs": "c.34",
+   "name": "Homo-oligomeric flavin-containing Cys decarboxylases, HFCD"
+  },
+  {
+   "sccs": "c.36",
+   "name": "Thiamin diphosphate-binding fold (THDP-binding)"
+  },
+  {
+   "sccs": "c.37",
+   "name": "P-loop containing nucleoside triphosphate hydrolases"
+  },
+  {
+   "sccs": "c.38",
+   "name": "PTS IIb component"
+  },
+  {
+   "sccs": "c.39",
+   "name": "Nicotinate mononucleotide:5,6-dimethylbenzimidazole phosphoribosyltransferase (CobT)"
+  },
+  {
+   "sccs": "c.4",
+   "name": "Nucleotide-binding domain"
+  },
+  {
+   "sccs": "c.40",
+   "name": "Methylesterase CheB, C-terminal domain"
+  },
+  {
+   "sccs": "c.41",
+   "name": "Subtilisin-like"
+  },
+  {
+   "sccs": "c.42",
+   "name": "Arginase/deacetylase"
+  },
+  {
+   "sccs": "c.43",
+   "name": "CoA-dependent acyltransferases"
+  },
+  {
+   "sccs": "c.44",
+   "name": "Phosphotyrosine protein phosphatases I-like"
+  },
+  {
+   "sccs": "c.45",
+   "name": "(Phosphotyrosine protein) phosphatases II"
+  },
+  {
+   "sccs": "c.46",
+   "name": "Rhodanese/Cell cycle control phosphatase"
+  },
+  {
+   "sccs": "c.47",
+   "name": "Thioredoxin fold"
+  },
+  {
+   "sccs": "c.48",
+   "name": "TK C-terminal domain-like"
+  },
+  {
+   "sccs": "c.49",
+   "name": "Pyruvate kinase C-terminal domain-like"
+  },
+  {
+   "sccs": "c.5",
+   "name": "MurCD N-terminal domain"
+  },
+  {
+   "sccs": "c.50",
+   "name": "Macro domain-like"
+  },
+  {
+   "sccs": "c.51",
+   "name": "Anticodon-binding domain-like"
+  },
+  {
+   "sccs": "c.52",
+   "name": "Restriction endonuclease-like"
+  },
+  {
+   "sccs": "c.53",
+   "name": "Resolvase-like"
+  },
+  {
+   "sccs": "c.54",
+   "name": "PTS system fructose IIA component-like"
+  },
+  {
+   "sccs": "c.55",
+   "name": "Ribonuclease H-like motif"
+  },
+  {
+   "sccs": "c.56",
+   "name": "Phosphorylase/hydrolase-like"
+  },
+  {
+   "sccs": "c.57",
+   "name": "Molybdenum cofactor biosynthesis proteins"
+  },
+  {
+   "sccs": "c.58",
+   "name": "Aminoacid dehydrogenase-like, N-terminal domain"
+  },
+  {
+   "sccs": "c.59",
+   "name": "MurD-like peptide ligases, peptide-binding domain"
+  },
+  {
+   "sccs": "c.6",
+   "name": "7-stranded beta/alpha barrel"
+  },
+  {
+   "sccs": "c.60",
+   "name": "Phosphoglycerate mutase-like"
+  },
+  {
+   "sccs": "c.61",
+   "name": "PRTase-like"
+  },
+  {
+   "sccs": "c.62",
+   "name": "vWA-like"
+  },
+  {
+   "sccs": "c.64",
+   "name": "Pyruvate-ferredoxin oxidoreductase, PFOR, domain III"
+  },
+  {
+   "sccs": "c.65",
+   "name": "Formyltransferase"
+  },
+  {
+   "sccs": "c.66",
+   "name": "S-adenosyl-L-methionine-dependent methyltransferases"
+  },
+  {
+   "sccs": "c.67",
+   "name": "PLP-dependent transferase-like"
+  },
+  {
+   "sccs": "c.68",
+   "name": "Nucleotide-diphospho-sugar transferases"
+  },
+  {
+   "sccs": "c.69",
+   "name": "alpha/beta-Hydrolases"
+  },
+  {
+   "sccs": "c.7",
+   "name": "PFL-like glycyl radical enzymes"
+  },
+  {
+   "sccs": "c.70",
+   "name": "Nucleoside hydrolase"
+  },
+  {
+   "sccs": "c.71",
+   "name": "Dihydrofolate reductase-like"
+  },
+  {
+   "sccs": "c.72",
+   "name": "Ribokinase-like"
+  },
+  {
+   "sccs": "c.73",
+   "name": "Carbamate kinase-like"
+  },
+  {
+   "sccs": "c.74",
+   "name": "AraD/HMP-PK domain-like"
+  },
+  {
+   "sccs": "c.76",
+   "name": "Alkaline phosphatase-like"
+  },
+  {
+   "sccs": "c.77",
+   "name": "Isocitrate/Isopropylmalate dehydrogenase-like"
+  },
+  {
+   "sccs": "c.78",
+   "name": "ATC-like"
+  },
+  {
+   "sccs": "c.79",
+   "name": "Tryptophan synthase beta subunit-like PLP-dependent enzymes"
+  },
+  {
+   "sccs": "c.8",
+   "name": "The 'swivelling' beta/beta/alpha domain"
+  },
+  {
+   "sccs": "c.80",
+   "name": "SIS domain"
+  },
+  {
+   "sccs": "c.81",
+   "name": "Formate dehydrogenase/DMSO reductase, domains 1-3"
+  },
+  {
+   "sccs": "c.82",
+   "name": "ALDH-like"
+  },
+  {
+   "sccs": "c.83",
+   "name": "Aconitase iron-sulfur domain"
+  },
+  {
+   "sccs": "c.84",
+   "name": "Phosphoglucomutase, first 3 domains"
+  },
+  {
+   "sccs": "c.85",
+   "name": "FucI/AraA N-terminal and middle domains"
+  },
+  {
+   "sccs": "c.86",
+   "name": "Phosphoglycerate kinase"
+  },
+  {
+   "sccs": "c.87",
+   "name": "UDP-Glycosyltransferase/glycogen phosphorylase"
+  },
+  {
+   "sccs": "c.88",
+   "name": "Glutaminase/Asparaginase"
+  },
+  {
+   "sccs": "c.89",
+   "name": "Phosphofructokinase"
+  },
+  {
+   "sccs": "c.9",
+   "name": "Barstar-like"
+  },
+  {
+   "sccs": "c.90",
+   "name": "Tetrapyrrole methylase"
+  },
+  {
+   "sccs": "c.91",
+   "name": "PEP carboxykinase-like"
+  },
+  {
+   "sccs": "c.92",
+   "name": "Chelatase-like"
+  },
+  {
+   "sccs": "c.93",
+   "name": "Periplasmic binding protein-like I"
+  },
+  {
+   "sccs": "c.94",
+   "name": "Periplasmic binding protein-like II"
+  },
+  {
+   "sccs": "c.95",
+   "name": "Thiolase-like"
+  },
+  {
+   "sccs": "c.96",
+   "name": "Fe-only hydrogenase"
+  },
+  {
+   "sccs": "c.97",
+   "name": "Cytidine deaminase-like"
+  },
+  {
+   "sccs": "c.98",
+   "name": "MurF and HprK N-domain-like"
+  },
+  {
+   "sccs": "c.99",
+   "name": "Dipeptide transport protein"
+  },
+  {
+   "sccs": "d.1",
+   "name": "Microbial ribonucleases"
+  },
+  {
+   "sccs": "d.10",
+   "name": "DNA-binding domain"
+  },
+  {
+   "sccs": "d.100",
+   "name": "MbtH/L9 domain-like"
+  },
+  {
+   "sccs": "d.101",
+   "name": "Ribonuclease PH domain 2-like"
+  },
+  {
+   "sccs": "d.102",
+   "name": "Regulatory factor Nef"
+  },
+  {
+   "sccs": "d.103",
+   "name": "CytB endotoxin-like"
+  },
+  {
+   "sccs": "d.104",
+   "name": "Class II aaRS and biotin synthetases"
+  },
+  {
+   "sccs": "d.105",
+   "name": "Subdomain of clathrin and coatomer appendage domain"
+  },
+  {
+   "sccs": "d.106",
+   "name": "SCP-like"
+  },
+  {
+   "sccs": "d.107",
+   "name": "Mog1p/PsbP-like"
+  },
+  {
+   "sccs": "d.108",
+   "name": "Acyl-CoA N-acyltransferases (Nat)"
+  },
+  {
+   "sccs": "d.109",
+   "name": "Gelsolin-like"
+  },
+  {
+   "sccs": "d.11",
+   "name": "Penicillin-binding protein 2x (pbp-2x), c-terminal domain"
+  },
+  {
+   "sccs": "d.110",
+   "name": "Profilin-like"
+  },
+  {
+   "sccs": "d.111",
+   "name": "PR-1-like"
+  },
+  {
+   "sccs": "d.112",
+   "name": "Phoshotransferase/anion transport protein"
+  },
+  {
+   "sccs": "d.113",
+   "name": "Nudix"
+  },
+  {
+   "sccs": "d.114",
+   "name": "5'-nucleotidase (syn. UDP-sugar hydrolase), C-terminal domain"
+  },
+  {
+   "sccs": "d.115",
+   "name": "YrdC/RibB"
+  },
+  {
+   "sccs": "d.116",
+   "name": "YbaK/ProRS associated domain"
+  },
+  {
+   "sccs": "d.117",
+   "name": "Thymidylate synthase/dCMP hydroxymethylase"
+  },
+  {
+   "sccs": "d.118",
+   "name": "N-acetylmuramoyl-L-alanine amidase-like"
+  },
+  {
+   "sccs": "d.12",
+   "name": "Ribosomal proteins S24e, L23 and L15e"
+  },
+  {
+   "sccs": "d.120",
+   "name": "Cytochrome b5-like heme/steroid binding domain"
+  },
+  {
+   "sccs": "d.121",
+   "name": "DNA topoisomerase I domain"
+  },
+  {
+   "sccs": "d.122",
+   "name": "ATPase domain of HSP90 chaperone/DNA topoisomerase II/histidine kinase"
+  },
+  {
+   "sccs": "d.123",
+   "name": "Sporulation response regulatory protein Spo0B"
+  },
+  {
+   "sccs": "d.124",
+   "name": "Ribonuclease Rh-like"
+  },
+  {
+   "sccs": "d.125",
+   "name": "Ornithine decarboxylase C-terminal domain"
+  },
+  {
+   "sccs": "d.126",
+   "name": "Pentein, beta/alpha-propeller"
+  },
+  {
+   "sccs": "d.127",
+   "name": "Creatinase/aminopeptidase"
+  },
+  {
+   "sccs": "d.128",
+   "name": "Glutamine synthetase/guanido kinase"
+  },
+  {
+   "sccs": "d.129",
+   "name": "TBP-like"
+  },
+  {
+   "sccs": "d.13",
+   "name": "HIT-like"
+  },
+  {
+   "sccs": "d.130",
+   "name": "S-adenosylmethionine synthetase"
+  },
+  {
+   "sccs": "d.131",
+   "name": "DNA clamp"
+  },
+  {
+   "sccs": "d.133",
+   "name": "Molybdenum cofactor-binding domain"
+  },
+  {
+   "sccs": "d.134",
+   "name": "Nitrite and sulphite reductase 4Fe-4S domain-like"
+  },
+  {
+   "sccs": "d.135",
+   "name": "The spindle assembly checkpoint protein mad2"
+  },
+  {
+   "sccs": "d.136",
+   "name": "Phospholipase D/nuclease"
+  },
+  {
+   "sccs": "d.137",
+   "name": "Monooxygenase (hydroxylase) regulatory protein"
+  },
+  {
+   "sccs": "d.139",
+   "name": "PurM C-terminal domain-like"
+  },
+  {
+   "sccs": "d.14",
+   "name": "Ribosomal protein S5 domain 2-like"
+  },
+  {
+   "sccs": "d.140",
+   "name": "Ribosomal protein S8"
+  },
+  {
+   "sccs": "d.141",
+   "name": "Ribosomal protein L6"
+  },
+  {
+   "sccs": "d.142",
+   "name": "ATP-grasp"
+  },
+  {
+   "sccs": "d.143",
+   "name": "SAICAR synthase-like"
+  },
+  {
+   "sccs": "d.144",
+   "name": "Protein kinase-like (PK-like)"
+  },
+  {
+   "sccs": "d.145",
+   "name": "FAD-binding/transporter-associated domain-like"
+  },
+  {
+   "sccs": "d.146",
+   "name": "Uridine diphospho-N-Acetylenolpyruvylglucosamine reductase, MurB, C-terminal domain"
+  },
+  {
+   "sccs": "d.147",
+   "name": "Methenyltetrahydromethanopterin cyclohydrolase"
+  },
+  {
+   "sccs": "d.148",
+   "name": "Hect, E3 ligase catalytic domain"
+  },
+  {
+   "sccs": "d.149",
+   "name": "Nitrile hydratase alpha chain"
+  },
+  {
+   "sccs": "d.15",
+   "name": "beta-Grasp (ubiquitin-like)"
+  },
+  {
+   "sccs": "d.150",
+   "name": "4'-phosphopantetheinyl transferase"
+  },
+  {
+   "sccs": "d.151",
+   "name": "DNase I-like"
+  },
+  {
+   "sccs": "d.152",
+   "name": "Aldehyde ferredoxin oxidoreductase, N-terminal domain"
+  },
+  {
+   "sccs": "d.153",
+   "name": "Ntn hydrolase-like"
+  },
+  {
+   "sccs": "d.154",
+   "name": "DmpA/ArgJ-like"
+  },
+  {
+   "sccs": "d.155",
+   "name": "Pyruvoyl-dependent histidine and arginine decarboxylases"
+  },
+  {
+   "sccs": "d.156",
+   "name": "S-adenosylmethionine decarboxylase"
+  },
+  {
+   "sccs": "d.157",
+   "name": "Metallo-hydrolase/oxidoreductase"
+  },
+  {
+   "sccs": "d.159",
+   "name": "Metallo-dependent phosphatases"
+  },
+  {
+   "sccs": "d.16",
+   "name": "FAD-linked reductases, C-terminal domain"
+  },
+  {
+   "sccs": "d.160",
+   "name": "Carbon-nitrogen hydrolase"
+  },
+  {
+   "sccs": "d.161",
+   "name": "ADC synthase"
+  },
+  {
+   "sccs": "d.162",
+   "name": "LDH C-terminal domain-like"
+  },
+  {
+   "sccs": "d.163",
+   "name": "DNA breaking-rejoining enzymes"
+  },
+  {
+   "sccs": "d.164",
+   "name": "SMAD MH1 domain"
+  },
+  {
+   "sccs": "d.165",
+   "name": "Ribosome inactivating proteins (RIP)"
+  },
+  {
+   "sccs": "d.166",
+   "name": "ADP-ribosylation"
+  },
+  {
+   "sccs": "d.167",
+   "name": "Peptide deformylase"
+  },
+  {
+   "sccs": "d.168",
+   "name": "Succinate dehydrogenase/fumarate reductase flavoprotein, catalytic domain"
+  },
+  {
+   "sccs": "d.169",
+   "name": "C-type lectin-like"
+  },
+  {
+   "sccs": "d.17",
+   "name": "Cystatin-like"
+  },
+  {
+   "sccs": "d.170",
+   "name": "SRCR-like"
+  },
+  {
+   "sccs": "d.171",
+   "name": "Fibrinogen C-terminal domain-like"
+  },
+  {
+   "sccs": "d.172",
+   "name": "gp120 core"
+  },
+  {
+   "sccs": "d.173",
+   "name": "Methionine synthase activation domain-like"
+  },
+  {
+   "sccs": "d.174",
+   "name": "Nitric oxide (NO) synthase oxygenase domain"
+  },
+  {
+   "sccs": "d.175",
+   "name": "Penicillin binding protein dimerisation domain"
+  },
+  {
+   "sccs": "d.176",
+   "name": "Oxidoreductase molybdopterin-binding domain"
+  },
+  {
+   "sccs": "d.177",
+   "name": "FAH"
+  },
+  {
+   "sccs": "d.178",
+   "name": "Aromatic aminoacid monoxygenases, catalytic and oligomerization domains"
+  },
+  {
+   "sccs": "d.179",
+   "name": "Substrate-binding domain of HMG-CoA reductase"
+  },
+  {
+   "sccs": "d.18",
+   "name": "ssDNA-binding transcriptional regulator domain"
+  },
+  {
+   "sccs": "d.180",
+   "name": "Conserved core of transcriptional regulatory protein vp16"
+  },
+  {
+   "sccs": "d.181",
+   "name": "Insert subdomain of RNA polymerase alpha subunit"
+  },
+  {
+   "sccs": "d.182",
+   "name": "Baseplate structural protein gp11"
+  },
+  {
+   "sccs": "d.183",
+   "name": "Major capsid protein gp5"
+  },
+  {
+   "sccs": "d.184",
+   "name": "Non-globular alpha+beta subunits of globular proteins"
+  },
+  {
+   "sccs": "d.185",
+   "name": "LuxS/MPP-like metallohydrolase"
+  },
+  {
+   "sccs": "d.186",
+   "name": "gpW/XkdW-like"
+  },
+  {
+   "sccs": "d.187",
+   "name": "Photosystem I subunit PsaD"
+  },
+  {
+   "sccs": "d.188",
+   "name": "Prokaryotic ribosomal protein L17"
+  },
+  {
+   "sccs": "d.189",
+   "name": "PX domain"
+  },
+  {
+   "sccs": "d.19",
+   "name": "MHC antigen-recognition domain"
+  },
+  {
+   "sccs": "d.190",
+   "name": "Chorismate lyase-like"
+  },
+  {
+   "sccs": "d.192",
+   "name": "YlxR-like"
+  },
+  {
+   "sccs": "d.193",
+   "name": "Hsp33 domain"
+  },
+  {
+   "sccs": "d.194",
+   "name": "CNF1/YfiH-like putative cysteine hydrolases"
+  },
+  {
+   "sccs": "d.195",
+   "name": "YopH tyrosine phosphatase N-terminal domain"
+  },
+  {
+   "sccs": "d.196",
+   "name": "Outer capsid protein sigma 3"
+  },
+  {
+   "sccs": "d.197",
+   "name": "Protein-L-isoaspartyl O-methyltransferase, C-terminal domain"
+  },
+  {
+   "sccs": "d.198",
+   "name": "Secretion chaperone-like"
+  },
+  {
+   "sccs": "d.199",
+   "name": "MotA C-terminal domain-like"
+  },
+  {
+   "sccs": "d.2",
+   "name": "Lysozyme-like"
+  },
+  {
+   "sccs": "d.20",
+   "name": "UBC-like"
+  },
+  {
+   "sccs": "d.200",
+   "name": "Integrin beta tail domain"
+  },
+  {
+   "sccs": "d.201",
+   "name": "SRP19"
+  },
+  {
+   "sccs": "d.202",
+   "name": "Transcription factor NusA, N-terminal domain"
+  },
+  {
+   "sccs": "d.203",
+   "name": "DsrC, the gamma subunit of dissimilatory sulfite reductase"
+  },
+  {
+   "sccs": "d.204",
+   "name": "Ribosome binding protein Y (YfiA homologue)"
+  },
+  {
+   "sccs": "d.205",
+   "name": "GTP cyclohydrolase I feedback regulatory protein, GFRP"
+  },
+  {
+   "sccs": "d.206",
+   "name": "YggU-like"
+  },
+  {
+   "sccs": "d.207",
+   "name": "Thymidylate synthase-complementing protein Thy1"
+  },
+  {
+   "sccs": "d.208",
+   "name": "MTH1598-like"
+  },
+  {
+   "sccs": "d.209",
+   "name": "LCCL domain"
+  },
+  {
+   "sccs": "d.21",
+   "name": "Diaminopimelate epimerase-like"
+  },
+  {
+   "sccs": "d.210",
+   "name": "Argininosuccinate synthetase, C-terminal domain"
+  },
+  {
+   "sccs": "d.211",
+   "name": "beta-hairpin-alpha-hairpin repeat"
+  },
+  {
+   "sccs": "d.212",
+   "name": "TolA/TonB C-terminal domain"
+  },
+  {
+   "sccs": "d.213",
+   "name": "VSV matrix protein"
+  },
+  {
+   "sccs": "d.214",
+   "name": "Hypothetical protein MTH1880"
+  },
+  {
+   "sccs": "d.215",
+   "name": "Smc hinge domain"
+  },
+  {
+   "sccs": "d.216",
+   "name": "Rotavirus NSP2 fragment, N-terminal domain"
+  },
+  {
+   "sccs": "d.217",
+   "name": "SAND domain-like"
+  },
+  {
+   "sccs": "d.218",
+   "name": "Nucleotidyltransferase"
+  },
+  {
+   "sccs": "d.219",
+   "name": "PP2C-like"
+  },
+  {
+   "sccs": "d.22",
+   "name": "GFP-like"
+  },
+  {
+   "sccs": "d.220",
+   "name": "Metal cation-transporting ATPase, ATP-binding domain N"
+  },
+  {
+   "sccs": "d.221",
+   "name": "Nuclease A inhibitor (NuiA)"
+  },
+  {
+   "sccs": "d.222",
+   "name": "YbaB-like"
+  },
+  {
+   "sccs": "d.223",
+   "name": "Polo-box domain"
+  },
+  {
+   "sccs": "d.224",
+   "name": "SufE/NifU"
+  },
+  {
+   "sccs": "d.225",
+   "name": "Multidrug efflux transporter AcrB TolC docking domain; DN and DC subdomains"
+  },
+  {
+   "sccs": "d.226",
+   "name": "GIY-YIG endonuclease"
+  },
+  {
+   "sccs": "d.227",
+   "name": "OsmC-like"
+  },
+  {
+   "sccs": "d.228",
+   "name": "Replication modulator SeqA, C-terminal DNA-binding domain"
+  },
+  {
+   "sccs": "d.229",
+   "name": "MesJ substrate recognition domain-like"
+  },
+  {
+   "sccs": "d.23",
+   "name": "Tubby C-terminal domain-like"
+  },
+  {
+   "sccs": "d.230",
+   "name": "Dodecin subunit-like"
+  },
+  {
+   "sccs": "d.231",
+   "name": "Receptor-binding domain of short tail fibre protein gp12"
+  },
+  {
+   "sccs": "d.232",
+   "name": "Mago nashi protein"
+  },
+  {
+   "sccs": "d.233",
+   "name": "Inhibitor of vertebrate lysozyme, Ivy"
+  },
+  {
+   "sccs": "d.234",
+   "name": "Proguanylin"
+  },
+  {
+   "sccs": "d.235",
+   "name": "FYSH domain"
+  },
+  {
+   "sccs": "d.236",
+   "name": "DNA-binding protein Tfx"
+  },
+  {
+   "sccs": "d.237",
+   "name": "Hypothetical protein YjiA, C-terminal domain"
+  },
+  {
+   "sccs": "d.238",
+   "name": "Hypothetical protein TM0875"
+  },
+  {
+   "sccs": "d.239",
+   "name": "GCM domain"
+  },
+  {
+   "sccs": "d.24",
+   "name": "Pili subunits"
+  },
+  {
+   "sccs": "d.240",
+   "name": "Lesion bypass DNA polymerase (Y-family), little finger domain"
+  },
+  {
+   "sccs": "d.241",
+   "name": "Ribosome binding domain-like"
+  },
+  {
+   "sccs": "d.242",
+   "name": "Obg GTP-binding protein C-terminal domain"
+  },
+  {
+   "sccs": "d.243",
+   "name": "Colicin D/E5 nuclease domain"
+  },
+  {
+   "sccs": "d.244",
+   "name": "Cell division protein ZapA-like"
+  },
+  {
+   "sccs": "d.245",
+   "name": "NSFL1 (p97 ATPase) cofactor p47, SEP domain"
+  },
+  {
+   "sccs": "d.246",
+   "name": "mRNA decapping enzyme DcpS N-terminal domain"
+  },
+  {
+   "sccs": "d.247",
+   "name": "Chromosomal protein MC1"
+  },
+  {
+   "sccs": "d.248",
+   "name": "Coproporphyrinogen III oxidase"
+  },
+  {
+   "sccs": "d.249",
+   "name": "Hypothetical protein Ta1206"
+  },
+  {
+   "sccs": "d.25",
+   "name": "Mitochondrial glycoprotein MAM33-like"
+  },
+  {
+   "sccs": "d.250",
+   "name": "Folate-binding domain"
+  },
+  {
+   "sccs": "d.251",
+   "name": "Hypothetical protein YwqG"
+  },
+  {
+   "sccs": "d.252",
+   "name": "CheC-like"
+  },
+  {
+   "sccs": "d.253",
+   "name": "Hypothetical protein YoaG"
+  },
+  {
+   "sccs": "d.254",
+   "name": "Nucleocapsid protein dimerization domain"
+  },
+  {
+   "sccs": "d.255",
+   "name": "Tombusvirus P19 core protein, VP19"
+  },
+  {
+   "sccs": "d.256",
+   "name": "Ta1353-like"
+  },
+  {
+   "sccs": "d.257",
+   "name": "Hypothetical protein TM0160"
+  },
+  {
+   "sccs": "d.258",
+   "name": "Chorismate synthase, AroC"
+  },
+  {
+   "sccs": "d.259",
+   "name": "Hypothetical protein HI1480"
+  },
+  {
+   "sccs": "d.26",
+   "name": "FKBP-like"
+  },
+  {
+   "sccs": "d.260",
+   "name": "Suppressor of Fused, N-terminal domain"
+  },
+  {
+   "sccs": "d.261",
+   "name": "Hypothetical protein PH1602"
+  },
+  {
+   "sccs": "d.262",
+   "name": "NinB"
+  },
+  {
+   "sccs": "d.263",
+   "name": "Hypothetical protein Yml108w"
+  },
+  {
+   "sccs": "d.264",
+   "name": "Prim-pol domain"
+  },
+  {
+   "sccs": "d.265",
+   "name": "Pseudouridine synthase"
+  },
+  {
+   "sccs": "d.266",
+   "name": "Hypothetical protein MTH677"
+  },
+  {
+   "sccs": "d.267",
+   "name": "Hypothetical protein SAV1430"
+  },
+  {
+   "sccs": "d.268",
+   "name": "ParB/Sulfiredoxin"
+  },
+  {
+   "sccs": "d.269",
+   "name": "Gamma-glutamyl cyclotransferase-like"
+  },
+  {
+   "sccs": "d.27",
+   "name": "Ribosomal protein S16"
+  },
+  {
+   "sccs": "d.270",
+   "name": "2-isopropylmalate synthase LeuA, allosteric (dimerisation) domain"
+  },
+  {
+   "sccs": "d.271",
+   "name": "HSP90 C-terminal domain"
+  },
+  {
+   "sccs": "d.272",
+   "name": "Dystroglycan, domain 2"
+  },
+  {
+   "sccs": "d.273",
+   "name": "YjbQ-like"
+  },
+  {
+   "sccs": "d.274",
+   "name": "Hypothetical protein PF0899"
+  },
+  {
+   "sccs": "d.275",
+   "name": "Hut operon positive regulatory protein HutP"
+  },
+  {
+   "sccs": "d.276",
+   "name": "Hypothetical protein yfbM"
+  },
+  {
+   "sccs": "d.277",
+   "name": "Bacillus phage protein"
+  },
+  {
+   "sccs": "d.278",
+   "name": "Ligand-binding domain in the NO signalling and Golgi transport"
+  },
+  {
+   "sccs": "d.279",
+   "name": "YggX-like"
+  },
+  {
+   "sccs": "d.28",
+   "name": "Ribosomal protein S19"
+  },
+  {
+   "sccs": "d.280",
+   "name": "Sulfolobus fructose-1,6-bisphosphatase-like"
+  },
+  {
+   "sccs": "d.281",
+   "name": "Hemolytic lectin CEL-III, C-terminal domain"
+  },
+  {
+   "sccs": "d.282",
+   "name": "SSo0622-like"
+  },
+  {
+   "sccs": "d.283",
+   "name": "Putative modulator of DNA gyrase, PmbA/TldD"
+  },
+  {
+   "sccs": "d.284",
+   "name": "PurS-like"
+  },
+  {
+   "sccs": "d.285",
+   "name": "DNA-binding domain of intron-encoded endonucleases"
+  },
+  {
+   "sccs": "d.286",
+   "name": "TrkA C-terminal domain-like"
+  },
+  {
+   "sccs": "d.287",
+   "name": "DNA methylase specificity domain"
+  },
+  {
+   "sccs": "d.288",
+   "name": "GTF2I-like repeat"
+  },
+  {
+   "sccs": "d.289",
+   "name": "WWE domain"
+  },
+  {
+   "sccs": "d.29",
+   "name": "Ribosomal protein L31e"
+  },
+  {
+   "sccs": "d.290",
+   "name": "AF0104/ALDC/Ptd012-like"
+  },
+  {
+   "sccs": "d.291",
+   "name": "YehU-like"
+  },
+  {
+   "sccs": "d.292",
+   "name": "DNA mismatch repair protein MutL"
+  },
+  {
+   "sccs": "d.293",
+   "name": "Phosphoprotein M1, C-terminal domain"
+  },
+  {
+   "sccs": "d.294",
+   "name": "EndoU-like"
+  },
+  {
+   "sccs": "d.295",
+   "name": "TFB5-like"
+  },
+  {
+   "sccs": "d.296",
+   "name": "YktB/PF0168-like"
+  },
+  {
+   "sccs": "d.297",
+   "name": "WGR domain-like"
+  },
+  {
+   "sccs": "d.298",
+   "name": "RelE-like"
+  },
+  {
+   "sccs": "d.299",
+   "name": "Ns1 effector domain-like"
+  },
+  {
+   "sccs": "d.3",
+   "name": "Cysteine proteinases"
+  },
+  {
+   "sccs": "d.30",
+   "name": "Allophycocyanin linker chain (domain)"
+  },
+  {
+   "sccs": "d.300",
+   "name": "Kinetochore globular domain-like"
+  },
+  {
+   "sccs": "d.301",
+   "name": "L35p-like"
+  },
+  {
+   "sccs": "d.302",
+   "name": "Coronavirus NSP8-like"
+  },
+  {
+   "sccs": "d.303",
+   "name": "BB1717-like"
+  },
+  {
+   "sccs": "d.304",
+   "name": "TTHA1013/TTHA0281-like"
+  },
+  {
+   "sccs": "d.305",
+   "name": "NAP-like"
+  },
+  {
+   "sccs": "d.306",
+   "name": "YefM-like"
+  },
+  {
+   "sccs": "d.307",
+   "name": "Nqo5-like"
+  },
+  {
+   "sccs": "d.308",
+   "name": "THUMP domain"
+  },
+  {
+   "sccs": "d.309",
+   "name": "AMMECR1-like"
+  },
+  {
+   "sccs": "d.31",
+   "name": "Cdc48 domain 2-like"
+  },
+  {
+   "sccs": "d.310",
+   "name": "VC0467-like"
+  },
+  {
+   "sccs": "d.311",
+   "name": "ImmE5-like"
+  },
+  {
+   "sccs": "d.312",
+   "name": "TM1622-like"
+  },
+  {
+   "sccs": "d.313",
+   "name": "Antiparallel beta/alpha barrel (PT-barrel)"
+  },
+  {
+   "sccs": "d.314",
+   "name": "PUG domain-like"
+  },
+  {
+   "sccs": "d.315",
+   "name": "TRCF domain-like"
+  },
+  {
+   "sccs": "d.316",
+   "name": "MK0786-like"
+  },
+  {
+   "sccs": "d.317",
+   "name": "YkuJ-like"
+  },
+  {
+   "sccs": "d.318",
+   "name": "SARS receptor-binding domain-like"
+  },
+  {
+   "sccs": "d.319",
+   "name": "TTHA1528-like"
+  },
+  {
+   "sccs": "d.32",
+   "name": "Glyoxalase/Bleomycin resistance protein/Dihydroxybiphenyl dioxygenase"
+  },
+  {
+   "sccs": "d.320",
+   "name": "YojJ-like"
+  },
+  {
+   "sccs": "d.321",
+   "name": "STIV B116-like"
+  },
+  {
+   "sccs": "d.322",
+   "name": "PHP14-like"
+  },
+  {
+   "sccs": "d.323",
+   "name": "Phage tail protein-like"
+  },
+  {
+   "sccs": "d.324",
+   "name": "DUSP-like"
+  },
+  {
+   "sccs": "d.325",
+   "name": "L28p-like"
+  },
+  {
+   "sccs": "d.326",
+   "name": "XisI-like"
+  },
+  {
+   "sccs": "d.327",
+   "name": "DeoB insert domain-like"
+  },
+  {
+   "sccs": "d.328",
+   "name": "CorA soluble domain-like"
+  },
+  {
+   "sccs": "d.329",
+   "name": "PF0523-like"
+  },
+  {
+   "sccs": "d.33",
+   "name": "SecB-like"
+  },
+  {
+   "sccs": "d.330",
+   "name": "ERH-like"
+  },
+  {
+   "sccs": "d.331",
+   "name": "NE0471 N-terminal domain-like"
+  },
+  {
+   "sccs": "d.332",
+   "name": "RGC domain-like"
+  },
+  {
+   "sccs": "d.333",
+   "name": "UbiD C-terminal domain-like"
+  },
+  {
+   "sccs": "d.334",
+   "name": "IlvD/EDD N-terminal domain-like"
+  },
+  {
+   "sccs": "d.335",
+   "name": "L,D-transpeptidase pre-catalytic domain-like"
+  },
+  {
+   "sccs": "d.336",
+   "name": "YbiA-like"
+  },
+  {
+   "sccs": "d.337",
+   "name": "AF2331-like"
+  },
+  {
+   "sccs": "d.338",
+   "name": "Oxysterol-binding protein-like"
+  },
+  {
+   "sccs": "d.339",
+   "name": "ORC1-binding domain"
+  },
+  {
+   "sccs": "d.34",
+   "name": "DNA-binding domain of Mlu1-box binding protein MBP1"
+  },
+  {
+   "sccs": "d.340",
+   "name": "CofE-like"
+  },
+  {
+   "sccs": "d.341",
+   "name": "Peptidoglycan deacetylase N-terminal noncatalytic region"
+  },
+  {
+   "sccs": "d.342",
+   "name": "PH1570-like"
+  },
+  {
+   "sccs": "d.343",
+   "name": "MM3350-like"
+  },
+  {
+   "sccs": "d.344",
+   "name": "GINS/PriA/YqbF domain"
+  },
+  {
+   "sccs": "d.345",
+   "name": "NRDP1 C-terminal domain-like"
+  },
+  {
+   "sccs": "d.346",
+   "name": "SARS Nsp1-like"
+  },
+  {
+   "sccs": "d.347",
+   "name": "Acetoacetate decarboxylase-like"
+  },
+  {
+   "sccs": "d.348",
+   "name": "YegP-like"
+  },
+  {
+   "sccs": "d.349",
+   "name": "CPE0013-like"
+  },
+  {
+   "sccs": "d.35",
+   "name": "Heme-binding protein A (HasA)"
+  },
+  {
+   "sccs": "d.350",
+   "name": "YcgL-like"
+  },
+  {
+   "sccs": "d.351",
+   "name": "NMB0488-like"
+  },
+  {
+   "sccs": "d.352",
+   "name": "FlaG-like"
+  },
+  {
+   "sccs": "d.353",
+   "name": "AMPKBI-like"
+  },
+  {
+   "sccs": "d.354",
+   "name": "Shew3726-like"
+  },
+  {
+   "sccs": "d.355",
+   "name": "RplX-like"
+  },
+  {
+   "sccs": "d.356",
+   "name": "SP0830-like"
+  },
+  {
+   "sccs": "d.357",
+   "name": "NosL/MerB-like"
+  },
+  {
+   "sccs": "d.358",
+   "name": "YdfO-like"
+  },
+  {
+   "sccs": "d.359",
+   "name": "BH3703-like"
+  },
+  {
+   "sccs": "d.36",
+   "name": "Chalcone isomerase"
+  },
+  {
+   "sccs": "d.360",
+   "name": "PG1857-like"
+  },
+  {
+   "sccs": "d.361",
+   "name": "PB2 C-terminal domain-like"
+  },
+  {
+   "sccs": "d.362",
+   "name": "BLRF2-like"
+  },
+  {
+   "sccs": "d.363",
+   "name": "NMB0513-like"
+  },
+  {
+   "sccs": "d.364",
+   "name": "PA1123-like"
+  },
+  {
+   "sccs": "d.365",
+   "name": "Ava3019-like"
+  },
+  {
+   "sccs": "d.366",
+   "name": "SpoVG-like"
+  },
+  {
+   "sccs": "d.367",
+   "name": "EscU C-terminal domain-like"
+  },
+  {
+   "sccs": "d.368",
+   "name": "YonK-like"
+  },
+  {
+   "sccs": "d.369",
+   "name": "SMI1/KNR4-like"
+  },
+  {
+   "sccs": "d.37",
+   "name": "CBS-domain pair"
+  },
+  {
+   "sccs": "d.370",
+   "name": "BTG domain-like"
+  },
+  {
+   "sccs": "d.371",
+   "name": "YehR-like"
+  },
+  {
+   "sccs": "d.372",
+   "name": "YqaI-like"
+  },
+  {
+   "sccs": "d.373",
+   "name": "gpW/gp25-like"
+  },
+  {
+   "sccs": "d.374",
+   "name": "TTHC002-like"
+  },
+  {
+   "sccs": "d.375",
+   "name": "NE1680-like"
+  },
+  {
+   "sccs": "d.376",
+   "name": "Lp2179-like"
+  },
+  {
+   "sccs": "d.377",
+   "name": "Rv2827c C-terminal domain-like"
+  },
+  {
+   "sccs": "d.378",
+   "name": "Phosphoprotein oligomerization domain-like"
+  },
+  {
+   "sccs": "d.379",
+   "name": "Taf5 N-terminal domain-like"
+  },
+  {
+   "sccs": "d.38",
+   "name": "Thioesterase/thiol ester dehydrase-isomerase"
+  },
+  {
+   "sccs": "d.380",
+   "name": "Jann2411-like"
+  },
+  {
+   "sccs": "d.381",
+   "name": "ATP12-like"
+  },
+  {
+   "sccs": "d.382",
+   "name": "PSTPO5379-like"
+  },
+  {
+   "sccs": "d.383",
+   "name": "PG1388-like"
+  },
+  {
+   "sccs": "d.384",
+   "name": "SV5-V core-like"
+  },
+  {
+   "sccs": "d.385",
+   "name": "DNA gyrase B, insert domain-like"
+  },
+  {
+   "sccs": "d.386",
+   "name": "Tyrosinase cofactor MelC1-like"
+  },
+  {
+   "sccs": "d.387",
+   "name": "STING C-terminal-like"
+  },
+  {
+   "sccs": "d.388",
+   "name": "Filoviridae VP35-like"
+  },
+  {
+   "sccs": "d.389",
+   "name": "Menin N-terminal domain-like"
+  },
+  {
+   "sccs": "d.39",
+   "name": "DLC"
+  },
+  {
+   "sccs": "d.390",
+   "name": "KS-to-AT linker domain from 6-deoxyerythronolide B synthase (DEBS)-like"
+  },
+  {
+   "sccs": "d.391",
+   "name": "POlypeptide TRansport Associated (PORTRA) domain-like"
+  },
+  {
+   "sccs": "d.392",
+   "name": "GBBH N-terminal domain-like"
+  },
+  {
+   "sccs": "d.393",
+   "name": "CRISPR-associated endonuclease Cas9/Csn1, Target recognition (REC) lobe"
+  },
+  {
+   "sccs": "d.394",
+   "name": "N-terminal domain of Prp8 / Spp42"
+  },
+  {
+   "sccs": "d.395",
+   "name": "Pre-mRNA splicing factor Cwc16-like"
+  },
+  {
+   "sccs": "d.396",
+   "name": "Influenza virus PB2 '627' domain-like"
+  },
+  {
+   "sccs": "d.397",
+   "name": "Influenza virus PB2 cap binding domain-like"
+  },
+  {
+   "sccs": "d.398",
+   "name": "NUC domain from CRISPR-associated protein Cas12a / Cpf1-like"
+  },
+  {
+   "sccs": "d.399",
+   "name": "Ebola nucleoprotein C-terminal domain-like"
+  },
+  {
+   "sccs": "d.4",
+   "name": "His-Me finger endonucleases"
+  },
+  {
+   "sccs": "d.40",
+   "name": "CI-2 family of serine protease inhibitors"
+  },
+  {
+   "sccs": "d.400",
+   "name": "Lem10 N-terminal domain-like"
+  },
+  {
+   "sccs": "d.401",
+   "name": "Cas3 C-terminal domain-like"
+  },
+  {
+   "sccs": "d.402",
+   "name": "B domain from Cmr1-like"
+  },
+  {
+   "sccs": "d.403",
+   "name": "Lewis(b) antigen binding domain of BabA-like"
+  },
+  {
+   "sccs": "d.41",
+   "name": "alpha/beta-Hammerhead"
+  },
+  {
+   "sccs": "d.42",
+   "name": "POZ domain"
+  },
+  {
+   "sccs": "d.43",
+   "name": "EF-Ts domain-like"
+  },
+  {
+   "sccs": "d.44",
+   "name": "Fe,Mn superoxide dismutase (SOD), C-terminal domain"
+  },
+  {
+   "sccs": "d.45",
+   "name": "ClpS-like"
+  },
+  {
+   "sccs": "d.47",
+   "name": "Ribosomal L11/L12e N-terminal domain"
+  },
+  {
+   "sccs": "d.48",
+   "name": "Anti-LPS factor/recA domain"
+  },
+  {
+   "sccs": "d.49",
+   "name": "Signal recognition particle alu RNA binding heterodimer, SRP9/14"
+  },
+  {
+   "sccs": "d.5",
+   "name": "RNase A-like"
+  },
+  {
+   "sccs": "d.50",
+   "name": "dsRBD-like"
+  },
+  {
+   "sccs": "d.51",
+   "name": "Eukaryotic type KH-domain (KH-domain type I)"
+  },
+  {
+   "sccs": "d.52",
+   "name": "Alpha-lytic protease prodomain-like"
+  },
+  {
+   "sccs": "d.53",
+   "name": "Ribosomal protein S3 C-terminal domain"
+  },
+  {
+   "sccs": "d.54",
+   "name": "Enolase N-terminal domain-like"
+  },
+  {
+   "sccs": "d.55",
+   "name": "Ribosomal protein L22"
+  },
+  {
+   "sccs": "d.56",
+   "name": "GroEL-intermediate domain like"
+  },
+  {
+   "sccs": "d.57",
+   "name": "DNA damage-inducible protein DinI"
+  },
+  {
+   "sccs": "d.58",
+   "name": "Ferredoxin-like"
+  },
+  {
+   "sccs": "d.59",
+   "name": "Ribosomal protein L30p/L7e"
+  },
+  {
+   "sccs": "d.6",
+   "name": "Prion-like"
+  },
+  {
+   "sccs": "d.60",
+   "name": "Probable bacterial effector-binding domain"
+  },
+  {
+   "sccs": "d.61",
+   "name": "LigT-like"
+  },
+  {
+   "sccs": "d.62",
+   "name": "Pepsin inhibitor-3"
+  },
+  {
+   "sccs": "d.63",
+   "name": "CYTH-like phosphatases"
+  },
+  {
+   "sccs": "d.64",
+   "name": "eIF1-like"
+  },
+  {
+   "sccs": "d.65",
+   "name": "Hedgehog/DD-peptidase"
+  },
+  {
+   "sccs": "d.66",
+   "name": "Alpha-L RNA-binding motif"
+  },
+  {
+   "sccs": "d.67",
+   "name": "RRF/tRNA synthetase additional domain-like"
+  },
+  {
+   "sccs": "d.68",
+   "name": "IF3-like"
+  },
+  {
+   "sccs": "d.7",
+   "name": "LysM domain"
+  },
+  {
+   "sccs": "d.70",
+   "name": "Yeast killer toxins"
+  },
+  {
+   "sccs": "d.71",
+   "name": "Cell division protein MinE topological specificity domain"
+  },
+  {
+   "sccs": "d.72",
+   "name": "Cyanase C-terminal domain"
+  },
+  {
+   "sccs": "d.73",
+   "name": "RuBisCO, small subunit"
+  },
+  {
+   "sccs": "d.74",
+   "name": "DCoH-like"
+  },
+  {
+   "sccs": "d.75",
+   "name": "MutS N-terminal domain-like"
+  },
+  {
+   "sccs": "d.76",
+   "name": "GYF/BRK domain-like"
+  },
+  {
+   "sccs": "d.77",
+   "name": "RL5-like"
+  },
+  {
+   "sccs": "d.78",
+   "name": "RPB5-like RNA polymerase subunit"
+  },
+  {
+   "sccs": "d.79",
+   "name": "Bacillus chorismate mutase-like"
+  },
+  {
+   "sccs": "d.8",
+   "name": "Urease, gamma-subunit"
+  },
+  {
+   "sccs": "d.80",
+   "name": "Tautomerase/MIF"
+  },
+  {
+   "sccs": "d.81",
+   "name": "FwdE/GAPDH domain-like"
+  },
+  {
+   "sccs": "d.82",
+   "name": "N domain of copper amine oxidase-like"
+  },
+  {
+   "sccs": "d.83",
+   "name": "Aha1/BPI domain-like"
+  },
+  {
+   "sccs": "d.84",
+   "name": "Subtilisin inhibitor"
+  },
+  {
+   "sccs": "d.85",
+   "name": "RNA bacteriophage capsid protein"
+  },
+  {
+   "sccs": "d.86",
+   "name": "eIF4e-like"
+  },
+  {
+   "sccs": "d.87",
+   "name": "CO dehydrogenase flavoprotein C-domain-like"
+  },
+  {
+   "sccs": "d.88",
+   "name": "SRF-like"
+  },
+  {
+   "sccs": "d.89",
+   "name": "Origin of replication-binding domain, RBD-like"
+  },
+  {
+   "sccs": "d.9",
+   "name": "IL8-like"
+  },
+  {
+   "sccs": "d.90",
+   "name": "FMN-dependent nitroreductase-like"
+  },
+  {
+   "sccs": "d.91",
+   "name": "N-terminal domain of eukaryotic peptide chain release factor subunit 1, ERF1"
+  },
+  {
+   "sccs": "d.92",
+   "name": "Zincin-like"
+  },
+  {
+   "sccs": "d.93",
+   "name": "SH2-like"
+  },
+  {
+   "sccs": "d.94",
+   "name": "HPr-like"
+  },
+  {
+   "sccs": "d.95",
+   "name": "Homing endonuclease-like"
+  },
+  {
+   "sccs": "d.96",
+   "name": "T-fold"
+  },
+  {
+   "sccs": "d.97",
+   "name": "Cell cycle regulatory proteins"
+  },
+  {
+   "sccs": "d.98",
+   "name": "BLIP-like"
+  },
+  {
+   "sccs": "d.99",
+   "name": "Ribosomal protein L9 C-domain"
+  },
+  {
+   "sccs": "e.1",
+   "name": "Serpins"
+  },
+  {
+   "sccs": "e.10",
+   "name": "Prokaryotic type I DNA topoisomerase"
+  },
+  {
+   "sccs": "e.11",
+   "name": "Type II DNA topoisomerase C-terminal domain-like"
+  },
+  {
+   "sccs": "e.12",
+   "name": "DNA topoisomerase IV, alpha subunit"
+  },
+  {
+   "sccs": "e.13",
+   "name": "DNA primase core"
+  },
+  {
+   "sccs": "e.15",
+   "name": "Eukaryotic DNA topoisomerase I, N-terminal DNA-binding fragment"
+  },
+  {
+   "sccs": "e.17",
+   "name": "D-aminoacid aminotransferase-like PLP-dependent enzymes"
+  },
+  {
+   "sccs": "e.18",
+   "name": "HydB/Nqo4-like"
+  },
+  {
+   "sccs": "e.19",
+   "name": "HydA/Nqo6-like"
+  },
+  {
+   "sccs": "e.2",
+   "name": "Replication terminator protein (Tus)"
+  },
+  {
+   "sccs": "e.22",
+   "name": "Dehydroquinate synthase-like"
+  },
+  {
+   "sccs": "e.23",
+   "name": "Acetyl-CoA synthetase-like"
+  },
+  {
+   "sccs": "e.24",
+   "name": "Ribosomal protein L1"
+  },
+  {
+   "sccs": "e.25",
+   "name": "Sec1/munc18-like (SM) proteins"
+  },
+  {
+   "sccs": "e.26",
+   "name": "Prismane protein-like"
+  },
+  {
+   "sccs": "e.27",
+   "name": "Upper collar protein gp10 (connector protein)"
+  },
+  {
+   "sccs": "e.28",
+   "name": "Reovirus inner layer core protein p3"
+  },
+  {
+   "sccs": "e.29",
+   "name": "beta and beta-prime subunits of DNA dependent RNA-polymerase"
+  },
+  {
+   "sccs": "e.3",
+   "name": "beta-lactamase/transpeptidase-like"
+  },
+  {
+   "sccs": "e.32",
+   "name": "Phase 1 flagellin"
+  },
+  {
+   "sccs": "e.34",
+   "name": "NSP3 homodimer"
+  },
+  {
+   "sccs": "e.35",
+   "name": "Membrane penetration protein mu1"
+  },
+  {
+   "sccs": "e.37",
+   "name": "Siroheme synthase middle domains-like"
+  },
+  {
+   "sccs": "e.38",
+   "name": "Release factor"
+  },
+  {
+   "sccs": "e.39",
+   "name": "YebC-like"
+  },
+  {
+   "sccs": "e.40",
+   "name": "Cullin homology domain"
+  },
+  {
+   "sccs": "e.41",
+   "name": "Adenylylcyclase toxin (the edema factor)"
+  },
+  {
+   "sccs": "e.42",
+   "name": "L-A virus major coat protein"
+  },
+  {
+   "sccs": "e.43",
+   "name": "Subunits of heterodimeric actin filament capping protein Capz"
+  },
+  {
+   "sccs": "e.44",
+   "name": "2-methylcitrate dehydratase PrpD"
+  },
+  {
+   "sccs": "e.45",
+   "name": "Antivirulence factor"
+  },
+  {
+   "sccs": "e.46",
+   "name": "Virulence-associated V antigen"
+  },
+  {
+   "sccs": "e.47",
+   "name": "39 kda initiator binding protein, IBP39, C-terminal domains"
+  },
+  {
+   "sccs": "e.48",
+   "name": "Major capsid protein VP5"
+  },
+  {
+   "sccs": "e.49",
+   "name": "Recombination protein RecR"
+  },
+  {
+   "sccs": "e.5",
+   "name": "Heme-dependent catalase-like"
+  },
+  {
+   "sccs": "e.50",
+   "name": "AF1104-like"
+  },
+  {
+   "sccs": "e.51",
+   "name": "Urocanase"
+  },
+  {
+   "sccs": "e.52",
+   "name": "NAD kinase/diacylglycerol kinase-like"
+  },
+  {
+   "sccs": "e.53",
+   "name": "QueA-like"
+  },
+  {
+   "sccs": "e.54",
+   "name": "CbiD-like"
+  },
+  {
+   "sccs": "e.55",
+   "name": "Rap/Ran-GAP"
+  },
+  {
+   "sccs": "e.56",
+   "name": "YaeB-like"
+  },
+  {
+   "sccs": "e.57",
+   "name": "Vacuolar ATP synthase subunit C"
+  },
+  {
+   "sccs": "e.58",
+   "name": "Viral ssDNA binding protein"
+  },
+  {
+   "sccs": "e.59",
+   "name": "FdhE-like"
+  },
+  {
+   "sccs": "e.6",
+   "name": "Acyl-CoA dehydrogenase NM domain-like"
+  },
+  {
+   "sccs": "e.60",
+   "name": "Thermophilic metalloprotease-like"
+  },
+  {
+   "sccs": "e.61",
+   "name": "ImpE-like"
+  },
+  {
+   "sccs": "e.62",
+   "name": "Heme iron utilization protein-like"
+  },
+  {
+   "sccs": "e.63",
+   "name": "E2F-DP heterodimerization region"
+  },
+  {
+   "sccs": "e.64",
+   "name": "FlhC-like"
+  },
+  {
+   "sccs": "e.65",
+   "name": "VPA0735-like"
+  },
+  {
+   "sccs": "e.66",
+   "name": "Api92-like"
+  },
+  {
+   "sccs": "e.67",
+   "name": "PH0156-like"
+  },
+  {
+   "sccs": "e.68",
+   "name": "YacF-like"
+  },
+  {
+   "sccs": "e.69",
+   "name": "Poly(A) polymerase catalytic subunit-like"
+  },
+  {
+   "sccs": "e.7",
+   "name": "Carbohydrate phosphatase"
+  },
+  {
+   "sccs": "e.70",
+   "name": "MalF N-terminal region-like"
+  },
+  {
+   "sccs": "e.71",
+   "name": "AF1531-like"
+  },
+  {
+   "sccs": "e.72",
+   "name": "SSO1389-like"
+  },
+  {
+   "sccs": "e.73",
+   "name": "CV3147-like"
+  },
+  {
+   "sccs": "e.74",
+   "name": "HI0933 insert domain-like"
+  },
+  {
+   "sccs": "e.75",
+   "name": "Flu NP-like"
+  },
+  {
+   "sccs": "e.76",
+   "name": "Viral glycoprotein ectodomain-like"
+  },
+  {
+   "sccs": "e.77",
+   "name": "PA C-terminal domain-like"
+  },
+  {
+   "sccs": "e.78",
+   "name": "DNA gyrase B, C-terminal domain-like"
+  },
+  {
+   "sccs": "e.79",
+   "name": "CRISPR associated protein Cas1-like"
+  },
+  {
+   "sccs": "e.8",
+   "name": "DNA/RNA polymerases"
+  },
+  {
+   "sccs": "e.80",
+   "name": "CRISPR-associated endonuclease Cas9/Csn1, Protospace-adjacent motif (PAM)-interacting domain"
+  },
+  {
+   "sccs": "e.81",
+   "name": "CRISPR associated protein CasA/Cse1-like"
+  },
+  {
+   "sccs": "e.82",
+   "name": "Influenza virus PB2 N-terminal region"
+  },
+  {
+   "sccs": "e.83",
+   "name": "Coronavirus S1 beta-rich region"
+  },
+  {
+   "sccs": "e.84",
+   "name": "N-terminal helical domains from CRISPR-associated protein Cas12a / Cpf1-like"
+  },
+  {
+   "sccs": "f.1",
+   "name": "Toxins' membrane translocation domains"
+  },
+  {
+   "sccs": "f.10",
+   "name": "Viral glycoprotein, central and dimerisation domains"
+  },
+  {
+   "sccs": "f.12",
+   "name": "Head and neck region of the ectodomain of NDV fusion glycoprotein"
+  },
+  {
+   "sccs": "f.13",
+   "name": "Class A G protein-coupled receptor (GPCR)-like"
+  },
+  {
+   "sccs": "f.14",
+   "name": "Gated ion channels"
+  },
+  {
+   "sccs": "f.15",
+   "name": "Small-conductance potassium channel"
+  },
+  {
+   "sccs": "f.16",
+   "name": "Gated mechanosensitive channel"
+  },
+  {
+   "sccs": "f.17",
+   "name": "Transmembrane helix hairpin"
+  },
+  {
+   "sccs": "f.18",
+   "name": "F1F0 ATP synthase subunit A"
+  },
+  {
+   "sccs": "f.19",
+   "name": "Aquaporin-like"
+  },
+  {
+   "sccs": "f.20",
+   "name": "Clc chloride channel"
+  },
+  {
+   "sccs": "f.21",
+   "name": "Heme-binding four-helical bundle"
+  },
+  {
+   "sccs": "f.22",
+   "name": "ABC transporter involved in vitamin B12 uptake, BtuC"
+  },
+  {
+   "sccs": "f.23",
+   "name": "Single transmembrane helix"
+  },
+  {
+   "sccs": "f.24",
+   "name": "Cytochrome c oxidase subunit I-like"
+  },
+  {
+   "sccs": "f.25",
+   "name": "Cytochrome c oxidase subunit III-like"
+  },
+  {
+   "sccs": "f.26",
+   "name": "Bacterial photosystem II reaction centre, L and M subunits"
+  },
+  {
+   "sccs": "f.27",
+   "name": "14 kDa protein of cytochrome bc1 complex (Ubiquinol-cytochrome c reductase)"
+  },
+  {
+   "sccs": "f.28",
+   "name": "Non-heme 11 kDa protein of cytochrome bc1 complex (Ubiquinol-cytochrome c reductase)"
+  },
+  {
+   "sccs": "f.29",
+   "name": "Photosystem I subunits PsaA/PsaB"
+  },
+  {
+   "sccs": "f.3",
+   "name": "Light-harvesting complex subunits"
+  },
+  {
+   "sccs": "f.30",
+   "name": "Photosystem I reaction center subunit X, PsaK"
+  },
+  {
+   "sccs": "f.31",
+   "name": "Photosystem I reaction center subunit XI, PsaL"
+  },
+  {
+   "sccs": "f.32",
+   "name": "a domain/subunit of cytochrome bc1 complex (Ubiquinol-cytochrome c reductase)"
+  },
+  {
+   "sccs": "f.33",
+   "name": "Metal cation-transporting ATPase, transmembrane domain"
+  },
+  {
+   "sccs": "f.34",
+   "name": "Mechanosensitive channel protein MscS (YggB), transmembrane region"
+  },
+  {
+   "sccs": "f.35",
+   "name": "Multidrug efflux transporter AcrB transmembrane domain"
+  },
+  {
+   "sccs": "f.36",
+   "name": "Neurotransmitter-gated ion-channel transmembrane pore"
+  },
+  {
+   "sccs": "f.37",
+   "name": "ABC transporter transmembrane region"
+  },
+  {
+   "sccs": "f.38",
+   "name": "MFS general substrate transporter"
+  },
+  {
+   "sccs": "f.4",
+   "name": "Transmembrane beta-barrels"
+  },
+  {
+   "sccs": "f.40",
+   "name": "V-type ATP synthase subunit C"
+  },
+  {
+   "sccs": "f.41",
+   "name": "Preprotein translocase SecY subunit"
+  },
+  {
+   "sccs": "f.42",
+   "name": "Mitochondrial carrier"
+  },
+  {
+   "sccs": "f.43",
+   "name": "Chlorophyll a-b binding protein"
+  },
+  {
+   "sccs": "f.44",
+   "name": "Ammonium transporter"
+  },
+  {
+   "sccs": "f.45",
+   "name": "Mitochondrial ATP synthase coupling factor 6"
+  },
+  {
+   "sccs": "f.46",
+   "name": "HlyD-like secretion proteins"
+  },
+  {
+   "sccs": "f.47",
+   "name": "VP4 membrane interaction domain"
+  },
+  {
+   "sccs": "f.48",
+   "name": "OmpH-like"
+  },
+  {
+   "sccs": "f.49",
+   "name": "Proton glutamate symport protein"
+  },
+  {
+   "sccs": "f.5",
+   "name": "Outer membrane efflux proteins (OEP)"
+  },
+  {
+   "sccs": "f.50",
+   "name": "Connexin43"
+  },
+  {
+   "sccs": "f.51",
+   "name": "Rhomboid-like"
+  },
+  {
+   "sccs": "f.52",
+   "name": "ATP synthase B chain-like"
+  },
+  {
+   "sccs": "f.53",
+   "name": "ATP synthase D chain-like"
+  },
+  {
+   "sccs": "f.54",
+   "name": "SNF-like"
+  },
+  {
+   "sccs": "f.55",
+   "name": "Photosystem II antenna protein-like"
+  },
+  {
+   "sccs": "f.56",
+   "name": "MAPEG domain-like"
+  },
+  {
+   "sccs": "f.57",
+   "name": "MgtE membrane domain-like"
+  },
+  {
+   "sccs": "f.58",
+   "name": "MetI-like"
+  },
+  {
+   "sccs": "f.59",
+   "name": "Cation efflux protein transmembrane domain-like"
+  },
+  {
+   "sccs": "f.6",
+   "name": "Leukocidin-like"
+  },
+  {
+   "sccs": "f.60",
+   "name": "Anthrax protective antigen C-terminal-like"
+  },
+  {
+   "sccs": "f.61",
+   "name": "Multidrug and toxic compound extrusion (MATE) transporter-like"
+  },
+  {
+   "sccs": "f.62",
+   "name": "Diacylglycerol kinase (DgkA)-like"
+  },
+  {
+   "sccs": "f.63",
+   "name": "Claudin-like"
+  },
+  {
+   "sccs": "f.64",
+   "name": "Filovirus surface glycoprotein-like"
+  },
+  {
+   "sccs": "f.65",
+   "name": "Vacuolar ATP synthase subunit a (also called I subunit) C-terminal domain"
+  },
+  {
+   "sccs": "f.66",
+   "name": "Helical insert domain of RAG1"
+  },
+  {
+   "sccs": "f.67",
+   "name": "Bestropin channel-like"
+  },
+  {
+   "sccs": "f.68",
+   "name": "Anoctamin (TMEM16)-like"
+  },
+  {
+   "sccs": "f.69",
+   "name": "Perfringolysin N-terminal-like"
+  },
+  {
+   "sccs": "f.7",
+   "name": "Lipovitellin-phosvitin complex; beta-sheet shell regions"
+  },
+  {
+   "sccs": "f.70",
+   "name": "Extracellular adhesion domain of SabA-like"
+  },
+  {
+   "sccs": "f.71",
+   "name": "LYR proteins from mammalian respiratory complex I"
+  },
+  {
+   "sccs": "f.72",
+   "name": "Antiporter-like subunits from respiratory complex I"
+  },
+  {
+   "sccs": "f.73",
+   "name": "Non-antiporter membrane subunits from respiratory complex I"
+  },
+  {
+   "sccs": "f.8",
+   "name": "Aerolisin/ETX pore-forming domain"
+  },
+  {
+   "sccs": "g.1",
+   "name": "Insulin-like"
+  },
+  {
+   "sccs": "g.10",
+   "name": "Hairpin loop containing domain-like"
+  },
+  {
+   "sccs": "g.100",
+   "name": "Pre-mRNA splicing factor Cwf5-like"
+  },
+  {
+   "sccs": "g.101",
+   "name": "Triquetra knot"
+  },
+  {
+   "sccs": "g.102",
+   "name": "Jumonji C-terminal domain-like"
+  },
+  {
+   "sccs": "g.103",
+   "name": "Protein-only RNAse P central domain-like"
+  },
+  {
+   "sccs": "g.11",
+   "name": "Neurotoxin III (ATX III)"
+  },
+  {
+   "sccs": "g.12",
+   "name": "LDL receptor-like module"
+  },
+  {
+   "sccs": "g.13",
+   "name": "Crambin-like"
+  },
+  {
+   "sccs": "g.14",
+   "name": "Kringle-like"
+  },
+  {
+   "sccs": "g.16",
+   "name": "Trefoil/Plexin domain-like"
+  },
+  {
+   "sccs": "g.17",
+   "name": "Cystine-knot cytokines"
+  },
+  {
+   "sccs": "g.18",
+   "name": "Complement control module/SCR domain"
+  },
+  {
+   "sccs": "g.19",
+   "name": "Crisp domain-like"
+  },
+  {
+   "sccs": "g.2",
+   "name": "Toxic hairpin"
+  },
+  {
+   "sccs": "g.20",
+   "name": "Blood coagulation inhibitor (disintegrin)"
+  },
+  {
+   "sccs": "g.21",
+   "name": "Methylamine dehydrogenase, L chain"
+  },
+  {
+   "sccs": "g.22",
+   "name": "Serine protease inhibitors"
+  },
+  {
+   "sccs": "g.23",
+   "name": "TB module/8-cys domain"
+  },
+  {
+   "sccs": "g.24",
+   "name": "TNF receptor-like"
+  },
+  {
+   "sccs": "g.25",
+   "name": "Heparin-binding domain from vascular endothelial growth factor"
+  },
+  {
+   "sccs": "g.26",
+   "name": "Antifungal protein (AGAFP)"
+  },
+  {
+   "sccs": "g.27",
+   "name": "FnI-like domain"
+  },
+  {
+   "sccs": "g.28",
+   "name": "Thyroglobulin type-1 domain"
+  },
+  {
+   "sccs": "g.29",
+   "name": "Type X cellulose binding domain, CBDX"
+  },
+  {
+   "sccs": "g.3",
+   "name": "Knottins (small inhibitors, toxins, lectins)"
+  },
+  {
+   "sccs": "g.30",
+   "name": "Carboxypeptidase inhibitor"
+  },
+  {
+   "sccs": "g.31",
+   "name": "Invertebrate chitin-binding proteins"
+  },
+  {
+   "sccs": "g.32",
+   "name": "GLA-domain"
+  },
+  {
+   "sccs": "g.33",
+   "name": "Cholecystokinin A receptor, N-domain"
+  },
+  {
+   "sccs": "g.34",
+   "name": "HIV-1 VPU cytoplasmic domain"
+  },
+  {
+   "sccs": "g.35",
+   "name": "HIPIP (high potential iron protein)"
+  },
+  {
+   "sccs": "g.36",
+   "name": "Ferredoxin thioredoxin reductase (FTR), catalytic beta chain"
+  },
+  {
+   "sccs": "g.37",
+   "name": "beta-beta-alpha zinc fingers"
+  },
+  {
+   "sccs": "g.38",
+   "name": "Zn2/Cys6 DNA-binding domain"
+  },
+  {
+   "sccs": "g.39",
+   "name": "Glucocorticoid receptor-like (DNA-binding domain)"
+  },
+  {
+   "sccs": "g.4",
+   "name": "PMP inhibitors"
+  },
+  {
+   "sccs": "g.40",
+   "name": "Retrovirus zinc finger-like domains"
+  },
+  {
+   "sccs": "g.41",
+   "name": "Rubredoxin-like"
+  },
+  {
+   "sccs": "g.42",
+   "name": "Ribosomal protein L36"
+  },
+  {
+   "sccs": "g.43",
+   "name": "B-box zinc-binding domain"
+  },
+  {
+   "sccs": "g.44",
+   "name": "RING/U-box"
+  },
+  {
+   "sccs": "g.45",
+   "name": "ArfGap/RecO-like zinc finger"
+  },
+  {
+   "sccs": "g.46",
+   "name": "Metallothionein"
+  },
+  {
+   "sccs": "g.47",
+   "name": "Zinc domain conserved in yeast copper-regulated transcription factors"
+  },
+  {
+   "sccs": "g.48",
+   "name": "Ada DNA repair protein, N-terminal domain (N-Ada 10)"
+  },
+  {
+   "sccs": "g.49",
+   "name": "Cysteine-rich domain"
+  },
+  {
+   "sccs": "g.5",
+   "name": "Midkine"
+  },
+  {
+   "sccs": "g.50",
+   "name": "FYVE/PHD zinc finger"
+  },
+  {
+   "sccs": "g.51",
+   "name": "Zn-binding domains of ADDBP"
+  },
+  {
+   "sccs": "g.52",
+   "name": "Inhibitor of apoptosis (IAP) repeat"
+  },
+  {
+   "sccs": "g.53",
+   "name": "TAZ domain"
+  },
+  {
+   "sccs": "g.54",
+   "name": "DnaJ/Hsp40 cysteine-rich domain"
+  },
+  {
+   "sccs": "g.55",
+   "name": "Cellulose docking domain, dockering"
+  },
+  {
+   "sccs": "g.58",
+   "name": "Pheromone ER-23"
+  },
+  {
+   "sccs": "g.59",
+   "name": "Zinc-binding domain of translation initiation factor 2 beta"
+  },
+  {
+   "sccs": "g.6",
+   "name": "Amb V allergen"
+  },
+  {
+   "sccs": "g.60",
+   "name": "TSP-1 type 1 repeat"
+  },
+  {
+   "sccs": "g.61",
+   "name": "Apical membrane antigen 1"
+  },
+  {
+   "sccs": "g.62",
+   "name": "Cysteine-rich DNA binding domain, (DM domain)"
+  },
+  {
+   "sccs": "g.63",
+   "name": "Mollusk pheromone"
+  },
+  {
+   "sccs": "g.64",
+   "name": "Somatomedin B domain"
+  },
+  {
+   "sccs": "g.65",
+   "name": "Notch domain"
+  },
+  {
+   "sccs": "g.66",
+   "name": "CCCH zinc finger"
+  },
+  {
+   "sccs": "g.67",
+   "name": "Zinc finger domain of DNA polymerase-alpha"
+  },
+  {
+   "sccs": "g.68",
+   "name": "Kazal-type serine protease inhibitors"
+  },
+  {
+   "sccs": "g.69",
+   "name": "Plant proteinase inhibitors"
+  },
+  {
+   "sccs": "g.7",
+   "name": "Snake toxin-like"
+  },
+  {
+   "sccs": "g.70",
+   "name": "Necrosis inducing protein 1, NIP1"
+  },
+  {
+   "sccs": "g.71",
+   "name": "Mini-collagen I, C-terminal domain"
+  },
+  {
+   "sccs": "g.72",
+   "name": "SBT domain"
+  },
+  {
+   "sccs": "g.73",
+   "name": "CCHHC domain"
+  },
+  {
+   "sccs": "g.74",
+   "name": "Sec-C motif"
+  },
+  {
+   "sccs": "g.75",
+   "name": "TSP type-3 repeat"
+  },
+  {
+   "sccs": "g.76",
+   "name": "Hormone receptor domain"
+  },
+  {
+   "sccs": "g.77",
+   "name": "Resistin"
+  },
+  {
+   "sccs": "g.78",
+   "name": "YAP1 redox domain"
+  },
+  {
+   "sccs": "g.79",
+   "name": "WRKY DNA-binding domain"
+  },
+  {
+   "sccs": "g.8",
+   "name": "BPTI-like"
+  },
+  {
+   "sccs": "g.80",
+   "name": "AN1-like Zinc finger"
+  },
+  {
+   "sccs": "g.81",
+   "name": "HSP33 redox switch-like"
+  },
+  {
+   "sccs": "g.82",
+   "name": "Expressed protein At2g23090/F21P24.15"
+  },
+  {
+   "sccs": "g.83",
+   "name": "Tim10-like"
+  },
+  {
+   "sccs": "g.84",
+   "name": "Cysteine zipper"
+  },
+  {
+   "sccs": "g.85",
+   "name": "HIT/MYND zinc finger-like"
+  },
+  {
+   "sccs": "g.86",
+   "name": "Coronavirus NSP10-like"
+  },
+  {
+   "sccs": "g.87",
+   "name": "Viral leader polypeptide zinc finger"
+  },
+  {
+   "sccs": "g.88",
+   "name": "Intrinsically disordered proteins"
+  },
+  {
+   "sccs": "g.89",
+   "name": "CHY zinc finger-like"
+  },
+  {
+   "sccs": "g.9",
+   "name": "Defensin-like"
+  },
+  {
+   "sccs": "g.90",
+   "name": "E6 C-terminal domain-like"
+  },
+  {
+   "sccs": "g.91",
+   "name": "E7 C-terminal domain-like"
+  },
+  {
+   "sccs": "g.92",
+   "name": "T-antigen specific domain-like"
+  },
+  {
+   "sccs": "g.93",
+   "name": "Zinc hairpin stack"
+  },
+  {
+   "sccs": "g.94",
+   "name": "Complement C3 linker domain-like"
+  },
+  {
+   "sccs": "g.95",
+   "name": "bi-CXXC zinc finger-like"
+  },
+  {
+   "sccs": "g.96",
+   "name": "Flavivirus non-structural protein NS2B-like"
+  },
+  {
+   "sccs": "g.97",
+   "name": "Iron-sulfur cluster-binding zinc finger CDGSH type"
+  },
+  {
+   "sccs": "g.98",
+   "name": "RNA polymerase I subunit A14-like"
+  },
+  {
+   "sccs": "g.99",
+   "name": "Pre-mRNA splicing factor Cwf14-like"
+  }
+ ]
+}

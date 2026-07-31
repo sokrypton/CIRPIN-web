@@ -1,0 +1,1 @@
+{"name": "cath40", "label": "CATH40 v4.4", "dims": 32, "structures": "coords", "shardBytes": 90000000, "models": {"cirpin": {"shardRows": 2812500, "shards": [["cath40-cirpin-000.bin", 34649]]}, "progres": {"shardRows": 2812500, "shards": [["cath40-progres-000.bin", 34649]]}}, "n": 34649, "idFormat": "text"}

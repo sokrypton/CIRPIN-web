@@ -1,0 +1,1 @@
+{"format": 4, "records": 15176, "index": "coords.idx", "indexBlock": 1024, "base": "coords-base.bin", "indexBytes": 30352, "shards": [{"file": "coords-000.bin", "row0": 0, "rows": 15176, "base": 0, "bytes": 4343504}], "codebook": "7a3a64ed5f056614"}

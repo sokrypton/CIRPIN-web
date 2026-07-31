@@ -1,0 +1,1 @@
+{"name": "scope40", "label": "SCOPe40 2.08", "dims": 32, "structures": "coords", "shardBytes": 90000000, "models": {"cirpin": {"shardRows": 2812500, "shards": [["scope40-cirpin-000.bin", 15176]]}, "progres": {"shardRows": 2812500, "shards": [["scope40-progres-000.bin", 15176]]}}, "n": 15176, "idFormat": "text"}
