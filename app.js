@@ -2,15 +2,15 @@
 
 // makeSec is TM-align's Cα-only secondary-structure assignment, reused here so
 // the viewer draws real cartoons without a model or side chains.
-const { makeSec, smoothSec } = await import('./src/tmalign.js?v=42548e97');
+const { makeSec, smoothSec } = await import('./src/tmalign.js?v=98dcea2c');
 // The first-load hero. Dynamic, like the import above, because this file is loaded as a module with
 // top-level await rather than with static imports.
-const { ouroboros } = await import('./src/ouroboros.js?v=42548e97');
-const { bestView, fillZoom } = await import('./src/orient.js?v=42548e97');
+const { ouroboros } = await import('./src/ouroboros.js?v=98dcea2c');
+const { bestView, fillZoom } = await import('./src/orient.js?v=98dcea2c');
 // The Cα cartoon renderer and the drag that turns it, which the atlas page imports too. It lived
 // here until the atlas needed it; a second copy of either would have drifted from this one.
 const { prep, fitOf, radiusAbout, hexToRgb, drawTraces, makeCamera, orbit, spectrumRgb,
-  PAPER, PE_MAX, SIDE_INSET } = await import('./src/trace3d.js?v=42548e97');
+  PAPER, PE_MAX, SIDE_INSET } = await import('./src/trace3d.js?v=98dcea2c');
 
 // Declared up here, not beside the call that starts it: updateChrome() stops the animation once a
 // structure loads, and updateChrome runs long before the end of this file. Declared at the bottom,
@@ -1968,6 +1968,7 @@ function clearAlignment() {
   $('mapEmpty').textContent = 'Pick a hit to align it against your structure.';
   $('mapRead').textContent = '';
   $('alignStats').hidden = true;
+  renderClass(null);
   $('superEmpty').hidden = false;
   $('superEmpty').textContent = 'Pick a hit to superimpose it on your structure.';
   $('sideEmpty').hidden = false;
@@ -2002,6 +2003,7 @@ function requestAlign(h) {
   sideState = null;
   mapState = null;
   $('alignStats').hidden = true;
+  renderClass(null);
   $('mapEmpty').hidden = false;
   $('mapEmpty').textContent = `Aligning ${displayId(h.id)}…`;
   $('superEmpty').hidden = false;
@@ -2063,6 +2065,41 @@ function cacheAlignment(m) {
   }
 }
 
+/**
+ * Where the hit sits in its database's classification, one row per level.
+ *
+ * Built rather than written into the HTML because the three schemes have different depths and different
+ * words: SCOPe names four levels class/fold/superfamily/family, CATH names four
+ * class/architecture/topology/homologous superfamily, ECOD names five architecture/X/H/T/F. Flattening
+ * them onto a shared vocabulary would misreport all three, and AlphaFold TED has no classification at
+ * all -- so the absence of rows is the honest rendering for it, not a row reading "unknown".
+ *
+ * The code (a.1.1.1, 3.40.50.300, 2007.1.1) goes on the scheme row, because it is the thing to paste into
+ * the source database and the level names above it are the thing to read.
+ */
+function renderClass(cls) {
+  const host = $('aClassRows');
+  host.textContent = '';
+  if (!cls || !cls.levels || !cls.levels.length) return;
+  const head = document.createElement('div');
+  head.className = 'align-row cls-head';
+  head.innerHTML = `<span>${cls.scheme}</span><b>${cls.code}</b>`;
+  host.appendChild(head);
+  for (const { level, name } of cls.levels) {
+    const el = document.createElement('div');
+    el.className = 'align-row cls-level';
+    // textContent, not innerHTML: these names come from SCOPe, CATH and ECOD release files and are
+    // display text, not markup.
+    const k = document.createElement('span');
+    k.textContent = level;
+    const v = document.createElement('b');
+    v.textContent = name;
+    v.title = name;          // the deepest levels are long enough to clip
+    el.append(k, v);
+    host.appendChild(el);
+  }
+}
+
 function renderAlignment(m) {
   alignAvailable = true;
   // Offered only for the selected hit, never in the table: a link in a row people
@@ -2075,6 +2112,7 @@ function renderAlignment(m) {
   // the table, so the card can be read on its own: "the models call this the same fold at 0.997 and
   // 0.550, and TM-align finds 0.378 sequential against 0.612 permuted" is one thought.
   const row = (unit()?.hits || []).find((h) => h.id === m.id);
+  renderClass(m.cls);
   $('aCirpin').textContent = row ? row.cirpin.toFixed(3) : '—';
   $('aProgres').textContent = row ? row.progres.toFixed(3) : '—';
   $('aTm').textContent = m.tm.toFixed(3);
@@ -2879,7 +2917,7 @@ hero = ouroboros($('heroCanvas'));
      */
     let snakeGame;
     try {
-      ({ snakeGame } = await import('./src/snakegame.js?v=42548e97'));
+      ({ snakeGame } = await import('./src/snakegame.js?v=98dcea2c'));
     } catch (err) {
       eggOpen = false;
       console.error('snake: could not load the game — most likely a cached module from a previous '

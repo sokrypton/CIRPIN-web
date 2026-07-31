@@ -141,14 +141,14 @@
 <div id="tip"></div>
 
 <script type="module">
-import { loadCodebook, decodeRecord, shardedStore } from './src/coords.js?v=42548e97';
-import { fetchRange, fetchWhole, fetchJSONWhole } from './src/fetchrange.js?v=42548e97';
+import { loadCodebook, decodeRecord, shardedStore } from './src/coords.js?v=98dcea2c';
+import { fetchRange, fetchWhole, fetchJSONWhole } from './src/fetchrange.js?v=98dcea2c';
 import { loadAtlas, makeScatter, neighbours, partnersAbove, makeTraceView, CLASS_COLOURS,
-  LINK_CUTOFF } from './src/atlas.js?v=42548e97';
+  LINK_CUTOFF } from './src/atlas.js?v=98dcea2c';
 // The Cα-only secondary-structure assignment, which the cartoon renderer needs to know a helix from
 // a loop. Imported here rather than inside src/atlas.js so the whole TM-align port is not a
 // dependency of the layout code that has no use for it.
-import { makeSec, smoothSec } from './src/tmalign.js?v=42548e97';
+import { makeSec, smoothSec } from './src/tmalign.js?v=98dcea2c';
 
 const $ = (id) => document.getElementById(id);
 const status = (t) => { $('status').textContent = t; };

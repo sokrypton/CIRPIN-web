@@ -1,20 +1,20 @@
 // Embedding, dual-model search and structural alignment. Everything heavy
 // runs here so the UI thread stays responsive.
 
-import { loadWeights, embedGraph } from './src/cirpin.js?v=42548e97';
-import { loadAccelerator } from './src/wasm.js?v=42548e97';
+import { loadWeights, embedGraph } from './src/cirpin.js?v=98dcea2c';
+import { loadAccelerator } from './src/wasm.js?v=98dcea2c';
 import { coordsToGraph, parseStructureChains, parseCoordsTxt, parseCIF }
-  from './src/structure.js?v=42548e97';
+  from './src/structure.js?v=98dcea2c';
 import { loadBasis, projectQuery, scanCodes, scoreRows, unpackId, TED_ID_BYTES }
-  from './src/ted.js?v=42548e97';
+  from './src/ted.js?v=98dcea2c';
 import { tmAlign, cpAlign, permuteCoords, applyTransform, applyInverseTransform }
-  from './src/tmalign.js?v=42548e97';
-import { parseDomains, domainCoords } from './src/domains.js?v=42548e97';
+  from './src/tmalign.js?v=98dcea2c';
+import { parseDomains, domainCoords } from './src/domains.js?v=98dcea2c';
 import { loadCodebook, decodeRecord, shardedStore, codebookId }
-  from './src/coords.js?v=42548e97';
+  from './src/coords.js?v=98dcea2c';
 // One range reader for the whole app, and the invariant that a file is either range-read or
 // fetched whole but never both. See src/fetchrange.js for the 45 MB read that made it necessary.
-import { fetchRange as rangeOf, fetchWhole, fetchJSONWhole } from './src/fetchrange.js?v=42548e97';
+import { fetchRange as rangeOf, fetchWhole, fetchJSONWhole } from './src/fetchrange.js?v=98dcea2c';
 
 let cirpinW = null;
 let progresW = null;
@@ -455,6 +455,8 @@ async function loadCoded(name, outerBump) {
   const loaded = {
     name, label: meta.label, n, dims,
     structures: meta.structures,
+    // kept so the classification lookup can be fetched lazily; everything else it needs is derived
+    prefix: src.prefix,
     // where this database's coordinate store lives; '' means it has none
     coords: src.coords ?? '',
     idFormat: meta.idFormat,
@@ -1128,6 +1130,52 @@ async function afdbDomainCoords(row) {
  * in src/coords.js; what differs between SCOPe and AlphaFold TED is the prefix and nothing else.
  * Returns null when no store is configured, or when its files are not reachable.
  */
+/**
+ * A database's classification lookup: which class, fold and family each row belongs to.
+ *
+ * Fetched on first use rather than at load, and cached per prefix. Nothing needs it until a hit is
+ * selected, and it is between 0.4 MB (SCOPe, CATH) and 2.7 MB (ECOD) -- worth nothing at all to a search,
+ * so making a search wait for it would be a pure loss.
+ *
+ * `paths` is flat, `levels.length` entries per path, and `names` is interned per level: ECOD40 has 448,232
+ * domains over 34,748 distinct paths drawn from 32,446 names, so a name per row would be ~20 MB where an
+ * index per row is 0.9 MB. See tools/build_class.py.
+ *
+ * Failure is null, not an exception. A missing lookup should cost the card a few rows, not the alignment
+ * the card is describing.
+ */
+const classifications = new Map();
+function classStore(prefix) {
+  if (!prefix) return null;
+  if (classifications.has(prefix)) return classifications.get(prefix);
+  const p = (async () => {
+    const meta = await fetchJSON(`${prefix}-class.json`);
+    const buf = await fetchBin(`${prefix}-class.bin`);
+    const view = meta.bits === 16 ? new Uint16Array(buf) : new Uint32Array(buf);
+    if (view.length !== meta.rows) {
+      throw new Error(`${prefix}-class.bin has ${view.length} rows, the manifest says ${meta.rows}`);
+    }
+    return { ...meta, view, sentinel: meta.bits === 16 ? 0xFFFF : 0xFFFFFFFF };
+  })().catch(() => null);
+  classifications.set(prefix, p);
+  return p;
+}
+
+/** The hierarchy one row sits in: {scheme, code, levels: [{level, name}]}, or null. */
+async function classOf(d, row) {
+  if (!d || row == null || row < 0) return null;
+  const c = await classStore(d.prefix);
+  if (!c || row >= c.rows) return null;
+  const at = c.view[row];
+  if (at === c.sentinel) return null;
+  const n = c.levels.length;
+  return {
+    scheme: c.scheme,
+    code: c.codes[at],
+    levels: c.levels.map((lv, i) => ({ level: lv, name: c.names[i][c.paths[at * n + i]] })),
+  };
+}
+
 const stores = new Map();
 function coordStore(prefix) {
   if (!prefix) return null;
@@ -1557,7 +1605,10 @@ onmessage = async (ev) => {
 
     if (msg.type === 'align') {
       const r = await runAlign(msg.coords, msg.id, msg.row);
-      post({ type: 'aligned', requestId: msg.requestId, ...r }, [
+      // The classification rides with the alignment rather than in a message of its own: the card is
+      // only on screen once an alignment has arrived, and the row number is already here.
+      const cls = await classOf(db(), msg.row);
+      post({ type: 'aligned', requestId: msg.requestId, cls, ...r }, [
         r.target.buffer, r.queryFixed.buffer,
         r.seq.map.buffer, r.seq.path.buffer, r.seq.fitted.buffer, r.seq.targetFitted.buffer,
         r.cp.map.buffer, r.cp.path.buffer, r.cp.fitted.buffer, r.cp.targetFitted.buffer,

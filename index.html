@@ -582,6 +582,15 @@
   .align-row span { color: var(--ink-2); }
   .align-row b { font-weight: 600; font-variant-numeric: tabular-nums; }
   .align-row a { color: var(--bond); text-underline-offset: 2px; }
+  /* The classification. Chips like the rest of this strip rather than a labelled column, because
+     .align-stats is a wrapping row and a fixed label width would clip "Homologous superfamily" at any
+     panel size. flex-basis 100% keeps the scheme and its levels together as one band instead of
+     interleaving them with TM and cut, and lets long prose values -- "Nucleotide-binding alpha-beta
+     plait" -- wrap without pushing the numbers around. */
+  #aClassRows { display: flex; flex-wrap: wrap; gap: 3px 16px; flex: 1 1 100%; }
+  #aClassRows:empty { display: none; }
+  #aClassRows .align-row b { font-weight: 500; font-variant-numeric: normal; }
+  #aClassRows .cls-head b { font-weight: 600; font-variant-numeric: tabular-nums; }
   .align-row a:hover { color: var(--cut); }
   .align-row.hi b { color: var(--cut); }
 
@@ -718,7 +727,12 @@ whatever coordinates have been read on demand.">0.0 MB</div>
              the two disagree, which you cannot see if they are in separate places on the page. -->
         <div class="align-row"><span>CIRPIN</span><b id="aCirpin">&mdash;</b></div>
         <div class="align-row"><span>Progres</span><b id="aProgres">&mdash;</b></div>
-        <div class="align-row" id="aClassRow" hidden><span id="aClassLabel">class</span><b id="aClass">&mdash;</b></div>
+        <!-- Where this hit sits in its database's own hierarchy: SCOPe class/fold/superfamily/family,
+             CATH class/architecture/topology/homologous superfamily, ECOD architecture/X/H/T/F. Built
+             here rather than written out because the schemes have different depths and different words
+             for their levels, and flattening them to a shared vocabulary would misreport all three.
+             Absent for AlphaFold TED, which has no classification to show. -->
+        <div id="aClassRows"></div>
         <div class="align-row"><span>TM</span><b id="aTm">&mdash;</b></div>
         <div class="align-row"><span>TM cp</span><b id="aTmCp">&mdash;</b></div>
         <div class="align-row" id="aDiffRow"><span>&Delta;</span><b id="aDiff">&mdash;</b></div>
