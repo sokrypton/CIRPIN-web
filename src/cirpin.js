@@ -16,7 +16,7 @@
 // approximation. Only the second edge Linear (256 -> 64), which sits after
 // the nonlinearity, is irreducibly per-edge.
 
-import { coordsToGraph, N_FEATURES } from './structure.js?v=5e652e7b';
+import { coordsToGraph, N_FEATURES } from './structure.js?v=42548e97';
 
 const HIDDEN = 128;       // hidden_dim
 const EDGE_HIDDEN = 256;  // hidden_edge_dim

@@ -1,20 +1,20 @@
 // Embedding, dual-model search and structural alignment. Everything heavy
 // runs here so the UI thread stays responsive.
 
-import { loadWeights, embedGraph } from './src/cirpin.js?v=5e652e7b';
-import { loadAccelerator } from './src/wasm.js?v=5e652e7b';
+import { loadWeights, embedGraph } from './src/cirpin.js?v=42548e97';
+import { loadAccelerator } from './src/wasm.js?v=42548e97';
 import { coordsToGraph, parseStructureChains, parseCoordsTxt, parseCIF }
-  from './src/structure.js?v=5e652e7b';
+  from './src/structure.js?v=42548e97';
 import { loadBasis, projectQuery, scanCodes, scoreRows, unpackId, TED_ID_BYTES }
-  from './src/ted.js?v=5e652e7b';
+  from './src/ted.js?v=42548e97';
 import { tmAlign, cpAlign, permuteCoords, applyTransform, applyInverseTransform }
-  from './src/tmalign.js?v=5e652e7b';
-import { parseDomains, domainCoords } from './src/domains.js?v=5e652e7b';
+  from './src/tmalign.js?v=42548e97';
+import { parseDomains, domainCoords } from './src/domains.js?v=42548e97';
 import { loadCodebook, decodeRecord, shardedStore, codebookId }
-  from './src/coords.js?v=5e652e7b';
+  from './src/coords.js?v=42548e97';
 // One range reader for the whole app, and the invariant that a file is either range-read or
 // fetched whole but never both. See src/fetchrange.js for the 45 MB read that made it necessary.
-import { fetchRange as rangeOf, fetchWhole, fetchJSONWhole } from './src/fetchrange.js?v=5e652e7b';
+import { fetchRange as rangeOf, fetchWhole, fetchJSONWhole } from './src/fetchrange.js?v=42548e97';
 
 let cirpinW = null;
 let progresW = null;
@@ -106,7 +106,7 @@ function coordCodebook() {
 // db-ids.bin, coords-000.bin -- because the repository name already says which database it is, and
 // CIRPIN-ted/ted-ids.bin stutters. One origin per database means each is published, re-published and
 // size-capped on its own: GitHub Pages allows 1 GiB per site, and TED alone is 841 MB.
-const EXTERNAL = {"afdb": "https://sokrypton.github.io/CIRPIN-ted"};
+const EXTERNAL = {"afdb": "https://sokrypton.github.io/CIRPIN-ted", "ecod40": "https://sokrypton.github.io/CIRPIN-ecod"};
 
 /**
  * The databases this build knows about.
@@ -128,6 +128,9 @@ const LOCAL_SOURCES = {
   // needing a clustered index. Its coordinates sit beside its codes because they were built from
   // cathdb.info's own PDB files rather than from training_coords.
   cath40: { prefix: './data/db/cath40', coords: './data/db/cath40-coords' },
+  // ECOD's F40 set, 448,232 domains. Clustered like TED rather than scanned like the two above, and
+  // its ids are text rather than packed, which needs no new code path -- CATH's shape with TED's index.
+  ecod40: { prefix: './data/db/ecod40', coords: './data/db/ecod40-coords' },
   afdb: { prefix: './data/ted/ted', coords: './data/ted/ted-coords' },
 };
 

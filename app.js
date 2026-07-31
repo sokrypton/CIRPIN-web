@@ -2,15 +2,15 @@
 
 // makeSec is TM-align's Cα-only secondary-structure assignment, reused here so
 // the viewer draws real cartoons without a model or side chains.
-const { makeSec, smoothSec } = await import('./src/tmalign.js?v=5e652e7b');
+const { makeSec, smoothSec } = await import('./src/tmalign.js?v=42548e97');
 // The first-load hero. Dynamic, like the import above, because this file is loaded as a module with
 // top-level await rather than with static imports.
-const { ouroboros } = await import('./src/ouroboros.js?v=5e652e7b');
-const { bestView, fillZoom } = await import('./src/orient.js?v=5e652e7b');
+const { ouroboros } = await import('./src/ouroboros.js?v=42548e97');
+const { bestView, fillZoom } = await import('./src/orient.js?v=42548e97');
 // The Cα cartoon renderer and the drag that turns it, which the atlas page imports too. It lived
 // here until the atlas needed it; a second copy of either would have drifted from this one.
 const { prep, fitOf, radiusAbout, hexToRgb, drawTraces, makeCamera, orbit, spectrumRgb,
-  PAPER, PE_MAX, SIDE_INSET } = await import('./src/trace3d.js?v=5e652e7b');
+  PAPER, PE_MAX, SIDE_INSET } = await import('./src/trace3d.js?v=42548e97');
 
 // Declared up here, not beside the call that starts it: updateChrome() stops the animation once a
 // structure loads, and updateChrome runs long before the end of this file. Declared at the bottom,
@@ -99,6 +99,7 @@ function hitUrl(id) {
 const DB_LABELS = {
   scope40: { label: 'SCOPe40 2.08' },
   cath40: { label: 'CATH40 v4.4' },
+  ecod40: { label: 'ECOD40 v295' },
   afdb: { label: 'AlphaFoldDB-TED v4' },
 };
 let databases = [];
@@ -2878,7 +2879,7 @@ hero = ouroboros($('heroCanvas'));
      */
     let snakeGame;
     try {
-      ({ snakeGame } = await import('./src/snakegame.js?v=5e652e7b'));
+      ({ snakeGame } = await import('./src/snakegame.js?v=42548e97'));
     } catch (err) {
       eggOpen = false;
       console.error('snake: could not load the game — most likely a cached module from a previous '

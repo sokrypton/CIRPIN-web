@@ -37,9 +37,9 @@
 // of 15 for normal vision and 8 under both deuteranope and protanope simulation, and every colour
 // clears a 1.6 contrast ratio against the background. Two classes merging under colour blindness
 // would put "all beta" and "small proteins" in one visual bucket with nothing to reveal it.
-import { bestView, fillZoom } from './orient.js?v=5e652e7b';
+import { bestView, fillZoom } from './orient.js?v=42548e97';
 import { drawTraces, fitOf, makeCamera, orbit, prep, mul3, rotX, rotY, spectrumRgb }
-  from './trace3d.js?v=5e652e7b';
+  from './trace3d.js?v=42548e97';
 
 export const CLASS_COLOURS = ['#0072B2', '#D55E00', '#009E73', '#CC79A7',
   '#E69F00', '#56B4E9', '#333333'];

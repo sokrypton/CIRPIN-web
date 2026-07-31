@@ -44,7 +44,7 @@ export const STANDARD_AMINO_ACIDS = new Set([
 // Imported AND re-exported, not `export ... from`: that form creates no local binding, so the two
 // uses below would have been silent undefined-property failures at runtime while parsing fine.
 // See web/tools/gen_modres.py for the provenance and for why the obvious distance test was not used.
-import { MODIFIED_AMINO_ACIDS } from './modres.js?v=5e652e7b';
+import { MODIFIED_AMINO_ACIDS } from './modres.js?v=42548e97';
 
 export { MODIFIED_AMINO_ACIDS };
 
