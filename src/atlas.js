@@ -37,18 +37,16 @@
 // of 15 for normal vision and 8 under both deuteranope and protanope simulation, and every colour
 // clears a 1.6 contrast ratio against the background. Two classes merging under colour blindness
 // would put "all beta" and "small proteins" in one visual bucket with nothing to reveal it.
-import { bestView, fillZoom } from './orient.js?v=98dcea2c';
+import { bestView, fillZoom } from './orient.js?v=2c8b633b';
 import { drawTraces, fitOf, makeCamera, orbit, prep, mul3, rotX, rotY, spectrumRgb }
-  from './trace3d.js?v=98dcea2c';
+  from './trace3d.js?v=2c8b633b';
 
 export const CLASS_COLOURS = ['#0072B2', '#D55E00', '#009E73', '#CC79A7',
   '#E69F00', '#56B4E9', '#333333'];
 const NO_CLASS = '#9aa4b0';
+// the sentinel the build writes for a domain with no class or fold
 const UNKNOWN = 0xFFFF;
 
-// The disagreement ramp and its quantile breaks are kept, unused, for the interpolation work: the
-// delta channel is still in the data file, and a sequential ramp that has been checked against the
-// background is worth not having to re-derive. Nothing imports them today.
 export const DELTA_RAMP = ['#fbe6f0', '#f0b9d5', '#e08cba', '#c85f9c', '#a5347b', '#750d55'];
 
 /** Decode the atlas file: layout coordinates, colour channels, and SCOPe labels. */
@@ -169,7 +167,16 @@ export function makeScatter(canvas, atlas, opts = {}) {
   // rotation fixed on the layout's origin, centring a point and then dragging swings it straight
   // back off screen, so a selection could be examined only from the one angle it happened to
   // arrive at. Moving the pivot to the clicked point turns a drag into an orbit around it.
-  const state = { hover: -1, focus: -1, links: [], pivot: [0, 0, 0] };
+  // subset: null for the whole cloud, or a mask of the rows a legend selection has narrowed to.
+  const state = { hover: -1, focus: -1, links: [], pivot: [0, 0, 0], subset: null };
+
+  /**
+   * Whether a point is on screen at all — the crop ball and the legend's subset in one place.
+   *
+   * One predicate, used by draw AND by pick. Two copies of this test is how a point becomes
+   * invisible but still clickable, which reads as the map selecting something at random.
+   */
+  const shown = (i) => pr[i] <= cropR && (!state.subset || state.subset[i] === 1);
 
   // extent of the layout, for the initial fit and the perspective divide
   let radius = 1;
@@ -314,7 +321,7 @@ export function makeScatter(canvas, atlas, opts = {}) {
     // marks them is drawn around them, not instead of them.
     for (let k = 0; k < atlas.n; k++) {
       const i = order[k];
-      if (pr[i] > cropR) continue;                   // outside the ball around the selection
+      if (!shown(i)) continue;              // outside the crop ball, or outside the selected class
       const x = px[i];
       const y = py[i];
       if (x < -4 || y < -4 || x > w + 4 || y > h + 4) continue;
@@ -381,7 +388,7 @@ export function makeScatter(canvas, atlas, opts = {}) {
     let bd = reach * reach;
     let bz = -Infinity;
     for (let i = 0; i < atlas.n; i++) {
-      if (pr[i] > cropR) continue;                   // not drawn, so not clickable
+      if (!shown(i)) continue;                       // not drawn, so not clickable
       const dx = px[i] - mx;
       const dy = py[i] - my;
       const d = dx * dx + dy * dy;
@@ -499,10 +506,13 @@ export function makeScatter(canvas, atlas, opts = {}) {
    *        single number cannot serve a layout whose neighbourhood scale spans two orders of
    *        magnitude — 3.2x was the old default and it left 95% of neighbourhoods inside one mark.
    */
-  function centreOn(i, target) {
-    const want = target ?? autoZoom(i);
-    const zoomTo = Math.min(ZOOM_MAX, Math.max(cam.zoom, want));
-    const to = [atlas.x[i], atlas.y[i], atlas.z[i]];
+  /**
+   * Move the camera to a world point and a zoom, as one gesture.
+   *
+   * Split out of centreOn so a GROUP can reuse it: centring on a class means centring on a centroid,
+   * which is not any point's position, and duplicating the easing would let the two drift apart.
+   */
+  function glide(to, zoomTo) {
     const from = state.pivot.slice();
     const fromTx = cam.tx;
     const fromTy = cam.ty;
@@ -528,6 +538,42 @@ export function makeScatter(canvas, atlas, opts = {}) {
       if (u < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
+  }
+
+  /** Centre on one domain, at the zoom that puts its k-th neighbour a known fraction out. */
+  function centreOn(i, target) {
+    const want = target ?? autoZoom(i);
+    glide([atlas.x[i], atlas.y[i], atlas.z[i]],
+          Math.min(ZOOM_MAX, Math.max(cam.zoom, want)));
+  }
+
+  /**
+   * Centre on a GROUP of domains and zoom until it fills the frame.
+   *
+   * Zoom comes from the group's own extent rather than a fixed step, because SCOPe classes differ by
+   * more than an order of magnitude in spread and one step cannot serve both: a fold of nine domains
+   * and a class of four thousand need very different framing. The extent used is a high percentile of
+   * the distance to the centroid, not the maximum -- one outlying domain would otherwise zoom the
+   * whole group back out to nothing, and on a UMAP layout a scattered outlier is common.
+   *
+   * Unlike centreOn this may zoom OUT, since stepping from a fold back up to its class has to widen.
+   */
+  function focusGroup(rows) {
+    if (!rows || !rows.length) return;
+    // A one-domain fold is a selected point, so it gets the same framing clicking a point gets. The
+    // spread formula below would floor its extent and slam to ZOOM_MAX, which is a different view of
+    // the same thing for no reason.
+    if (rows.length === 1) { centreOn(rows[0]); return; }
+    const c = [0, 0, 0];
+    for (const i of rows) { c[0] += atlas.x[i]; c[1] += atlas.y[i]; c[2] += atlas.z[i]; }
+    for (let k = 0; k < 3; k++) c[k] /= rows.length;
+    const d = rows.map((i) => Math.hypot(atlas.x[i] - c[0], atlas.y[i] - c[1], atlas.z[i] - c[2]));
+    d.sort((a, b) => a - b);
+    const spread = Math.max(d[Math.floor(0.92 * (d.length - 1))], radius * 1e-3);
+    // `base` already maps `radius` onto 0.42 of the frame, so this is the ratio that maps `spread`
+    // onto 0.38 of it -- a little inside, so the group is framed rather than clipped.
+    const want = (0.38 / 0.42) * (radius / spread);
+    glide(c, Math.min(ZOOM_MAX, Math.max(1, want)));
   }
 
   return {
@@ -580,13 +626,23 @@ export function makeScatter(canvas, atlas, opts = {}) {
     home,
     is3D,
     centreOn,
-    spinning: () => spinning,
-    toggleSpin() {
-      if (!is3D) return false;
-      spinning = !spinning;
-      if (spinning && !raf) raf = requestAnimationFrame(loop);
-      if (!spinning && raf) { cancelAnimationFrame(raf); raf = 0; }
-      return spinning;
+    focusGroup,
+    /**
+     * Narrow the map to a set of rows, or pass null for the whole cloud.
+     *
+     * A mask rather than a list of rows: draw and pick both ask about one index at a time, in loops over
+     * every point, and a Set lookup per point per frame is the one thing that would make a 15,176-point
+     * rotation stutter.
+     */
+    setSubset(mask) {
+      state.subset = mask || null;
+      draw();
+    },
+    subsetCount() {
+      if (!state.subset) return atlas.n;
+      let k = 0;
+      for (let i = 0; i < atlas.n; i++) if (state.subset[i] === 1) k++;
+      return k;
     },
     /**
      * Select a point and connect it to its partners.

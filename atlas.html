@@ -71,7 +71,13 @@
     position: absolute; top: 12px; left: 14px; z-index: 2;
     display: flex; flex-direction: column; gap: 3px;
     padding: 9px 11px; background: rgba(248,249,250,.92); border: 1px solid var(--line);
-    font-size: 12px; color: var(--ink2); pointer-events: none;
+    font-size: 12px; color: var(--ink2);
+    /* Interactive now, so it has to take pointer events -- but only the box: the plot behind it must
+       still drag and rotate everywhere else, which is why this sits on .classkey and not .map-wrap.
+       Capped in both directions so an expanded class cannot grow over the map it is describing:
+       class d (alpha+beta) has 396 folds here, which unbounded would be a column many times the
+       height of the plot. */
+    pointer-events: auto; max-width: 268px; max-height: calc(100% - 26px);
   }
   .classkey b {
     font-weight: 500; color: var(--ink3); font-size: 10px; letter-spacing: .14em;
@@ -80,6 +86,37 @@
   .classkey span { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
   .classkey i { width: 9px; height: 9px; border-radius: 50%; flex: none; }
   .classkey.off { display: none; }
+  .key-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .key-back {
+    background: none; border: 0; padding: 0; font: inherit; font-size: 11px;
+    color: var(--mark); cursor: pointer; text-decoration: underline; text-underline-offset: 2px;
+  }
+  /* Rows are buttons, not spans with handlers: a hierarchy you walk with a keyboard needs real
+     focus and real Enter/Space, and aria-expanded on a button already means what it says here. */
+  .key-class, .key-fold {
+    display: flex; align-items: center; gap: 6px; width: 100%;
+    background: none; border: 0; font: inherit; color: inherit;
+    text-align: left; cursor: pointer; border-radius: 2px;
+  }
+  .key-class { padding: 2px 4px; }
+  .key-class:hover, .key-fold:hover { background: rgba(0, 0, 0, .055); }
+  .key-class.on { background: rgba(0, 0, 0, .085); }
+  .key-class:focus-visible, .key-fold:focus-visible { outline: 2px solid var(--mark); outline-offset: 1px; }
+  /* The count sits hard right so four or five of them form a column that can be compared, which is
+     the only reason to show counts at all. */
+  .key-class em, .key-fold em {
+    margin-left: auto; font-style: normal; font-size: 11px;
+    color: var(--ink3); font-variant-numeric: tabular-nums;
+  }
+  .key-folds {
+    overflow-y: auto; max-height: min(46vh, 340px);
+    margin: 1px 0 4px 13px; border-left: 1px solid var(--line);
+  }
+  .key-fold { padding: 1px 4px 1px 8px; font-size: 11px; color: var(--ink2); }
+  .key-fold.on { background: rgba(0, 0, 0, .085); color: var(--ink3); }
+  /* Fold names run long -- "Nucleotide-binding alpha-beta plait" -- and the box is capped, so they
+     clip with an ellipsis and carry the full text in the title. */
+  .key-fold span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   /* wide enough for "disagreement", which was overlapping its own value. 96px was measured
      against a proportional face and this panel is monospace: twelve characters at 13px need
      ~101px, so the label and the number were touching with no gap at all. */
@@ -141,14 +178,14 @@
 <div id="tip"></div>
 
 <script type="module">
-import { loadCodebook, decodeRecord, shardedStore } from './src/coords.js?v=98dcea2c';
-import { fetchRange, fetchWhole, fetchJSONWhole } from './src/fetchrange.js?v=98dcea2c';
+import { loadCodebook, decodeRecord, shardedStore } from './src/coords.js?v=2c8b633b';
+import { fetchRange, fetchWhole, fetchJSONWhole } from './src/fetchrange.js?v=2c8b633b';
 import { loadAtlas, makeScatter, neighbours, partnersAbove, makeTraceView, CLASS_COLOURS,
-  LINK_CUTOFF } from './src/atlas.js?v=98dcea2c';
+  LINK_CUTOFF } from './src/atlas.js?v=2c8b633b';
 // The Cα-only secondary-structure assignment, which the cartoon renderer needs to know a helix from
 // a loop. Imported here rather than inside src/atlas.js so the whole TM-align port is not a
 // dependency of the layout code that has no use for it.
-import { makeSec, smoothSec } from './src/tmalign.js?v=98dcea2c';
+import { makeSec, smoothSec } from './src/tmalign.js?v=2c8b633b';
 
 const $ = (id) => document.getElementById(id);
 const status = (t) => { $('status').textContent = t; };
@@ -234,14 +271,152 @@ const CLASS_SHORT = {
   a: 'all \u03b1', b: 'all \u03b2', c: '\u03b1/\u03b2', d: '\u03b1+\u03b2',
   e: 'multi-domain', f: 'membrane', g: 'small',
 };
-const CLASS_LEGEND = '<b>SCOPe class</b>' + (aMeta.classes || []).map((c, i) =>
-  `<span title="${c.name}"><i style="background:${CLASS_COLOURS[i]}"></i>`
-  + `${c.key} &middot; ${CLASS_SHORT[c.key] || c.name}</span>`).join('');
+// --- the hierarchy the legend walks -------------------------------------------
+//
+// Class then fold, from the two channels the build already records per domain -- no extra data, and
+// the counts are the map's own rather than SCOPe's totals, which matters because SCOPe40 is a 40%
+// subset and quoting the full database's fold sizes beside a plot of the subset would be wrong.
+//
+// Folds are ordered by how many domains they have here, largest first, because that is the order
+// someone scanning for something to look at wants. Alphabetical by sccs would bury a 200-domain fold
+// under a hundred singletons.
+const CLASS_OF_KEY = new Map((aMeta.classes || []).map((c, i) => [c.key, i]));
+const classRows = (aMeta.classes || []).map(() => []);
+const foldRows = new Map();          // fold index -> rows
+for (let i = 0; i < atlas.n; i++) {
+  const ci = atlas.cls[i];
+  if (ci < classRows.length) classRows[ci].push(i);
+  const fi = atlas.fold[i];
+  if (fi !== 0xFFFF) {
+    if (!foldRows.has(fi)) foldRows.set(fi, []);
+    foldRows.get(fi).push(i);
+  }
+}
+// folds grouped under their class, from the first component of the sccs
+const foldsByClass = (aMeta.classes || []).map(() => []);
+(aMeta.folds || []).forEach((f, fi) => {
+  const ci = CLASS_OF_KEY.get(String(f.sccs).split('.')[0]);
+  if (ci === undefined) return;
+  const rows = foldRows.get(fi);
+  if (rows && rows.length) foldsByClass[ci].push({ fi, ...f, n: rows.length });
+});
+for (const list of foldsByClass) list.sort((a, b) => b.n - a.n || a.sccs.localeCompare(b.sccs));
 
-// The ramp legend prints the quantile boundaries, so a shade can be read back to a number. Without
-// it a sequential colour says only "more" and "less", which for a quantity with a defined meaning
-// is throwing the meaning away.
-$('legend').innerHTML = CLASS_LEGEND;
+
+
+
+
+const maskOf = (rows) => {
+  const m = new Uint8Array(atlas.n);
+  for (const i of rows) m[i] = 1;
+  return m;
+};
+
+let openClass = -1;      // which class is expanded
+let selection = null;    // {kind:'class'|'fold', ci, fi, rows}
+
+/** Narrow the map, or widen it back to everything. */
+function selectGroup(sel) {
+  selection = sel;
+  if (!sel) {
+    scatter.setSubset(null);
+    scatter.home();
+  } else {
+    scatter.setSubset(maskOf(sel.rows));
+    scatter.focusGroup(sel.rows);
+  }
+  renderLegend();
+  status(selectionStatus());
+}
+
+function selectionStatus() {
+  const all = `${atlas.n.toLocaleString()} SCOPe40 domains · ${atlas.components}d UMAP`;
+  if (!selection) return all;
+  const c = aMeta.classes[selection.ci];
+  const where = selection.kind === 'fold'
+    ? `${aMeta.folds[selection.fi].sccs} · ${aMeta.folds[selection.fi].name}`
+    : `class ${c.key} · ${c.name}`;
+  return `${selection.rows.length.toLocaleString()} of ${atlas.n.toLocaleString()} shown — ${where}`;
+}
+
+/**
+ * The legend, as a hierarchy you can walk into.
+ *
+ * Rebuilt rather than patched on every change: it is at most seven classes plus one expanded fold
+ * list, so the cost is nothing, and a single render path means the swatches, the selected state and
+ * the aria attributes cannot disagree about which node is open.
+ */
+function renderLegend() {
+  const host = $('legend');
+  host.textContent = '';
+  const head = document.createElement('div');
+  head.className = 'key-head';
+  const title = document.createElement('b');
+  title.textContent = 'SCOPe class';
+  head.appendChild(title);
+  if (selection) {
+    const back = document.createElement('button');
+    back.type = 'button';
+    back.className = 'key-back';
+    // "All" rather than a left arrow: the widening step is not "up one level" when a fold is
+    // selected, it is all the way out, and an arrow would promise a half step.
+    back.textContent = 'show all';
+    back.onclick = () => { openClass = -1; selectGroup(null); };
+    head.appendChild(back);
+  }
+  host.appendChild(head);
+
+  (aMeta.classes || []).forEach((c, ci) => {
+    const rows = classRows[ci];
+    if (!rows.length) return;
+    const row = document.createElement('button');
+    row.type = 'button';
+    row.className = 'key-class';
+    if (selection && selection.ci === ci) row.classList.add('on');
+    row.setAttribute('aria-expanded', openClass === ci ? 'true' : 'false');
+    row.title = `${c.name} — ${rows.length.toLocaleString()} domains, `
+      + `${foldsByClass[ci].length} folds`;
+    const sw = document.createElement('i');
+    sw.style.background = CLASS_COLOURS[ci];
+    const label = document.createElement('span');
+    label.textContent = `${c.key} \u00b7 ${CLASS_SHORT[c.key] || c.name}`;
+    const n = document.createElement('em');
+    n.textContent = rows.length.toLocaleString();
+    row.append(sw, label, n);
+    row.onclick = () => {
+      // One click both opens the class and narrows to it. Separating them would mean clicking a
+      // class did nothing visible to the map, which is the thing being asked for.
+      openClass = openClass === ci ? -1 : ci;
+      if (openClass === ci) selectGroup({ kind: 'class', ci, rows });
+      else selectGroup(null);
+    };
+    host.appendChild(row);
+
+    if (openClass !== ci) return;
+    const list = document.createElement('div');
+    list.className = 'key-folds';
+    for (const f of foldsByClass[ci]) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'key-fold';
+      if (selection && selection.kind === 'fold' && selection.fi === f.fi) b.classList.add('on');
+      b.title = `${f.sccs} · ${f.name} — ${f.n} domain${f.n === 1 ? '' : 's'}`;
+      const nm = document.createElement('span');
+      nm.textContent = f.name;
+      const n = document.createElement('em');
+      n.textContent = f.n;
+      b.append(nm, n);
+      b.onclick = () => selectGroup({ kind: 'fold', ci, fi: f.fi, rows: foldRows.get(f.fi) });
+      list.appendChild(b);
+    }
+    host.appendChild(list);
+  });
+}
+
+// The legend is also the navigation, so it is rendered once here and then re-rendered by every
+// selection. (The comment that stood here described a quantile ramp legend this file has not had for
+// some time — it was already describing the wrong element before the legend became interactive.)
+renderLegend();
 
 // The caption earns its space by being short. The full numbers matter — they are what makes the
 // map checkable rather than decorative — but as a wall of text under the map they cost more pixels

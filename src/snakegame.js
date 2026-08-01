@@ -12,7 +12,7 @@
 //
 // It never blocks the page. Escape closes it, so does the button, and closing puts the hero back.
 
-import { PAPER, SEG, toward, hue, girth, drawHead } from './ouroboros.js?v=98dcea2c';
+import { PAPER, SEG, toward, hue, girth, drawHead } from './ouroboros.js?v=2c8b633b';
 
 // 14, not 15, and it is not arbitrary: one cell then equals the hero's segment pitch, which is its
 // circumference over 30 segments — 2*pi*0.34*S/30 against S/14 agrees to 0.3% at any canvas size.

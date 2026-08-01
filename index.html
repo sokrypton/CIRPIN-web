@@ -574,23 +574,69 @@
      furniture around about forty characters of content, and tall enough to need its own scrollbar.
      Now one line that wraps, with the labels abbreviated to what the results table already calls
      these quantities: TM, Δ. Nothing is dropped, it is just not a list any more. */
-  .align-stats {
-    margin: 11px 0 0; display: flex; flex-wrap: wrap; gap: 3px 16px;
-    border-top: 1px solid var(--rule-2); padding-top: 8px;
+  /* The hit card. The app's own box idiom -- panel fill, one hairline rule -- so it reads as part of
+     the page rather than a widget dropped onto it. It replaced a wrapping strip of chips, which fitted
+     in one line but left the reader to work out which numbers belonged together. */
+  .hitcard {
+    margin: 11px 0 0; background: var(--panel); border: 1px solid var(--rule);
+    font: 12px/1.5 var(--mono); color: var(--ink-2);
   }
-  .align-row { display: flex; gap: 6px; font: 12px/1.5 var(--mono); }
+  /* The id is the heading, so it takes the ink and the weight; the classification code is secondary and
+     sits hard right, which is where someone looking for something to paste will look. */
+  .hc-head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    padding: 7px 10px; border-bottom: 1px solid var(--rule-2);
+  }
+  .hc-head b { color: var(--ink); font-weight: 600; font-size: 13px; }
+  .hc-head a { color: var(--bond); text-underline-offset: 2px; }
+  .hc-code { font-size: 11px; color: var(--ink-2); white-space: nowrap; }
+  /* Label column sized to the LONGEST LABEL, not to a guess. max-content is what lets "Homologous
+     superfamily" fit at any panel width while every level still lines up; a fixed width either clips
+     that one or wastes the space on SCOPe's shorter words. */
+  .hc-class {
+    display: grid; grid-template-columns: max-content 1fr; gap: 1px 12px;
+    padding: 7px 10px; border-bottom: 1px solid var(--rule-2);
+  }
+  .hc-class:empty { display: none; }
+  .hc-class dt { color: var(--ink-2); }
+  /* Values are prose from the release files -- "Nucleotide-binding alpha-beta plait" -- so they set in
+     the sans face, wrap rather than clip, and carry the ink, because they are the content. */
+  .hc-class dd {
+    margin: 0; color: var(--ink); font-family: var(--sans); overflow-wrap: anywhere;
+  }
+  /* Side by side. Three short rows each -- two numbers and a delta -- fits where five did not, which is
+     what made the first attempt at two columns cramped: dropping cut and aligned is what buys the room.
+     minmax(120px, 1fr) still stacks the pair on a narrow panel rather than crushing it. */
+  .hc-scores {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 2px 16px; padding: 7px 10px;
+  }
+  .hc-scores h4 {
+    margin: 0 0 3px; font: 500 10px/1.4 var(--sans); letter-spacing: .12em;
+    text-transform: uppercase; color: var(--ink-2);
+  }
+  .align-row { display: flex; gap: 6px; font: 12px/1.55 var(--mono); }
   .align-row span { color: var(--ink-2); }
-  .align-row b { font-weight: 600; font-variant-numeric: tabular-nums; }
+  /* Numbers hard right, so a column of them can be read down rather than hunted for. */
+  .align-row b {
+    margin-left: auto; color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums;
+  }
   .align-row a { color: var(--bond); text-underline-offset: 2px; }
-  /* The classification. Chips like the rest of this strip rather than a labelled column, because
-     .align-stats is a wrapping row and a fixed label width would clip "Homologous superfamily" at any
-     panel size. flex-basis 100% keeps the scheme and its levels together as one band instead of
-     interleaving them with TM and cut, and lets long prose values -- "Nucleotide-binding alpha-beta
-     plait" -- wrap without pushing the numbers around. */
-  #aClassRows { display: flex; flex-wrap: wrap; gap: 3px 16px; flex: 1 1 100%; }
-  #aClassRows:empty { display: none; }
-  #aClassRows .align-row b { font-weight: 500; font-variant-numeric: normal; }
-  #aClassRows .cls-head b { font-weight: 600; font-variant-numeric: tabular-nums; }
+  /* Side by side while there is room, stacked when there is not. The maps carry an aspect ratio that
+     means something -- a permuted alignment is two segments at one slope -- so they are never squeezed
+     to fit; the pair wraps instead. */
+  .map-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px 10px; }
+  .map-cell { min-width: 0; }
+  /* Spans both columns and keeps its line whether or not there is text: the global .readout:empty rule
+     collapses an empty readout, which is right for a readout under a plot and wrong for one above two. */
+  .map-readout { grid-column: 1 / -1; margin: 0; min-height: 15px; text-align: right; }
+  .map-readout:empty { display: block; }
+  /* Titles, because two unlabelled heatmaps side by side are a puzzle. Set in the same small caps as the
+     card's section headings so the page has one voice for "this is what you are looking at". */
+  .map-title {
+    margin: 0 0 3px; font: 500 10px/1.4 var(--sans); letter-spacing: .12em;
+    text-transform: uppercase; color: var(--ink-2);
+  }
   .align-row a:hover { color: var(--cut); }
   .align-row.hi b { color: var(--cut); }
 
@@ -691,8 +737,8 @@ whatever coordinates have been read on demand.">0.0 MB</div>
         </div>
         <div class="opt-row" role="group" aria-label="How to colour the two chains">
           <span>colour by</span>
-          <button class="opt" id="sideByAlign" aria-pressed="true">alignment order</button>
-          <button class="opt" id="sideByIndex" aria-pressed="false">residue number</button>
+          <button class="opt" id="sideByAlign" aria-pressed="false">alignment order</button>
+          <button class="opt" id="sideByIndex" aria-pressed="true">residue number</button>
         </div>
       </div>
 
@@ -708,37 +754,88 @@ whatever coordinates have been read on demand.">0.0 MB</div>
       </div>
 
       <div class="sub" id="subMap" hidden>
-        <div class="plot-wrap">
-          <canvas id="map"></canvas>
-          <div class="empty" id="mapEmpty">Pick a hit to align it against your structure.</div>
+        <!-- Two answers to the same question, on one grid.
+             Left: TM-align's score field -- how well residue i lands on residue j under the
+             superposition, in Angstroms. Right: cos(node_i, node_j) from CIRPIN's per-residue vectors,
+             which knows nothing about the superposition. Measured on same-superfamily pairs, the cosine
+             map picks out the aligned pairs at AUC 0.75-0.93 while correlating with the TM field at only
+             0.15-0.41, so it finds the region without copying the geometry -- and where the two disagree
+             is what a reader came for. The alignment path is drawn on BOTH, which is what makes the
+             comparison readable rather than two pictures side by side. -->
+        <div class="map-pair" id="mapPair">
+          <!-- The hover readout, ABOVE the maps and always occupying its line.
+               It used to sit under them and inherit .readout:empty { display: none }, so it collapsed to
+               nothing when the pointer left and reappeared at 15px plus a 6px margin the moment it
+               entered -- a 21px shift of everything below, on every mouse move onto a map. Reserved
+               height is the fix; putting it at the top is what makes it readable, since the eye is
+               already there when it reaches for a cell. -->
+          <p class="readout map-readout" id="mapRead"></p>
+          <div class="map-cell">
+            <h4 class="map-title">TM-align</h4>
+            <div class="plot-wrap">
+              <canvas id="map"></canvas>
+              <div class="empty" id="mapEmpty">Pick a hit to align it against your structure.</div>
+            </div>
+          </div>
+          <div class="map-cell" id="cosWrap">
+            <h4 class="map-title">CIRPIN</h4>
+            <div class="plot-wrap">
+              <canvas id="cosmap"></canvas>
+            </div>
+          </div>
         </div>
-        <p class="readout" id="mapRead"></p>
         <div class="legend">
-          <span><i style="background:#d6006e"></i>aligned pairs</span>
-          <span>score <span class="ramp"></span></span>
+          <span><i style="background:#d6006e"></i>tm alignment</span>
+          <!-- One ramp caption now the panels are titled. Two said "TM score" and "CIRPIN cosine" for
+               what is the same ramp applied to two quantities, which read as two different scales. -->
+          <span>low <span class="ramp"></span> high</span>
         </div>
       </div>
 
-      <dl class="align-stats" id="alignStats" hidden>
-        <div class="align-row"><b id="aId">&mdash;</b></div>
-        <!-- The scores that put this hit in the table, next to the scores TM-align measured for it.
-             They answer different questions -- the embeddings say "these look like the same fold",
-             TM-align says "here is the superposition" -- and the interesting hits are the ones where
-             the two disagree, which you cannot see if they are in separate places on the page. -->
-        <div class="align-row"><span>CIRPIN</span><b id="aCirpin">&mdash;</b></div>
-        <div class="align-row"><span>Progres</span><b id="aProgres">&mdash;</b></div>
+      <!-- One hit, as a box rather than a strip of chips.
+           Three zones, in the order a reader needs them: WHAT it is (id and classification), then the
+           two families of score. The scores sit side by side and not stacked, because the whole reason
+           they are on one card is that the interesting hits are where the two disagree -- the embeddings
+           say "same fold", TM-align says "here is the superposition", and a reader has to be able to
+           hold both numbers at once. Stacking them, or putting them in separate panels, loses exactly
+           that comparison. -->
+      <div class="hitcard" id="alignStats" hidden>
+        <div class="hc-head">
+          <b id="aId">&mdash;</b>
+          <!-- scheme and classification code, e.g. "SCOPe d.9.1.1": the thing to paste into the source
+               database, so it belongs beside the id rather than buried in the level list -->
+          <span class="hc-code" id="aScheme"></span>
+        </div>
         <!-- Where this hit sits in its database's own hierarchy: SCOPe class/fold/superfamily/family,
-             CATH class/architecture/topology/homologous superfamily, ECOD architecture/X/H/T/F. Built
-             here rather than written out because the schemes have different depths and different words
-             for their levels, and flattening them to a shared vocabulary would misreport all three.
-             Absent for AlphaFold TED, which has no classification to show. -->
-        <div id="aClassRows"></div>
-        <div class="align-row"><span>TM</span><b id="aTm">&mdash;</b></div>
-        <div class="align-row"><span>TM cp</span><b id="aTmCp">&mdash;</b></div>
-        <div class="align-row" id="aDiffRow"><span>&Delta;</span><b id="aDiff">&mdash;</b></div>
-        <div class="align-row"><span>cut</span><b id="aCut">&mdash;</b></div>
-        <div class="align-row"><span>aligned</span><b id="aAli">&mdash;</b></div>
-      </dl>
+             CATH class/architecture/topology/homologous superfamily, ECOD architecture/X/H/T/F. Built by
+             app.js because the schemes have different depths and different words for their levels, and
+             flattening them to a shared vocabulary would misreport all three. Empty for AlphaFold TED,
+             which has no classification, and the block collapses rather than showing "unknown". -->
+        <dl class="hc-class" id="aClassRows"></dl>
+        <!-- Two columns, and the ROWS are paired on purpose.
+             CIRPIN is circular-permutation invariant, so the alignment measuring the same thing is TM-cp;
+             Progres is sequential, so its counterpart is plain TM. Reading across a row therefore
+             compares an embedding with the alignment that asks its question, and reading down a column
+             gives the delta between the permutation-aware and the sequential answer -- which is the same
+             quantity on both sides, first row minus second. A hit where both deltas are large is a
+             different animal from one where neither is, and that only shows up with the pair aligned. -->
+        <div class="hc-scores">
+          <section>
+            <h4>embeddings</h4>
+            <div class="align-row"><span>CIRPIN</span><b id="aCirpin">&mdash;</b></div>
+            <div class="align-row"><span>Progres</span><b id="aProgres">&mdash;</b></div>
+            <div class="align-row" id="aEmbDiffRow" title="CIRPIN minus Progres"><span>&Delta;</span><b id="aEmbDiff">&mdash;</b></div>
+          </section>
+          <section>
+            <h4>TM-align</h4>
+            <!-- TM-cp first, level with CIRPIN: both allow a circular permutation. TM sits level with
+                 Progres, which does not. -->
+            <div class="align-row"><span>TM-cp</span><b id="aTmCp">&mdash;</b></div>
+            <div class="align-row"><span>TM</span><b id="aTm">&mdash;</b></div>
+            <div class="align-row" id="aDiffRow" title="TM-cp minus TM"><span>&Delta;</span><b id="aDiff">&mdash;</b></div>
+          </section>
+        </div>
+      </div>
     </div>
 
   </section>

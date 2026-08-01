@@ -2,15 +2,15 @@
 
 // makeSec is TM-align's Cα-only secondary-structure assignment, reused here so
 // the viewer draws real cartoons without a model or side chains.
-const { makeSec, smoothSec } = await import('./src/tmalign.js?v=98dcea2c');
+const { makeSec, smoothSec } = await import('./src/tmalign.js?v=2c8b633b');
 // The first-load hero. Dynamic, like the import above, because this file is loaded as a module with
 // top-level await rather than with static imports.
-const { ouroboros } = await import('./src/ouroboros.js?v=98dcea2c');
-const { bestView, fillZoom } = await import('./src/orient.js?v=98dcea2c');
+const { ouroboros } = await import('./src/ouroboros.js?v=2c8b633b');
+const { bestView, fillZoom } = await import('./src/orient.js?v=2c8b633b');
 // The Cα cartoon renderer and the drag that turns it, which the atlas page imports too. It lived
 // here until the atlas needed it; a second copy of either would have drifted from this one.
 const { prep, fitOf, radiusAbout, hexToRgb, drawTraces, makeCamera, orbit, spectrumRgb,
-  PAPER, PE_MAX, SIDE_INSET } = await import('./src/trace3d.js?v=98dcea2c');
+  PAPER, PE_MAX, SIDE_INSET } = await import('./src/trace3d.js?v=2c8b633b');
 
 // Declared up here, not beside the call that starts it: updateChrome() stops the animation once a
 // structure loads, and updateChrome runs long before the end of this file. Declared at the bottom,
@@ -1974,7 +1974,7 @@ function clearAlignment() {
   $('sideEmpty').hidden = false;
   $('sideEmpty').textContent = 'Pick a hit to compare it with your structure.';
   $('legendHit').textContent = 'hit';
-  for (const id of ['map', 'super', 'side']) {
+  for (const id of ['map', 'cosmap', 'super', 'side']) {
     const c = $(id);
     c.getContext('2d').clearRect(0, 0, c.width, c.height);
   }
@@ -2066,37 +2066,36 @@ function cacheAlignment(m) {
 }
 
 /**
- * Where the hit sits in its database's classification, one row per level.
+ * Where the hit sits in its database's classification.
+ *
+ * The scheme and code go in the card's header, next to the id, because they are the identifier to paste
+ * into the source database. The levels go in a two-column grid below it, aligned, because four or five
+ * of them are a list to read down and chips are not.
  *
  * Built rather than written into the HTML because the three schemes have different depths and different
- * words: SCOPe names four levels class/fold/superfamily/family, CATH names four
- * class/architecture/topology/homologous superfamily, ECOD names five architecture/X/H/T/F. Flattening
- * them onto a shared vocabulary would misreport all three, and AlphaFold TED has no classification at
- * all -- so the absence of rows is the honest rendering for it, not a row reading "unknown".
- *
- * The code (a.1.1.1, 3.40.50.300, 2007.1.1) goes on the scheme row, because it is the thing to paste into
- * the source database and the level names above it are the thing to read.
+ * words: SCOPe names four levels class/fold/superfamily/family, CATH four
+ * class/architecture/topology/homologous superfamily, ECOD five architecture/X/H/T/F. Flattening them
+ * onto shared words would misreport all three, and AlphaFold TED has no classification at all -- so an
+ * empty block, which collapses, is the honest rendering for it rather than a row reading "unknown".
  */
 function renderClass(cls) {
   const host = $('aClassRows');
+  const code = $('aScheme');
   host.textContent = '';
+  code.textContent = '';
+  code.title = '';
   if (!cls || !cls.levels || !cls.levels.length) return;
-  const head = document.createElement('div');
-  head.className = 'align-row cls-head';
-  head.innerHTML = `<span>${cls.scheme}</span><b>${cls.code}</b>`;
-  host.appendChild(head);
+  code.textContent = `${cls.scheme} ${cls.code}`;
+  code.title = `${cls.scheme} classification ${cls.code}`;
   for (const { level, name } of cls.levels) {
-    const el = document.createElement('div');
-    el.className = 'align-row cls-level';
-    // textContent, not innerHTML: these names come from SCOPe, CATH and ECOD release files and are
-    // display text, not markup.
-    const k = document.createElement('span');
+    const k = document.createElement('dt');
     k.textContent = level;
-    const v = document.createElement('b');
+    const v = document.createElement('dd');
+    // textContent, not innerHTML: these names come from the SCOPe, CATH and ECOD release files and are
+    // display text, not markup.
     v.textContent = name;
-    v.title = name;          // the deepest levels are long enough to clip
-    el.append(k, v);
-    host.appendChild(el);
+    v.title = name;
+    host.append(k, v);
   }
 }
 
@@ -2117,9 +2116,20 @@ function renderAlignment(m) {
   $('aProgres').textContent = row ? row.progres.toFixed(3) : '—';
   $('aTm').textContent = m.tm.toFixed(3);
   $('aTmCp').textContent = m.tmCp.toFixed(3);
-  $('aDiff').textContent = `${m.tmDiff >= 0 ? '+' : '−'}${Math.abs(m.tmDiff).toFixed(3)}`;
+  const signed = (v) => `${v >= 0 ? '+' : '−'}${Math.abs(v).toFixed(3)}`;
+  $('aDiff').textContent = signed(m.tmDiff);
+  // Highlighted when the permutation WINS, which is the finding this app exists to surface.
   $('aDiffRow').classList.toggle('hi', m.tmDiff > 0);
-  $('aCut').textContent = m.cpPoint ? `${m.cpPoint} residues` : 'none';
+  // The models' own disagreement about this hit, in the same form and the same place as TM-align's, so
+  // the two deltas can be read against each other.
+  if (row) {
+    const gap = row.cirpin - row.progres;
+    $('aEmbDiff').textContent = signed(gap);
+    $('aEmbDiffRow').classList.toggle('hi', Math.abs(gap) >= 0.2);
+  } else {
+    $('aEmbDiff').textContent = '—';
+    $('aEmbDiffRow').classList.remove('hi');
+  }
   // aligned count and RMSD are per-alignment, so applyMode() fills them in
   $('alignStats').hidden = false;
 
@@ -2138,8 +2148,10 @@ function renderAlignment(m) {
   // better answer rather than an arbitrary default.
   mapMode = m.prefer;
   applyMode();
-  // Not repeated here. The alignment readout in the left column carries the id, TM, TM cp, the cut
-  // and the aligned length, so saying three of those again on the right was the same sentence twice.
+  // Not repeated here. The hit card carries the id, both models' scores and both TM scores, so saying
+  // any of them again on the right was the same sentence twice. The cut point and the aligned length
+  // left the card deliberately: the cut is visible as the break in the map's diagonal, and the aligned
+  // length is what the superposition shows.
   setMessage('');
 }
 
@@ -2152,15 +2164,10 @@ function applyMode() {
   const side = align[mapMode];
   // No choice offered: the alignment that scored higher is the one worth looking
   // at, and both scores are in the table below for anyone who wants the other.
-  // Nothing here. Every part of this — which alignment is shown, its TM, where the cut fell — is in
-  // the readout under the viewer, and stating it twice beside the tabs made the tabs look annotated
-  // rather than the numbers look authoritative.
-
-  $('aAli').textContent = `${side.nAligned} · ${side.rmsd.toFixed(1)} Å`;
-
   mapState = {
     id: align.id, xlen: align.xlen, ylen: align.ylen,
-    map: side.map, mapW: align.mapW, mapH: align.mapH, mapStride: align.mapStride,
+    map: side.map, cos: align.cosMap || null,
+    mapW: align.mapW, mapH: align.mapH, mapStride: align.mapStride,
     path: side.path, cpPoint: mapMode === 'cp' ? align.cpPoint : 0,
   };
   // The query as given, and the hit brought to it — not the other way round.
@@ -2201,9 +2208,9 @@ function rampColour(v) {
   ];
 }
 
-function paintMap() {
+function paintField(canvasId, field) {
   const m = mapState;
-  const canvas = $('map');
+  const canvas = $(canvasId);
   const wCss = canvas.clientWidth;
   if (!wCss) return;
   if (!m) { prep(canvas, Math.min(Math.round(wCss * 0.84), viewMaxH())); return; }
@@ -2224,7 +2231,7 @@ function paintMap() {
   const img = ctx.createImageData(m.mapW, m.mapH);
   for (let j = 0; j < m.mapH; j++) {
     for (let i = 0; i < m.mapW; i++) {
-      const [r, g, b] = rampColour(m.map[j * m.mapW + i] / 255);
+      const [r, g, b] = rampColour(field[j * m.mapW + i] / 255);
       const o = ((m.mapH - 1 - j) * m.mapW + i) * 4;   // y increases upward
       img.data[o] = r; img.data[o + 1] = g; img.data[o + 2] = b; img.data[o + 3] = 255;
     }
@@ -2288,13 +2295,38 @@ function paintMap() {
   ctx.fillText(`${m.id} — residue`, 0, 0);
   ctx.restore();
 
-  mapState.geom = { plotW, plotH };
+  // Only the TM panel records the geometry the hover arithmetic uses. Both panels are the same size, and
+  // letting the second one write it meant a hidden canvas could leave a zero-width geometry behind.
+  if (canvasId === 'map') mapState.geom = { plotW, plotH };
 }
 
-$('map').addEventListener('pointermove', (e) => {
+/**
+ * Both panels: TM-align's score field, and CIRPIN's residue-similarity field beside it.
+ *
+ * One drawing routine for both, so the axes, the aspect ratio and -- the part that makes the pair
+ * readable -- the alignment path are identical. Drawing the path on the cosine map is the whole point:
+ * without it the second panel is a picture, with it you can see whether the model's notion of
+ * correspondence follows the superposition or departs from it.
+ */
+function paintMap() {
+  const m = mapState;
+  const has = !!(m && m.cos);
+  // VISIBILITY FIRST, THEN MEASURE.
+  //
+  // This was the other way round and it distorted the map on every hit that changed whether the second
+  // panel is shown. The canvases share a grid, so hiding one widens the other -- but paintField had
+  // already measured clientWidth and drawn a bitmap at the old width, which CSS then stretched to the new
+  // box. The same fault in reverse leaves a hidden canvas at clientWidth 0, where prep() returns null and
+  // paintField bails, so the stale bitmap survives to be stretched when it reappears.
+  $('cosWrap').hidden = !has;
+  paintField('map', m ? m.map : null);
+  if (has) paintField('cosmap', m.cos);
+}
+
+const mapHover = (e, id) => {
   const m = mapState;
   if (!m?.geom) return;
-  const r = $('map').getBoundingClientRect();
+  const r = $(id).getBoundingClientRect();
   const fx = (e.clientX - r.left - MAP_PAD.L) / m.geom.plotW;
   const fy = 1 - (e.clientY - r.top - MAP_PAD.T) / m.geom.plotH;
   if (fx < 0 || fx > 1 || fy < 0 || fy > 1) { $('mapRead').textContent = ''; return; }
@@ -2302,10 +2334,16 @@ $('map').addEventListener('pointermove', (e) => {
   const j = Math.min(m.ylen - 1, Math.floor(fy * m.ylen));
   const ci = Math.min(m.mapW - 1, Math.floor(i / m.mapStride));
   const cj = Math.min(m.mapH - 1, Math.floor(j / m.mapStride));
-  $('mapRead').textContent = `your ${i + 1} · ${m.id} ${j + 1} · score `
-    + `${(m.map[cj * m.mapW + ci] / 255).toFixed(3)}`;
-});
-$('map').addEventListener('pointerleave', () => { $('mapRead').textContent = ''; });
+  // Both numbers for one cell, whichever panel the pointer is over: the comparison is the reason the
+  // two maps are side by side, and making the reader move between panels to get the pair would undo it.
+  const tm = (m.map[cj * m.mapW + ci] / 255).toFixed(3);
+  const cs = m.cos ? ` · cosine ${(m.cos[cj * m.mapW + ci] / 255).toFixed(3)}` : '';
+  $('mapRead').textContent = `your ${i + 1} · ${m.id} ${j + 1} · TM ${tm}${cs}`;
+};
+for (const id of ['map', 'cosmap']) {
+  $(id).addEventListener('pointermove', (e) => mapHover(e, id));
+  $(id).addEventListener('pointerleave', () => { $('mapRead').textContent = ''; });
+}
 
 // --- Cα trace rendering -----------------------------------------------------
 // Shared by the domain view and the superposition: depth-sorted segments in
@@ -2470,7 +2508,11 @@ function sideColours(st) {
   return { byIndexQ, byIndexT, byAlignQ, byAlignT };
 }
 
-let sideColourBy = 'alignment';
+// 'index' by default: residue number is a property of the structure and reads the same in both panels
+// whichever hit is selected, so the two chains can be compared before anything is known about the
+// alignment. Alignment order is the more specialised view -- it recolours as the alignment changes -- and
+// is one click away.
+let sideColourBy = 'index';
 
 /**
  * The two chains in separate panels, same orientation, aligned parts coloured.
@@ -2917,7 +2959,7 @@ hero = ouroboros($('heroCanvas'));
      */
     let snakeGame;
     try {
-      ({ snakeGame } = await import('./src/snakegame.js?v=98dcea2c'));
+      ({ snakeGame } = await import('./src/snakegame.js?v=2c8b633b'));
     } catch (err) {
       eggOpen = false;
       console.error('snake: could not load the game — most likely a cached module from a previous '

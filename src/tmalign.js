@@ -1353,7 +1353,17 @@ export function cpAlign(xa, ya, xlen, ylen, opts = {}) {
     ...res,
     cpPoint,
     cpAlnBest,
-    linear: { TM1: lin.TM1, TM2: lin.TM2, n_ali8: lin.n_ali8 },
+    // THE WHOLE pass-2 result, not a summary of it.
+    //
+    // Pass 2 is an ordinary sequential alignment with exactly the arguments tmAlign() would build --
+    // makeSec on each chain, fast on -- so a caller that wants both answers has already paid for this
+    // one and must not run it again. It used to return three fields, which was too little to draw with,
+    // so worker.js called tmAlign separately and repeated 22-29% of the work for a bit-identical result.
+    //
+    // Note the asymmetry that makes this safe only for fast callers: pass 2 is hardcoded fast, matching
+    // TMalign.cpp, while tmAlign honours its own flag. `linear` is therefore the sequential answer AT
+    // FAST SETTINGS, whatever `opts.fast` says about pass 3.
+    linear: lin,
   };
 }
 
